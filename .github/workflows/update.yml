@@ -1,0 +1,58 @@
+name: Update The Ascent
+
+on:
+  schedule:
+    # Three times a day (times are UTC: 06:17, 12:17, 18:17 → about 7:17, 13:17, 19:17 in Madrid in winter)
+    - cron: "17 6,12,18 * * *"
+  workflow_dispatch: {}   # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write   # to save data/articles.json back to the repo
+  pages: write      # to publish the website
+  id-token: write   # required by GitHub Pages deployment
+
+concurrency:
+  group: update-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch news, write articles and build the site
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: python ascent_news.py
+
+      - name: Save the article archive
+        run: |
+          git config user.name "the-ascent-bot"
+          git config user.email "the-ascent-bot@users.noreply.github.com"
+          git add data/articles.json
+          git diff --cached --quiet || git commit -m "New articles $(date -u +'%Y-%m-%d %H:%M')"
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
