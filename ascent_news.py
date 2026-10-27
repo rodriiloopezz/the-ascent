@@ -900,6 +900,13 @@ def page(title: str, body: str, prefix: str, desc: str = "", extra_head: str = "
 <meta name="description" content="{esc(desc or UI['tagline']['en'])}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc or UI['tagline']['en'])}">
+<meta property="og:image" content="{SITE_URL}/og-image.png">
+<meta property="og:site_name" content="{SITE_NAME}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#7A1F3D">
+<link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{prefix}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{prefix}apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{prefix}style.css">
@@ -908,7 +915,7 @@ def page(title: str, body: str, prefix: str, desc: str = "", extra_head: str = "
 </head>
 <body data-lang="en">
 <div class="topbar"><div class="wrap">
-  <a class="home-link" href="{prefix}index.html">{SITE_NAME}<span>.</span></a>
+  <a class="home-link" href="{prefix}index.html"><img class="brand-mark" src="{prefix}logo-light.svg" alt="" width="34" height="34"><span>{SITE_NAME}<span class="dot-gold">.</span></span></a>
   <nav class="nav" aria-label="Sections">
     <a href="{prefix}index.html">{tri(UI["nav_news"])}</a>
     <a href="{prefix}style/index.html">{tri(UI["nav_style"])}</a>
@@ -924,7 +931,7 @@ def page(title: str, body: str, prefix: str, desc: str = "", extra_head: str = "
 {body}
 {subscribe_band()}
 <footer class="wrap">
-  <span class="logo-sm">{SITE_NAME}.</span>
+  <span class="logo-sm"><img src="{prefix}logo-light.svg" alt="" width="40" height="40"><span>{SITE_NAME}.</span></span>
   <p>{tri(UI["tagline"])}</p>
   <p class="ai-note">{tri(UI["ai_note"])}</p>
   <nav class="foot-links" aria-label="Information">
@@ -961,7 +968,7 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .topbar .wrap { display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:56px; }
 .home-link { font-family:var(--serif); font-weight:600; font-size:24px; color:#fff; text-decoration:none; }
 .home-link:hover { color:#F5D7DF; }
-.home-link span { color:var(--gold); }
+.home-link .dot-gold { color:var(--gold); }
 .langs { display:flex; gap:4px; }
 .langs button { font:inherit; min-width:44px; min-height:40px; border:0; border-radius:999px; background:none; cursor:pointer;
   font-size:12px; font-weight:600; letter-spacing:.08em; color:#F5D7DF; }
@@ -1045,6 +1052,13 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .info h1 { font-family:var(--serif); font-weight:600; font-size:clamp(38px, 6vw, 56px); color:var(--granate); margin:0 0 20px; }
 .info h2 { font-family:var(--serif); font-weight:600; font-size:26px; color:var(--granate); margin:32px 0 8px; }
 .info p { font-size:17px; line-height:1.75; margin:0 0 16px; }
+
+.home-link { display:inline-flex; align-items:center; gap:10px; }
+.brand-mark { width:34px; height:34px; display:block; }
+.masthead-mark { width:84px; height:84px; display:block; margin:0 auto 14px; }
+footer .logo-sm { display:inline-flex !important; align-items:center; gap:10px; }
+footer .logo-sm img { width:40px; height:40px; }
+@media (max-width: 640px) { .masthead-mark { width:64px; height:64px; } .brand-mark { width:28px; height:28px; } }
 
 /* masthead */
 .masthead { text-align:center; padding:52px 24px 36px; }
@@ -1261,6 +1275,7 @@ def build_home(articles: list[dict], styles: list[dict] | None = None) -> str:
     styles = styles or []
     masthead = f"""
 <header class="wrap masthead">
+  <img class="masthead-mark" src="logo.svg" alt="" width="84" height="84">
   <h1 class="logo">{SITE_NAME}<span>.</span></h1>
   <p class="tagline">{tri(UI["tagline"])}</p>
   {f'<p class="edition-date">{tri(date_labels(articles[0]["published_at"]))}</p>' if articles else ""}
@@ -1658,6 +1673,10 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
         f.write(JS)
     with open(os.path.join(SITE_DIR, ".nojekyll"), "w") as f:
         f.write("")
+    assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+    if os.path.isdir(assets_dir):
+        for name in os.listdir(assets_dir):
+            shutil.copy(os.path.join(assets_dir, name), os.path.join(SITE_DIR, name))
     for slug in legal.PAGES:
         with open(os.path.join(SITE_DIR, f"{slug}.html"), "w", encoding="utf-8") as f:
             f.write(build_info_page(slug))
