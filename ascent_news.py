@@ -32,6 +32,8 @@ import feedparser
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
+import game
+
 # ---------------------------------------------------------------- settings
 SITE_NAME = "Madam CEO"
 SITE_URL = "https://themadamceo.com"
@@ -48,6 +50,36 @@ HOME_ARTICLES = 31                  # articles shown on the homepage
 KEEP_ARTICLES = 400                 # articles kept in the archive
 
 DATA_FILE = os.path.join("data", "articles.json")
+STYLE_FILE = os.path.join("data", "style.json")
+STYLE_EVERY_DAYS = 7                # a new Style guide every N days
+
+# Evergreen office-style topics; Claude writes one guide per topic, in order, then starts over
+STYLE_TOPICS = [
+    "The capsule work wardrobe: 10 pieces that make 30 outfits",
+    "What to wear to a job interview, from corporate to creative",
+    "Dressing for your first board or executive meeting",
+    "Business casual decoded: what it really means",
+    "The perfect blazer: fit, fabric and how to style it",
+    "Power colours: what to wear when you need to be heard",
+    "Hybrid work: looking polished on camera and in the office",
+    "Comfortable shoes that still look executive",
+    "The work bag: what to look for and what to carry",
+    "Dressing for a conference where you are speaking",
+    "Client dinner: from desk to evening with one swap",
+    "Summer in the office: staying cool and professional",
+    "Winter layering for the commute and the boardroom",
+    "Business travel: packing a week of outfits in a carry-on",
+    "Accessories that add authority: watches, jewellery and scarves",
+    "Building a professional wardrobe on a tight budget",
+    "Dressing for a promotion: dress for the role you want",
+    "Maternity workwear that stays sharp",
+    "Smart casual Fridays without looking underdressed",
+    "Investment pieces worth saving for",
+    "Caring for your work clothes so they last for years",
+    "Tailoring: small alterations that transform an outfit",
+    "Personal style at work: standing out while fitting in",
+    "Dressing for a networking event",
+]
 SITE_DIR = "site"
 
 SEARCHES = [
@@ -115,6 +147,41 @@ UI = {
     "ad": {"en": "Advertisement", "es": "Publicidad", "fr": "Publicité"},
     "ad_cta": {"en": "Your brand here — advertise with us", "es": "Tu marca aquí — anúnciate con nosotros",
                "fr": "Votre marque ici — annoncez chez nous"},
+    "nav_news": {"en": "News", "es": "Noticias", "fr": "Actualités"},
+    "nav_style": {"en": "Style", "es": "Estilo", "fr": "Style"},
+    "nav_game": {"en": "Power Word", "es": "Power Word", "fr": "Power Word"},
+    "style_title": {"en": "Office Style", "es": "Estilo de oficina", "fr": "Style au bureau"},
+    "style_sub": {"en": "A weekly guide to dressing for the job you want",
+                  "es": "Una guía semanal para vestir para el puesto que quieres",
+                  "fr": "Un guide hebdomadaire pour s'habiller pour le poste que vous visez"},
+    "essentials": {"en": "The essentials", "es": "Imprescindibles", "fr": "Les essentiels"},
+    "do": {"en": "Do", "es": "Sí", "fr": "À faire"},
+    "dont": {"en": "Don't", "es": "No", "fr": "À éviter"},
+    "tip": {"en": "Smart tip", "es": "Consejo", "fr": "Astuce"},
+    "all_style": {"en": "All style guides", "es": "Todas las guías de estilo", "fr": "Tous les guides de style"},
+    "game_sub": {"en": "Guess today's business word in six tries",
+                 "es": "Adivina la palabra empresarial del día en seis intentos",
+                 "fr": "Devinez le mot business du jour en six essais"},
+    "game_num": {"en": "Puzzle", "es": "Reto", "fr": "Défi"},
+    "game_teaser": {"en": "A new five-letter business word every day. How fast can you crack it?",
+                    "es": "Una palabra empresarial de cinco letras cada día. ¿Cuánto tardarás en descubrirla?",
+                    "fr": "Un nouveau mot business de cinq lettres chaque jour. Saurez-vous le trouver ?"},
+    "play": {"en": "Play today's word", "es": "Jugar al reto de hoy", "fr": "Jouer au défi du jour"},
+    "enter": {"en": "Enter", "es": "Enviar", "fr": "Valider"},
+    "how_title": {"en": "How to play", "es": "Cómo se juega", "fr": "Comment jouer"},
+    "how_text": {"en": "Type any five-letter word and press Enter. The tiles change colour to show how close you are.",
+                 "es": "Escribe una palabra de cinco letras en inglés y pulsa Enviar. Las casillas cambian de color para indicarte lo cerca que estás.",
+                 "fr": "Tapez un mot anglais de cinq lettres et validez. Les cases changent de couleur pour indiquer si vous êtes proche."},
+    "hit": {"en": "Right letter, right spot", "es": "Letra correcta en su sitio", "fr": "Bonne lettre, bonne place"},
+    "near": {"en": "In the word, wrong spot", "es": "Está en la palabra, en otro sitio", "fr": "Dans le mot, mauvaise place"},
+    "miss": {"en": "Not in the word", "es": "No está en la palabra", "fr": "Absente du mot"},
+    "word_means": {"en": "What it means", "es": "Qué significa", "fr": "Ce que ça veut dire"},
+    "played": {"en": "Played", "es": "Jugadas", "fr": "Parties"},
+    "wins": {"en": "Win rate", "es": "Aciertos", "fr": "Réussite"},
+    "streak": {"en": "Streak", "es": "Racha", "fr": "Série"},
+    "best": {"en": "Best", "es": "Mejor", "fr": "Record"},
+    "share": {"en": "Share result", "es": "Compartir resultado", "fr": "Partager"},
+    "comeback": {"en": "A new word arrives tomorrow.", "es": "Mañana habrá una palabra nueva.", "fr": "Un nouveau mot arrive demain."},
     "empty": {"en": "The first edition is on its way.", "es": "La primera edición está en camino.",
               "fr": "La première édition arrive bientôt."},
 }
@@ -618,7 +685,7 @@ def adsense_head() -> str:
             f'?client={esc(ADSENSE_CLIENT)}" crossorigin="anonymous"></script>')
 
 
-def page(title: str, body: str, prefix: str, desc: str = "") -> str:
+def page(title: str, body: str, prefix: str, desc: str = "", extra_head: str = "", extra_js: str = "") -> str:
     return f"""<!doctype html>
 <html lang="en" translate="no">
 <head>
@@ -632,11 +699,17 @@ def page(title: str, body: str, prefix: str, desc: str = "") -> str:
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{prefix}style.css">
+{extra_head}
 {adsense_head()}
 </head>
 <body data-lang="en">
 <div class="topbar"><div class="wrap">
   <a class="home-link" href="{prefix}index.html">{SITE_NAME}<span>.</span></a>
+  <nav class="nav" aria-label="Sections">
+    <a href="{prefix}index.html">{tri(UI["nav_news"])}</a>
+    <a href="{prefix}style/index.html">{tri(UI["nav_style"])}</a>
+    <a href="{prefix}game/index.html">{tri(UI["nav_game"])}</a>
+  </nav>
   <div class="langs" role="group" aria-label="Language">
     <button type="button" data-set="en" aria-pressed="true">EN</button>
     <button type="button" data-set="es" aria-pressed="false">ES</button>
@@ -652,6 +725,7 @@ def page(title: str, body: str, prefix: str, desc: str = "") -> str:
   <p class="ai-note">{tri(UI["ai_note"])}</p>
 </footer>
 <script src="{prefix}app.js"></script>
+{extra_js}
 </body>
 </html>"""
 
@@ -684,6 +758,51 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .langs button { font:inherit; min-width:44px; min-height:40px; border:0; border-radius:999px; background:none; cursor:pointer;
   font-size:12px; font-weight:600; letter-spacing:.08em; color:#F5D7DF; }
 .langs button[aria-pressed="true"] { background:#fff; color:var(--accent); }
+
+/* section navigation */
+.topbar .wrap { flex-wrap:wrap; }
+.nav { display:flex; gap:4px; margin-right:auto; margin-left:24px; }
+.nav a { color:#F5D7DF; text-decoration:none; font-size:14px; font-weight:600; padding:10px 12px; border-radius:999px; }
+.nav a:hover { background:rgba(255,255,255,.12); color:#fff; }
+@media (max-width: 640px) {
+  .nav { order:3; width:100%; margin:0 0 8px; justify-content:space-between; }
+  .nav a { padding:8px 10px; font-size:13px; }
+}
+
+/* home: style + game strip */
+.extras { display:grid; grid-template-columns:minmax(0, 2fr) minmax(0, 1fr); gap:32px; margin:56px 0 0; }
+.extras-style { background:#fff; border-radius:6px; padding:28px; }
+.extras-style h2, .page-head h1 { font-family:var(--serif); font-weight:600; color:var(--granate); margin:0; }
+.extras-style h2 { font-size:32px; }
+.mini-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; margin-top:20px; }
+.mini { display:flex; flex-direction:column; gap:8px; text-decoration:none; color:var(--ink); }
+.mini img { width:100%; aspect-ratio:3/2; object-fit:cover; border-radius:4px; }
+.mini span { font-family:var(--serif); font-weight:600; font-size:19px; line-height:1.2; }
+.mini:hover span { color:var(--granate); }
+.extras-game { background:var(--granate); color:#fff; border-radius:6px; padding:28px; display:flex; flex-direction:column; gap:14px; justify-content:center; }
+.extras-game h2 { margin:0; font-family:var(--serif); font-weight:600; font-size:34px; }
+.extras-game p { margin:0; color:#F1D3DA; }
+.mini-tiles { display:flex; gap:6px; }
+.mini-tiles i { width:34px; height:34px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-style:normal; font-weight:700; color:#fff; }
+.extras-game .cta { background:var(--gold); color:var(--ink); align-self:flex-start; }
+.extras-game .cta:hover { background:#fff; }
+@media (max-width: 900px) { .extras { grid-template-columns:1fr; } .mini-grid { grid-template-columns:1fr; } }
+
+/* style pages */
+.page-head { text-align:center; padding:48px 16px 8px; }
+.page-head h1 { font-size:clamp(42px, 7vw, 68px); }
+.page-head p { margin:8px 0 0; font-family:var(--serif); font-style:italic; font-size:20px; color:var(--muted); }
+.style-sections h2 { font-family:var(--serif); font-weight:600; font-size:30px; color:var(--granate); margin:36px 0 10px; }
+.essentials { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin:0; padding:0; list-style:none; }
+.essentials li { background:#fff; border-radius:6px; padding:18px; border-top:3px solid var(--gold); }
+.essentials b { display:block; font-family:var(--serif); font-size:20px; color:var(--granate); margin-bottom:4px; }
+.dodont { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+.dodont div { border-radius:6px; padding:20px 22px; }
+.dodont .yes { background:#fff; border-left:4px solid var(--granate); }
+.dodont .no { background:var(--blush); border-left:4px solid #8C8A90; }
+.dodont h3 { margin:0 0 8px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--granate); }
+.dodont ul { margin:0; padding-left:18px; }
+@media (max-width: 640px) { .dodont { grid-template-columns:1fr; } }
 
 /* masthead */
 .masthead { text-align:center; padding:52px 24px 36px; }
@@ -888,7 +1007,8 @@ def build_article_page(a: dict) -> str:
     return page(f'{en["headline"]} — {SITE_NAME}', html_body, "../", en.get("dek", ""))
 
 
-def build_home(articles: list[dict]) -> str:
+def build_home(articles: list[dict], styles: list[dict] | None = None) -> str:
+    styles = styles or []
     masthead = f"""
 <header class="wrap masthead">
   <h1 class="logo">{SITE_NAME}<span>.</span></h1>
@@ -925,14 +1045,228 @@ def build_home(articles: list[dict]) -> str:
     grid = f'<h2 class="section-title">{tri(UI["latest"])}</h2><div class="grid">{"".join(parts)}</div>' if rest else ""
     leader = f'<div class="wrap">{ad_slot("leader")}</div>' if ADS_ENABLED else ""
     return page(f"{SITE_NAME} — {UI['tagline']['en']}",
-                masthead + lead_html + leader + f'<main class="wrap">{grid}</main>', "")
+                masthead + lead_html + leader + f'<main class="wrap">{extras_strip(styles)}{grid}</main>', "")
 
 
-def build_site(articles: list[dict]) -> None:
+# ---------------------------------------------------------------- style section
+def load_styles() -> list[dict]:
+    try:
+        with open(STYLE_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+
+def save_styles(styles: list[dict]) -> None:
+    os.makedirs(os.path.dirname(STYLE_FILE), exist_ok=True)
+    with open(STYLE_FILE, "w", encoding="utf-8") as f:
+        json.dump(styles, f, ensure_ascii=False, indent=1)
+
+
+def style_due(styles: list[dict]) -> bool:
+    if not styles:
+        return True
+    last = datetime.fromisoformat(styles[0]["published_at"])
+    return (datetime.now(timezone.utc) - last).days >= STYLE_EVERY_DAYS
+
+
+def write_style(client: Anthropic, styles: list[dict]) -> dict:
+    topic = STYLE_TOPICS[len(styles) % len(STYLE_TOPICS)]
+    prompt = f"""You are the style editor of "{SITE_NAME}", a publication for this audience:
+{AUDIENCE}
+
+Write this week's office-style guide on the topic: "{topic}".
+
+Rules:
+- Practical, confident, warm and inclusive: different budgets, body types, dress codes
+  (corporate, business casual, creative) and climates.
+- Talk about pieces, fits, fabrics and colours. Do NOT name brands, shops or prices,
+  and do not invent statistics or quotes.
+- Spanish must be natural Spain Spanish and French natural France French, written natively.
+
+Output ONLY JSON inside <style_json></style_json> tags:
+{{
+ "image_query": "3-6 English words for a symbolic illustration (e.g. 'blazer on a hanger by a window')",
+ "en": {{
+   "headline": "max 10 words",
+   "dek": "one-sentence standfirst",
+   "intro": "a short opening paragraph",
+   "sections": [{{"title": "...", "text": "one paragraph"}}, {{"title": "...", "text": "..."}}, {{"title": "...", "text": "..."}}],
+   "essentials": [{{"item": "piece", "how": "how to wear it, one sentence"}}],
+   "do": ["...", "...", "..."],
+   "dont": ["...", "...", "..."],
+   "tip": "one smart, specific tip"
+ }},
+ "es": {{ same fields }},
+ "fr": {{ same fields }}
+}}
+Use 4-6 essentials."""
+    data = extract_json(ask(client, WRITER_MODEL, prompt, max_tokens=8000), "style_json")
+    for lang in LANGS:
+        if not data.get(lang, {}).get("headline"):
+            raise ValueError(f"missing {lang} version")
+    art = pixel_art(client, data["en"]["headline"], data.get("image_query", "")) if IMAGE_MODE == "pixel" else None
+    words = len(" ".join([data["en"].get("intro", "")] + [x.get("text", "") for x in data["en"].get("sections", [])]).split())
+    return {
+        "id": "s" + hashlib.sha1(topic.encode()).hexdigest()[:8] + datetime.now(timezone.utc).strftime("%y%m%d"),
+        "topic": topic,
+        "category": "Careers",
+        "published_at": datetime.now(timezone.utc).isoformat(timespec="minutes"),
+        "minutes": max(2, round(words / 220)),
+        "content": {l: data[l] for l in LANGS},
+        "image_query": data.get("image_query", ""),
+        "art": art,
+        "photo": None,
+    }
+
+
+def style_meta(s: dict) -> str:
+    return (f'<p class="kicker"><span class="pill" style="background:var(--gold);color:var(--ink)">'
+            f'{tri(UI["nav_style"])}</span><span class="muted">{s["minutes"]} {tri(UI["min"])}</span></p>')
+
+
+def build_style_page(s: dict) -> str:
+    c = s["content"]
+    def per_lang(fn):
+        return "".join(f'<div data-l="{l}" lang="{l}">{fn(c[l])}</div>' for l in LANGS)
+    sections = per_lang(lambda x: f'<p>{esc(x.get("intro", ""))}</p>' + "".join(
+        f'<h2>{esc(sec.get("title", ""))}</h2><p>{esc(sec.get("text", ""))}</p>' for sec in x.get("sections", [])))
+    essentials = per_lang(lambda x: '<ul class="essentials">' + "".join(
+        f'<li><b>{esc(e.get("item", ""))}</b>{esc(e.get("how", ""))}</li>' for e in x.get("essentials", [])) + "</ul>")
+    dos = per_lang(lambda x: "<ul>" + "".join(f"<li>{esc(d)}</li>" for d in x.get("do", [])) + "</ul>")
+    donts = per_lang(lambda x: "<ul>" + "".join(f"<li>{esc(d)}</li>" for d in x.get("dont", [])) + "</ul>")
+    body = f"""
+<div class="story-layout">
+<main class="story">
+  <a class="back" href="index.html">← {tri(UI["all_style"])}</a>
+  <article>
+    {style_meta(s)}
+    <h1>{tri(field(s, "headline"))}</h1>
+    <p class="dek">{tri(field(s, "dek"))}</p>
+    <p class="byline">{tri(date_labels(s["published_at"]))}</p>
+    {image_html(s, "story-img", "../")}
+    {f'<p class="credit">{tri(UI["ai_art"])}</p>' if s.get("art") else '<div style="height:32px"></div>'}
+    <div class="body style-sections">{sections}</div>
+    <h2 class="src-title">{tri(UI["essentials"])}</h2>
+    {essentials}
+    <div class="dodont">
+      <div class="yes"><h3>{tri(UI["do"])}</h3>{dos}</div>
+      <div class="no"><h3>{tri(UI["dont"])}</h3>{donts}</div>
+    </div>
+    {ad_slot("inline")}
+    <aside class="box accent"><h2>{tri(UI["tip"])}</h2><p>{tri(field(s, "tip"))}</p></aside>
+  </article>
+</main>
+{('<div class="rail">' + ad_slot("rail") + '</div>') if ADS_ENABLED else ""}
+</div>"""
+    en = c["en"]
+    return page(f'{en["headline"]} — {SITE_NAME}', body, "../", en.get("dek", ""))
+
+
+def build_style_index(styles: list[dict]) -> str:
+    head = f"""<header class="page-head"><h1>{tri(UI["style_title"])}</h1><p>{tri(UI["style_sub"])}</p></header>"""
+    if not styles:
+        return page(f'{UI["style_title"]["en"]} — {SITE_NAME}',
+                    head + f'<main class="wrap"><p class="empty">{tri(UI["empty"])}</p></main>', "../")
+    cards = "".join(f"""
+<article class="card" style="--cat:var(--gold)">
+  <a class="img-link" href="{s["id"]}.html" tabindex="-1" aria-hidden="true">{image_html(s, "card-img", "../")}</a>
+  {style_meta(s)}
+  <h3><a href="{s["id"]}.html">{tri(field(s, "headline"))}</a></h3>
+  <p class="card-dek">{tri(field(s, "dek"))}</p>
+</article>""" for s in styles)
+    leader = ad_slot("leader")
+    return page(f'{UI["style_title"]["en"]} — {SITE_NAME}',
+                head + f'<main class="wrap">{leader}<div class="grid" style="margin-top:40px">{cards}</div></main>', "../")
+
+
+# ---------------------------------------------------------------- game page
+def build_game_page() -> str:
+    rows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
+    keys = ""
+    for i, row in enumerate(rows):
+        btns = "".join(f'<button type="button" class="key" data-k="{k}">{k}</button>' for k in row)
+        if i == 2:
+            btns = (f'<button type="button" class="key wide" data-action="ENTER">{tri(UI["enter"])}</button>' + btns +
+                    '<button type="button" class="key wide" data-action="BACK" aria-label="Delete">⌫</button>')
+        keys += f'<div class="keyrow">{btns}</div>'
+    defs = "".join(f'<p id="def-{l}" data-l="{l}" lang="{l}"></p>' for l in LANGS)
+    body = f"""
+<main class="game">
+  <h1>Power Word</h1>
+  <p class="game-sub">{tri(UI["game_sub"])}</p>
+  <p class="game-num">{tri(UI["game_num"])} #<span class="pw-num"></span></p>
+  <p class="game-msg" id="msg" role="status" aria-live="polite"></p>
+  <div class="board" id="board" aria-label="Game board"></div>
+  <div class="keys">{keys}</div>
+  <section class="reveal" id="reveal" aria-live="polite">
+    <p class="kicker">{tri(UI["word_means"])}</p>
+    <h2 id="answer"></h2>
+    {defs}
+    <div class="stats">
+      <div><b id="st-played">0</b><span>{tri(UI["played"])}</span></div>
+      <div><b id="st-wins">0%</b><span>{tri(UI["wins"])}</span></div>
+      <div><b id="st-streak">0</b><span>{tri(UI["streak"])}</span></div>
+      <div><b id="st-best">0</b><span>{tri(UI["best"])}</span></div>
+    </div>
+    <button type="button" class="share" id="share">{tri(UI["share"])} <span aria-hidden="true">↗</span></button>
+    <p class="muted" style="margin-top:14px">{tri(UI["comeback"])}</p>
+  </section>
+  <details class="how">
+    <summary>{tri(UI["how_title"])}</summary>
+    <p>{tri(UI["how_text"])}</p>
+    <div class="legend">
+      <span><i style="background:var(--granate)"></i>{tri(UI["hit"])}</span>
+      <span><i style="background:var(--gold)"></i>{tri(UI["near"])}</span>
+      <span><i style="background:#8C8A90"></i>{tri(UI["miss"])}</span>
+    </div>
+  </details>
+</main>"""
+    words = json.dumps([list(w) for w in game.WORDS], ensure_ascii=False)
+    extra_js = (f'<script>window.POWER_WORDS = {words}; window.SITE_URL = {json.dumps(SITE_URL)};</script>'
+                f'<script src="game.js"></script>')
+    return page(f"Power Word — {SITE_NAME}", body, "../", UI["game_sub"]["en"],
+                extra_head='<link rel="stylesheet" href="game.css">', extra_js=extra_js)
+
+
+def extras_strip(styles: list[dict]) -> str:
+    minis = "".join(f'<a class="mini" href="style/{s["id"]}.html">{image_html(s, "", "")}'
+                    f'<span>{tri(field(s, "headline"))}</span></a>' for s in styles[:3])
+    style_box = (f'<div class="extras-style"><h2>{tri(UI["style_title"])}</h2>'
+                 f'<p class="muted" style="margin:6px 0 0">{tri(UI["style_sub"])}</p>'
+                 f'<div class="mini-grid">{minis}</div></div>') if styles else ""
+    game_box = f"""<div class="extras-game">
+  <div class="mini-tiles" aria-hidden="true"><i style="background:var(--gold);color:var(--ink)">P</i><i style="background:#8C8A90">O</i><i style="background:#fff;color:var(--granate)">W</i><i style="background:#fff;color:var(--granate)">E</i><i style="background:var(--gold);color:var(--ink)">R</i></div>
+  <h2>Power Word</h2>
+  <p>{tri(UI["game_teaser"])}</p>
+  <a class="cta" href="game/index.html">{tri(UI["play"])} <span aria-hidden="true">→</span></a>
+</div>"""
+    cols = "" if styles else ' style="grid-template-columns:1fr"'
+    return f'<section class="extras"{cols}>{style_box}{game_box}</section>'
+
+
+def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
+    styles = load_styles() if styles is None else styles
     if os.path.isdir(SITE_DIR):
         shutil.rmtree(SITE_DIR)
     os.makedirs(os.path.join(SITE_DIR, "article"))
     os.makedirs(os.path.join(SITE_DIR, "img"))
+    os.makedirs(os.path.join(SITE_DIR, "style"))
+    os.makedirs(os.path.join(SITE_DIR, "game"))
+    with open(os.path.join(SITE_DIR, "game", "game.css"), "w", encoding="utf-8") as f:
+        f.write(game.GAME_CSS)
+    with open(os.path.join(SITE_DIR, "game", "game.js"), "w", encoding="utf-8") as f:
+        f.write(game.GAME_JS)
+    with open(os.path.join(SITE_DIR, "game", "index.html"), "w", encoding="utf-8") as f:
+        f.write(build_game_page())
+    for st in styles:
+        if st.get("art"):
+            with open(os.path.join(SITE_DIR, "img", f'{st["id"]}.svg'), "w", encoding="utf-8") as f:
+                f.write(st["art"]["svg"])
+        with open(os.path.join(SITE_DIR, "style", f'{st["id"]}.html'), "w", encoding="utf-8") as f:
+            f.write(build_style_page(st))
+    with open(os.path.join(SITE_DIR, "style", "index.html"), "w", encoding="utf-8") as f:
+        f.write(build_style_index(styles))
     with open(os.path.join(SITE_DIR, "style.css"), "w", encoding="utf-8") as f:
         f.write(CSS)
     with open(os.path.join(SITE_DIR, "app.js"), "w", encoding="utf-8") as f:
@@ -946,7 +1280,7 @@ def build_site(articles: list[dict]) -> None:
         with open(os.path.join(SITE_DIR, "article", f'{a["id"]}.html'), "w", encoding="utf-8") as f:
             f.write(build_article_page(a))
     with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_home(articles))
+        f.write(build_home(articles, styles))
     print(f"[6/6] Website built in '{SITE_DIR}/' with {len(articles)} articles")
 
 
@@ -992,10 +1326,19 @@ def main() -> None:
         with ThreadPoolExecutor(max_workers=PARALLEL_WRITERS) as pool:
             new_articles = [a for a in pool.map(work, enumerate(selected, 1)) if a]
 
+    styles = load_styles()
+    if "--style" in sys.argv or style_due(styles):
+        try:
+            styles.insert(0, write_style(client, styles))
+            save_styles(styles)
+            print(f"[Style] New guide: {styles[0]['topic']}")
+        except Exception as e:
+            print(f"      Style guide skipped ({e})")
+
     articles = new_articles + published  # newest first
     save_articles(articles)
     print(f"[5/6] Added {len(new_articles)} new articles (total {len(articles)})")
-    build_site(articles[:KEEP_ARTICLES])
+    build_site(articles[:KEEP_ARTICLES], styles)
 
 
 if __name__ == "__main__":
