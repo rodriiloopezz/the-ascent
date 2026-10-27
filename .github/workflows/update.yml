@@ -44,6 +44,7 @@ jobs:
           COMMUNITY_KEY: ${{ secrets.COMMUNITY_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           PACK_EMAIL: ${{ secrets.PACK_EMAIL }}
+          PACK_FROM: ${{ secrets.PACK_FROM }}
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
             python ascent_news.py --build-only

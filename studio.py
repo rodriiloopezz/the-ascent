@@ -13,6 +13,7 @@ The first pack of each day (Madrid time) also includes the Power Word post + sto
 Settings (GitHub secrets or .env):
   RESEND_API_KEY   key from resend.com (domain themadamceo.com verified)
   PACK_EMAIL       where the pack is sent (kept secret because the repository is public)
+  PACK_FROM        optional sender, e.g. "Madam CEO Studio <studio@another-verified-domain.com>"
 """
 
 import base64
@@ -525,7 +526,7 @@ def send(pack: dict, site_url: str, logo_png: str | None) -> bool:
     d = pack["date"]
     n_items = sum(len(sec["nets"]) for sec in pack["sections"])
     subject = f"Madam CEO · {pack['edition']} pack · {d.strftime('%a %d %b')} · {n_items} posts ready"
-    body = json.dumps({"from": SENDER, "to": [t.strip() for t in to.split(",") if t.strip()], "reply_to": REPLY_TO,
+    body = json.dumps({"from": os.getenv("PACK_FROM") or SENDER, "to": [t.strip() for t in to.split(",") if t.strip()], "reply_to": REPLY_TO,
                        "subject": subject, "html": email_html(pack, site_url, logo_cid),
                        "attachments": attachments}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=body, method="POST", headers={
