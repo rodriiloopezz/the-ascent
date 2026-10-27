@@ -1,5 +1,829 @@
 [
  {
+  "id": "sf440bea9261027",
+  "topic": "Dressing for your first board or executive meeting",
+  "category": "Careers",
+  "published_at": "2026-10-27T10:42+00:00",
+  "minutes": 3,
+  "content": {
+   "en": {
+    "headline": "What to Wear to Your First Board Meeting",
+    "dek": "Soft tailoring, a rich autumn palette and a few well-fitted pieces will help you walk into the room looking like you belong there.",
+    "intro": "Your first board or executive meeting is not a fashion test. It is a chance to let your ideas lead, and your clothes should back you up quietly. This season's tailoring is softer and more flexible than the old rigid power suit, so you can look authoritative and still move, sit and breathe comfortably. Use the guide below as a starting point and adapt it to your budget, your body, your climate and your company's culture.",
+    "sections": [
+     {
+      "title": "Decode the room before you dress for it",
+      "text": "Boards range from formal and traditional to relaxed and start-up casual. Before the day, ask the board secretary or your sponsor what people usually wear, and look at recent photos of the leadership team. Then dress one notch above the most formal person you expect to see. If you are unsure, tailoring in a neutral colour is the safest answer almost everywhere. Smart trousers or a skirt, a considered top and a structured layer will work in nearly any dress code, including modest and faith-informed styles."
+     },
+     {
+      "title": "Fit and comfort matter more than the label",
+      "text": "A well-fitted mid-priced jacket will always look better than an ill-fitting expensive one, so budget for a tailor to adjust sleeves, hems and waists. Try everything on seated, with your arms raised, as if you were presenting, because that is how you will spend the meeting. Choose breathable natural fibres such as wool, cotton or silk where you can. Lighter-weight fabrics suit warmer climates, while a fine knit under your blazer gives you cold-weather layers without bulk. British Vogue's AW26 message is also worth remembering: shop your own wardrobe first and find new ways to wear the pieces you already love."
+     },
+     {
+      "title": "Make it yours with one deliberate detail",
+      "text": "This season is less about a single uniform and more about personal style. Keep the base calm, in navy, charcoal, camel, black or one of the season's deep shades, then add one detail that feels like you. That could be a pinstripe, a rich wine or eggplant tone, a silk blouse, a pair of earrings or a favourite watch. Relaxed should never mean careless, so press, steam and polish your shoes the night before and put the outfit out ready. One less decision on the morning of the meeting leaves more energy for the room."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "A tailored blazer",
+      "how": "Choose a single- or double-breasted cut with a soft but defined shoulder and wear it with trousers or a skirt, or over a dress."
+     },
+     {
+      "item": "Wide-leg or straight trousers",
+      "how": "Pick a fluid wool-blend or similar fabric that falls from the hip, and hem it to the shoe heel you will wear on the day."
+     },
+     {
+      "item": "A crisp white shirt or silk blouse",
+      "how": "Wear it tucked or half-tucked under a blazer, or on its own once the jacket comes off."
+     },
+     {
+      "item": "A structured knit or sheath dress",
+      "how": "It is a one-piece answer for busy mornings, and a blazer or longline cardigan on top completes the look."
+     },
+     {
+      "item": "Polished loafers or a low block heel",
+      "how": "Pick shoes you can walk, stand and present in comfortably, since a polished flat or a modest heel both read as professional."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Relaxed, softer tailoring",
+      "text": "Suits are loosening up, with softer shoulders, fluid fabrics and drapey blazers. Wear a matching set for a big meeting, or mix a structured blazer with a softer trouser or knit."
+     },
+     {
+      "name": "New-wave CEO dressing",
+      "text": "At Copenhagen Fashion Week, sharp blazers and smart trousers, leather gloves and a trench draped over the shoulders gave a fresh take on executive dressing. Try the trench-over-tailoring combination for the walk into the building."
+     },
+     {
+      "name": "Wine, espresso and eggplant",
+      "text": "Deep wine red, espresso brown and eggplant are being styled as new autumn neutrals, with butter yellow as a soft accent. Dress head-to-toe in one shade family for a polished, confident look."
+     }
+    ],
+    "do": [
+     "Ask what the dress code is, then dress one step more formal than the room.",
+     "Get your key piece tailored and test the outfit seated and standing.",
+     "Pick one deliberate detail, such as colour, a pinstripe or jewellery, that feels like you."
+    ],
+    "dont": [
+     "Don't wear anything brand new that you haven't sat, walked and presented in.",
+     "Don't let trends override fit: if a piece pulls, gapes or restricts you, leave it at home.",
+     "Don't dress down to blend in, or up so far that the outfit overshadows you."
+    ],
+    "tip": "A few days before the meeting, do a full dress rehearsal: put on the whole outfit, sit at a table, reach for a laptop and stand up to present. Fix anything that rides up, gapes or pinches, and keep a small kit in your bag with a lint roller, spare tights or socks and a safety pin."
+   },
+   "es": {
+    "headline": "Qué ponerte en tu primer consejo de administración",
+    "dek": "Una sastrería más suave, una paleta otoñal intensa y unas pocas prendas bien entalladas te ayudarán a entrar en la sala con total seguridad.",
+    "intro": "Tu primera reunión de consejo o comité ejecutivo no es un examen de moda. Es la oportunidad de que tus ideas lleven la voz cantante, y tu ropa solo tiene que respaldarte con discreción. La sastrería de esta temporada es más suave y flexible que el traje rígido de antes, así que puedes transmitir autoridad y, a la vez, moverte, sentarte y respirar con comodidad. Usa esta guía como punto de partida y adáptala a tu presupuesto, tu cuerpo, tu clima y la cultura de tu empresa.",
+    "sections": [
+     {
+      "title": "Descifra la sala antes de vestirte",
+      "text": "Hay consejos muy formales y tradicionales, y otros mucho más relajados, casi de startup. Antes del día señalado, pregunta a la secretaría del consejo o a tu mentora qué suele ponerse la gente, y echa un vistazo a fotos recientes del equipo directivo. Después, vístete un punto por encima de la persona más formal que esperes encontrar. Si dudas, la sastrería en un color neutro es la apuesta más segura en casi cualquier lugar. Un pantalón o una falda elegantes, una parte de arriba cuidada y una capa estructurada funcionan en casi cualquier código de vestimenta, incluidos los estilos más discretos o los que responden a convicciones religiosas."
+     },
+     {
+      "title": "El ajuste y la comodidad importan más que la etiqueta",
+      "text": "Una chaqueta de precio medio bien entallada siempre se verá mejor que una cara que te quede mal, así que reserva algo de presupuesto para que una modista te arregle mangas, bajos y cintura. Pruébate todo sentada y con los brazos en alto, como si estuvieras presentando, porque así pasarás la reunión. Elige fibras naturales y transpirables como la lana, el algodón o la seda siempre que puedas. Los tejidos ligeros van mejor en climas cálidos, y un jersey fino bajo el blazer te da capas para el frío sin volumen. Merece la pena recordar también el mensaje de British Vogue para este otoño-invierno: mira primero en tu propio armario y busca nuevas formas de llevar lo que ya te encanta."
+     },
+     {
+      "title": "Hazlo tuyo con un detalle intencionado",
+      "text": "Esta temporada va menos de un uniforme único y más de estilo personal. Mantén una base serena, en azul marino, gris marengo, camel, negro o alguno de los tonos intensos de la temporada, y añade un detalle que sea muy tú. Puede ser una raya diplomática, un tono vino o berenjena, una blusa de seda, unos pendientes o tu reloj favorito. Relajado no debe significar descuidado: plancha, repasa con el vapor y limpia los zapatos la noche anterior, y deja el conjunto preparado. Una decisión menos la mañana de la reunión te deja más energía para la sala."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Un blazer entallado",
+      "how": "Elige un corte recto o cruzado con un hombro suave pero definido, y llévalo con pantalón o falda, o sobre un vestido."
+     },
+     {
+      "item": "Pantalón de pierna ancha o recta",
+      "how": "Busca un tejido fluido, como una mezcla de lana, que caiga desde la cadera, y haz que te lo arreglen a la altura del tacón o zapato que llevarás ese día."
+     },
+     {
+      "item": "Una camisa blanca impecable o una blusa de seda",
+      "how": "Llévala por dentro o medio metida bajo el blazer, o sola cuando te quites la chaqueta."
+     },
+     {
+      "item": "Un vestido de punto estructurado o tipo tubo",
+      "how": "Es la solución de una sola pieza para las mañanas con prisa, y con un blazer o un cárdigan largo por encima el conjunto queda completo."
+     },
+     {
+      "item": "Mocasines pulidos o un tacón bajo cuadrado",
+      "how": "Elige un calzado con el que puedas caminar, estar de pie y presentar con comodidad, porque tanto una bailarina o mocasín cuidados como un tacón discreto transmiten profesionalidad."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Sastrería suave y relajada",
+      "text": "Los trajes se aflojan, con hombros más suaves, tejidos fluidos y blazers con caída. Llévalo en conjunto para una reunión importante o combina un blazer estructurado con un pantalón o un jersey más suaves."
+     },
+     {
+      "name": "El look de nueva CEO",
+      "text": "En la Semana de la Moda de Copenhague, blazers marcados y pantalones elegantes, guantes de piel y una gabardina echada sobre los hombros dieron una versión fresca del estilo ejecutivo. Prueba la gabardina sobre la sastrería para el trayecto hasta el edificio."
+     },
+     {
+      "name": "Vino, espresso y berenjena",
+      "text": "El rojo vino intenso, el marrón espresso y el berenjena se llevan como los nuevos neutros del otoño, con el amarillo mantequilla como toque suave. Combina todo en una misma gama de color para un look pulido y seguro."
+     }
+    ],
+    "do": [
+     "Pregunta cuál es el código de vestimenta y vístete un punto más formal que la sala.",
+     "Haz que te arreglen la prenda clave y prueba el conjunto sentada y de pie.",
+     "Elige un detalle intencionado, como un color, una raya diplomática o una joya, que sea muy tú."
+    ],
+    "dont": [
+     "No estrenes nada que no hayas probado sentada, caminando y presentando.",
+     "No dejes que una tendencia mande sobre el ajuste: si una prenda tira, hace bolsas o te limita, déjala en casa.",
+     "No te vistas con demasiada informalidad para pasar desapercibida, ni tan arreglada que el conjunto te eclipse."
+    ],
+    "tip": "Unos días antes de la reunión, haz un ensayo general: ponte el conjunto completo, siéntate a una mesa, alcanza el portátil y ponte de pie para presentar. Corrige lo que se suba, abra o apriete, y lleva en el bolso un pequeño kit con un cepillo quitapelusas, unas medias o calcetines de repuesto y un imperdible."
+   },
+   "fr": {
+    "headline": "Que porter à votre premier conseil d'administration",
+    "dek": "Un tailoring plus souple, une palette d'automne profonde et quelques pièces bien coupées vous aideront à entrer dans la salle en toute assurance.",
+    "intro": "Votre premier conseil d'administration ou comité exécutif n'est pas un examen de mode. C'est l'occasion de laisser vos idées parler, et votre tenue doit simplement vous soutenir avec discrétion. Le tailleur de cette saison est plus souple que l'ancien costume rigide : vous pouvez donc affirmer votre autorité tout en bougeant, en vous asseyant et en respirant à l'aise. Prenez ce guide comme point de départ et adaptez-le à votre budget, à votre morphologie, à votre climat et à la culture de votre entreprise.",
+    "sections": [
+     {
+      "title": "Décodez la salle avant de vous habiller",
+      "text": "Certains conseils sont très formels et traditionnels, d'autres beaucoup plus décontractés, façon start-up. Avant le jour J, demandez au secrétariat du conseil ou à votre mentor ce que l'on porte d'habitude, et regardez des photos récentes de l'équipe dirigeante. Habillez-vous ensuite d'un cran au-dessus de la personne la plus formelle que vous pensez croiser. En cas de doute, un tailoring dans un coloris neutre est le choix le plus sûr presque partout. Un pantalon ou une jupe élégants, un haut soigné et une couche structurée conviennent à presque tous les codes vestimentaires, y compris les styles plus couverts ou liés à des convictions religieuses."
+     },
+     {
+      "title": "La coupe et le confort comptent plus que l'étiquette",
+      "text": "Une veste de milieu de gamme bien ajustée sera toujours plus flatteuse qu'une veste chère mal coupée : prévoyez donc un petit budget pour faire retoucher manches, ourlets et taille. Essayez tout en position assise, les bras levés, comme si vous présentiez, car c'est ainsi que vous passerez la réunion. Choisissez autant que possible des fibres naturelles respirantes comme la laine, le coton ou la soie. Les tissus légers conviennent mieux aux climats chauds, et un pull fin sous le blazer vous donne des couches pour le froid sans surépaisseur. Le message de British Vogue pour cet automne-hiver mérite aussi d'être retenu : puisez d'abord dans votre propre garde-robe et trouvez de nouvelles façons de porter les pièces que vous aimez déjà."
+     },
+     {
+      "title": "Personnalisez avec un détail assumé",
+      "text": "Cette saison, il s'agit moins d'un uniforme unique que d'un style personnel. Gardez une base sobre, en bleu marine, gris anthracite, camel, noir ou l'une des teintes profondes de la saison, puis ajoutez un détail qui vous ressemble. Ce peut être une rayure tennis, un ton lie-de-vin ou aubergine, un chemisier en soie, des boucles d'oreilles ou votre montre préférée. Décontracté ne doit pas rimer avec négligé : repassez, défroissez à la vapeur et cirez vos chaussures la veille, puis préparez la tenue. Une décision de moins le matin de la réunion, c'est de l'énergie en plus pour la salle."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Un blazer ajusté",
+      "how": "Choisissez une coupe droite ou croisée avec une épaule souple mais dessinée, et portez-le avec un pantalon, une jupe ou par-dessus une robe."
+     },
+     {
+      "item": "Un pantalon large ou droit",
+      "how": "Optez pour un tissu fluide, comme un mélange de laine, qui tombe depuis la hanche, et faites-le ourler à la hauteur des chaussures que vous porterez ce jour-là."
+     },
+     {
+      "item": "Une chemise blanche impeccable ou un chemisier en soie",
+      "how": "Portez-la rentrée ou à moitié rentrée sous le blazer, ou seule quand vous retirez la veste."
+     },
+     {
+      "item": "Une robe en maille structurée ou une robe fourreau",
+      "how": "C'est la solution en une seule pièce pour les matins pressés, et un blazer ou un long cardigan par-dessus complète la tenue."
+     },
+     {
+      "item": "Des mocassins bien cirés ou un talon bloc bas",
+      "how": "Choisissez des chaussures dans lesquelles vous pouvez marcher, rester debout et présenter à l'aise : un mocassin soigné comme un talon sage donnent une image professionnelle."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Tailoring souple et décontracté",
+      "text": "Les costumes se détendent, avec des épaules plus douces, des tissus fluides et des blazers qui tombent bien. Portez un ensemble assorti pour une réunion importante, ou associez un blazer structuré à un pantalon ou un pull plus souples."
+     },
+     {
+      "name": "Le style nouvelle PDG",
+      "text": "À la Fashion Week de Copenhague, blazers affirmés, pantalons élégants, gants en cuir et trench posé sur les épaules ont donné une version actuelle du style dirigeant. Essayez le trench sur un tailleur pour le trajet jusqu'à l'immeuble."
+     },
+     {
+      "name": "Lie-de-vin, expresso et aubergine",
+      "text": "Le rouge lie-de-vin profond, le brun expresso et l'aubergine se portent comme les nouveaux neutres de l'automne, avec une touche de jaune beurre. Misez sur un total look dans une même gamme de couleurs pour une allure soignée et assurée."
+     }
+    ],
+    "do": [
+     "Demandez quel est le code vestimentaire, puis habillez-vous un cran plus formel que la salle.",
+     "Faites retoucher votre pièce clé et testez la tenue assise comme debout.",
+     "Choisissez un détail assumé, comme une couleur, une rayure tennis ou un bijou, qui vous ressemble."
+    ],
+    "dont": [
+     "N'étrennez pas une tenue que vous n'avez jamais portée assise, en marchant et en présentant.",
+     "Ne laissez pas une tendance primer sur la coupe : si une pièce tire, bâille ou vous gêne, laissez-la au placard.",
+     "Ne vous habillez pas trop décontracté pour passer inaperçue, ni si apprêtée que la tenue vous éclipse."
+    ],
+    "tip": "Quelques jours avant la réunion, faites une répétition générale : enfilez la tenue complète, asseyez-vous à une table, attrapez un ordinateur portable et levez-vous pour présenter. Corrigez ce qui remonte, bâille ou pince, et gardez dans votre sac une petite trousse avec un rouleau antipeluches, des collants ou chaussettes de rechange et une épingle à nourrice."
+   }
+  },
+  "image_query": "confident woman tailored blazer boardroom",
+  "photo_queries": [
+   "woman walking into boardroom meeting",
+   "professional woman tailored suit office",
+   "woman blazer wide leg trousers street style",
+   "woman knit dress office autumn",
+   "businesswoman white shirt loafers"
+  ],
+  "essential_queries": [
+   "tailored wool blazer women",
+   "wide leg tailored trousers",
+   "white poplin shirt women",
+   "knit sheath dress",
+   "leather loafers women"
+  ],
+  "shops": [
+   {
+    "name": "Mango",
+    "url": "https://shop.mango.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Tailored blazers, trousers and shirts that follow the season's trends.",
+     "es": "Blazers, pantalones y camisas de corte sastre que siguen las tendencias de la temporada.",
+     "fr": "Blazers, pantalons et chemises de style tailleur qui suivent les tendances de la saison."
+    }
+   },
+   {
+    "name": "H&M",
+    "url": "https://www.hm.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Budget-friendly workwear basics: shirts, trousers and knits.",
+     "es": "Básicos de oficina a buen precio: camisas, pantalones y jerséis.",
+     "fr": "Des basiques de bureau abordables : chemises, pantalons et pulls."
+    }
+   },
+   {
+    "name": "ASOS",
+    "url": "https://www.asos.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "A huge online choice of tailoring, coats and shoes from many labels.",
+     "es": "Un gran surtido online de sastrería, abrigos y calzado de muchas marcas.",
+     "fr": "Un vaste choix en ligne de tailoring, manteaux et chaussures de nombreuses marques."
+    }
+   },
+   {
+    "name": "COS",
+    "url": "https://www.cos.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Minimalist, structured pieces in wool and cotton that build a capsule wardrobe.",
+     "es": "Prendas minimalistas y estructuradas en lana y algodón para crear un armario cápsula.",
+     "fr": "Des pièces minimalistes et structurées en laine et coton pour une garde-robe capsule."
+    }
+   },
+   {
+    "name": "Reiss",
+    "url": "https://www.reiss.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Blazer-and-trouser combinations with a flattering cut.",
+     "es": "Combinaciones de blazer y pantalón con un corte favorecedor.",
+     "fr": "Des associations blazer-pantalon à la coupe flatteuse."
+    }
+   },
+   {
+    "name": "Jigsaw",
+    "url": "https://www.jigsaw-online.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Elevated British workwear, with quality that often outshines the label's profile.",
+     "es": "Ropa de trabajo británica elevada, con una calidad que supera su fama.",
+     "fr": "Un vestiaire de travail britannique soigné, d'une qualité souvent sous-estimée."
+    }
+   },
+   {
+    "name": "Max Mara",
+    "url": "https://www.maxmara.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Tailored coats and executive suiting for board-level dressing.",
+     "es": "Abrigos y trajes sastre pensados para vestir en la alta dirección.",
+     "fr": "Manteaux et tailleurs pour s'habiller au niveau du comité exécutif."
+    }
+   },
+   {
+    "name": "Theory",
+    "url": "https://www.theory.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Minimalist office separates that last through years of daily wear.",
+     "es": "Prendas minimalistas de oficina que aguantan años de uso diario.",
+     "fr": "Des séparables minimalistes qui tiennent des années de port quotidien."
+    }
+   },
+   {
+    "name": "Toteme",
+    "url": "https://toteme.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Sculptural Scandinavian tailoring and coats.",
+     "es": "Sastrería escandinava de líneas escultóricas y abrigos.",
+     "fr": "Un tailoring scandinave sculptural et des manteaux."
+    }
+   }
+  ],
+  "sources": [],
+  "photo": {
+   "id": "Y7TJOcAtnpw",
+   "src": "https://images.unsplash.com/photo-1758691736580-a41e0cfe9e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjB3YWxraW5nJTIwaW50byUyMGJvYXJkcm9vbSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5MzA5NzczNHww&ixlib=rb-4.1.0&q=80&w=1080",
+   "alt": "Woman presenting to colleagues in a modern office meeting",
+   "photographer": "Vitaly Gariev",
+   "page": "https://unsplash.com/@silverkblack?utm_source=madam_ceo&utm_medium=referral",
+   "provider": "Unsplash",
+   "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+  },
+  "gallery": [
+   {
+    "id": "uKXfQblF2F4",
+    "src": "https://images.unsplash.com/photo-1604914509335-9001944f23d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjB0YWlsb3JlZCUyMHN1aXQlMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzA5NzczNXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in black and white striped blazer",
+    "photographer": "Marcel Strauß",
+    "page": "https://unsplash.com/@martzzl?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "am39--_rSaQ",
+    "src": "https://images.unsplash.com/photo-1762341120638-b5b9358ef571?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8Mnx8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjB0YWlsb3JlZCUyMHN1aXQlMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzA5NzczNXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "A woman in a black suit stands by a bookshelf",
+    "photographer": "Zulfugar Karimov",
+    "page": "https://unsplash.com/@zulfugarkarimov?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "-9I4DmKPNVY",
+    "src": "https://images.unsplash.com/photo-1615348411055-3492a2c76ca2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8M3x8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjB0YWlsb3JlZCUyMHN1aXQlMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzA5NzczNXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "person in gray blazer and white dress pants",
+    "photographer": "Kier in Sight Archives",
+    "page": "https://unsplash.com/@kierinsightarchives?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "wOkhtagarKU",
+    "src": "https://images.unsplash.com/photo-1762341121609-dc208ac2514d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8NHx8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjB0YWlsb3JlZCUyMHN1aXQlMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzA5NzczNXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "A woman in a black suit stands by a bookshelf",
+    "photographer": "Zulfugar Karimov",
+    "page": "https://unsplash.com/@zulfugarkarimov?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "essential_photos": [
+   {
+    "id": "Tmqu835ZNZY",
+    "src": "https://images.unsplash.com/photo-1617647858823-2424b6dc472f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8dGFpbG9yZWQlMjB3b29sJTIwYmxhemVyJTIwd29tZW58ZW58MXwxfHx8MTc5MzA5NzczN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in brown and black plaid blazer standing",
+    "photographer": "Mirko di Micco",
+    "page": "https://unsplash.com/@dimics3?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "rTG-AwMj08o",
+    "src": "https://images.unsplash.com/photo-1789110854331-6d3cabfef781?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d2lkZSUyMGxlZyUyMHRhaWxvcmVkJTIwdHJvdXNlcnN8ZW58MXwxfHx8MTc5MzA5NzczOHww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "A person wearing red linen trousers and a beige top with tan sandals",
+    "photographer": "engin akyurt",
+    "page": "https://unsplash.com/@enginakyurt?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "_y6hMz1pJC0",
+    "src": "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d2hpdGUlMjBwb3BsaW4lMjBzaGlydCUyMHdvbWVufGVufDF8MXx8fDE3OTMwOTc3Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in white long sleeve dress wearing black sunglasses",
+    "photographer": "YASU SHOTS",
+    "page": "https://unsplash.com/@yasushots?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "ioZdKCEa_YI",
+    "src": "https://images.unsplash.com/photo-1533638842865-579068d17afe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8a25pdCUyMHNoZWF0aCUyMGRyZXNzfGVufDF8MXx8fDE3OTMwOTc3NDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman standing near the wall while holding beer bottle",
+    "photographer": "Matheus Frade",
+    "page": "https://unsplash.com/@matheusfrade?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "avUyevopVlg",
+    "src": "https://images.unsplash.com/photo-1678784973551-f38208de2529?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8bGVhdGhlciUyMGxvYWZlcnMlMjB3b21lbnxlbnwxfDF8fHwxNzkzMDk3NzQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "a pair of shoes sitting inside of a box",
+    "photographer": "Mattia Occhi",
+    "page": "https://unsplash.com/@redzzz97?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "art": null
+ },
+ {
+  "id": "s2e381f10261027",
+  "topic": "What to wear to a job interview, from corporate to creative",
+  "category": "Careers",
+  "published_at": "2026-10-27T10:29+00:00",
+  "minutes": 3,
+  "content": {
+   "en": {
+    "headline": "What to Wear to an Interview, Corporate to Creative",
+    "dek": "Dress one step above the company's everyday code, and let polish, fit and one personal detail do the talking.",
+    "intro": "An interview outfit has one job: to make you feel like the obvious choice before you say a word. The good news this autumn is that tailoring has softened, so you can look sharp and still be comfortable and yourself. Start with the company's dress code, go one step more polished, and build from pieces that fit you properly. That matters more than any label or any trend.",
+    "sections": [
+     {
+      "title": "Corporate: law, finance, consulting, public sector",
+      "text": "Here, a tailored trouser or skirt suit, or a sheath dress with a blazer, is the safest route. Stick to navy, charcoal or black, with a neutral blouse or fine knit underneath. Add polished closed-toe shoes, whether low heels or smart flats, and minimal jewellery. Soft shoulders and a fluid trouser are on trend, but keep the overall effect crisp and quietly confident."
+     },
+     {
+      "title": "Business casual: tech, healthcare, education, scale-ups",
+      "text": "Most modern offices sit here. Pair tailored trousers or a midi skirt with a blouse, a structured knit or a waistcoat, and add a blazer you can keep on or take off. Smart-casual workplaces may accept dark, clean, non-distressed jeans with a crisp shirt and structured jacket. If you're unsure, trousers are the safer call. Loafers or Mary Janes keep the look polished without feeling stiff."
+     },
+     {
+      "title": "Creative: media, marketing, design, fashion, retail",
+      "text": "This is where you can show your taste, but keep it to one statement piece, such as a patterned shirt, a rich autumn colour, a sculptural earring or a standout bag. Keep everything else clean and well fitted. For retail and brand-led roles, look at how the company presents itself and echo its aesthetic with your own twist."
+     },
+     {
+      "title": "Video, climate and comfort",
+      "text": "For a video interview, dress head to toe anyway, choose solid colours that contrast with your background, and test the camera and lighting beforehand. In warm climates or air-conditioned offices, natural, breathable fibres and a light layer you can add or remove will keep you comfortable. Whatever your size, height or personal style, a quick alteration at the tailor makes any piece look made for you. Choose clothes you don't need to tug or adjust, so your focus stays on the conversation."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "A well-cut blazer",
+      "how": "Choose a softer shoulder or a defined waist, depending on what flatters you, and wear it over trousers, a dress or a knit."
+     },
+     {
+      "item": "Wide-leg or straight tailored trousers",
+      "how": "Their clean line suits most body types, and they pair equally well with a shirt, a fine knit or a waistcoat."
+     },
+     {
+      "item": "A crisp white shirt",
+      "how": "Wear it tucked for corporate settings, or partly tucked with the sleeves rolled for something more relaxed."
+     },
+     {
+      "item": "A structured knit or sheath dress",
+      "how": "It's a one-decision outfit: add a blazer for formal interviews or a cardigan and loafers for a softer look."
+     },
+     {
+      "item": "Loafers or low block-heel pumps",
+      "how": "Pick a comfortable pair you can walk, wait and sit in, and keep them clean and polished."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Relaxed tailoring",
+      "text": "Suits are loosening up, with softer shoulders, fluid fabrics and trousers that skim rather than cling. Wear a draped blazer with matching trousers for a polished look that still moves with you."
+     },
+     {
+      "name": "The waistcoat",
+      "text": "Fashion editors and high-street brands alike are calling it a standout piece this year. Layer it over a shirt with tailored trousers for tailoring with a twist, ideal for creative and business-casual interviews."
+     },
+     {
+      "name": "Wine, claret and aubergine tones",
+      "text": "Autumn reds are working their way into offices and pair well with the navy, grey and cream you already own. Try one in a blouse, knit or accessory for a memorable but professional accent."
+     }
+    ],
+    "do": [
+     "Dress one step more polished than the company's everyday dress code.",
+     "Prioritise fit and comfort: a quick alteration beats a more expensive label.",
+     "Do a full dress rehearsal, including shoes and bag, a few days before."
+    ],
+    "dont": [
+     "Don't wear anything you need to tug, adjust or keep checking.",
+     "Don't let a trend overshadow you: stick to one statement piece at most.",
+     "Don't assume casual means casual: even in relaxed workplaces, loungewear and flip-flops are out."
+    ],
+    "tip": "Choose your outfit two days ahead and wear it for an hour at home: sit, walk, reach for something and check how it looks on a video call. If anything pulls, pinches or distracts, swap it now rather than in the lift."
+   },
+   "es": {
+    "headline": "Qué ponerte en una entrevista, del traje al estilo creativo",
+    "dek": "Vístete un paso por encima del código habitual de la empresa y deja que el acabado, el ajuste y un detalle personal hablen por ti.",
+    "intro": "Un look de entrevista tiene una sola misión: que te sientas la elección obvia antes de abrir la boca. La buena noticia de este otoño es que la sastrería se ha suavizado, así que puedes ir elegante, cómoda y fiel a ti misma. Parte del código de vestimenta de la empresa, sube un escalón en cuidado y construye el look con prendas que te sienten bien. Eso importa más que cualquier marca o tendencia.",
+    "sections": [
+     {
+      "title": "Corporativo: derecho, finanzas, consultoría, sector público",
+      "text": "Aquí lo más seguro es un traje de pantalón o de falda, o un vestido tubo con americana. Quédate con el azul marino, el gris marengo o el negro, con una blusa neutra o un jersey fino debajo. Añade zapato cerrado cuidado, ya sea de tacón bajo o plano, y joyas discretas. Los hombros suaves y el pantalón fluido están de moda, pero procura que el conjunto siga siendo nítido y transmita seguridad."
+     },
+     {
+      "title": "Business casual: tecnología, sanidad, educación, scale-ups",
+      "text": "Es donde se sitúan la mayoría de las oficinas actuales. Combina pantalón de vestir o falda midi con una blusa, un punto estructurado o un chaleco, y suma una americana que puedas llevar puesta o quitarte. En empresas de estilo smart casual puede valer un vaquero oscuro, limpio y sin rotos, con camisa impecable y chaqueta estructurada. Si dudas, el pantalón de vestir es la opción segura. Los mocasines o las merceditas mantienen el look elegante sin rigidez."
+     },
+     {
+      "title": "Creativo: medios, marketing, diseño, moda, retail",
+      "text": "Aquí puedes enseñar tu criterio, pero limítate a una sola prenda protagonista: una camisa estampada, un color otoñal intenso, un pendiente escultórico o un bolso con personalidad. El resto, limpio y bien entallado. Para puestos de retail o de marca, fíjate en cómo se presenta la empresa y haz eco de su estética con tu toque personal."
+     },
+     {
+      "title": "Videollamada, clima y comodidad",
+      "text": "Si la entrevista es por videollamada, vístete igualmente de pies a cabeza, elige colores lisos que contrasten con el fondo y prueba antes la cámara y la luz. En climas cálidos o con aire acondicionado, las fibras naturales y transpirables y una capa ligera que puedas poner y quitar te darán comodidad. Sea cual sea tu talla, tu altura o tu estilo, un pequeño arreglo en la modista o el sastre hace que cualquier prenda parezca hecha a tu medida. Elige ropa que no tengas que estar recolocando, para que toda tu atención esté en la conversación."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Una americana bien cortada",
+      "how": "Elige un hombro suave o una cintura marcada, según lo que más te favorezca, y póntela sobre pantalón, vestido o punto."
+     },
+     {
+      "item": "Pantalón de pernera ancha o recta",
+      "how": "Su línea limpia favorece a casi todas las siluetas y combina igual de bien con camisa, jersey fino o chaleco."
+     },
+     {
+      "item": "Una camisa blanca impecable",
+      "how": "Métela por dentro en entornos corporativos o solo a medias y con las mangas remangadas para un aire más relajado."
+     },
+     {
+      "item": "Un vestido de punto estructurado o tipo tubo",
+      "how": "Es un look que se resuelve de una vez: con americana para entrevistas formales o con rebeca y mocasines para algo más suave."
+     },
+     {
+      "item": "Mocasines o zapatos de salón con tacón bajo y ancho",
+      "how": "Elige un par cómodo en el que puedas caminar, esperar y sentarte, y mantenlo limpio y cuidado."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Sastrería relajada",
+      "text": "Los trajes se aflojan, con hombros más suaves, tejidos fluidos y pantalones que caen sin ceñir. Lleva una americana con caída y pantalón a juego para un look cuidado que se mueve contigo."
+     },
+     {
+      "name": "El chaleco",
+      "text": "Editoras de moda y marcas de calle lo señalan como una de las prendas estrella del año. Póntelo sobre una camisa con pantalón de vestir para una sastrería con un guiño, ideal para entrevistas creativas o business casual."
+     },
+     {
+      "name": "Tonos vino, burdeos y berenjena",
+      "text": "Los rojos otoñales se cuelan en las oficinas y combinan de maravilla con el marino, el gris y el crudo que ya tienes. Prueba uno en una blusa, un jersey o un complemento para un toque memorable y a la vez profesional."
+     }
+    ],
+    "do": [
+     "Vístete un paso por encima del código habitual de la empresa.",
+     "Prioriza el ajuste y la comodidad: un arreglo a medida vale más que una etiqueta cara.",
+     "Haz un ensayo completo, con zapatos y bolso incluidos, unos días antes."
+    ],
+    "dont": [
+     "No te pongas nada que tengas que estirar, recolocar o revisar constantemente.",
+     "No dejes que una tendencia te eclipse: como mucho, una sola prenda protagonista.",
+     "No des por hecho que informal significa informal: incluso en empresas relajadas, el chándal y las chanclas están descartados."
+    ],
+    "tip": "Elige el look con dos días de antelación y póntelo una hora en casa: siéntate, camina, estira el brazo para coger algo y mira cómo se ve en una videollamada. Si algo tira, aprieta o distrae, cámbialo ahora y no en el ascensor."
+   },
+   "fr": {
+    "headline": "Que porter en entretien, du corporate au créatif",
+    "dek": "Habillez-vous d'un cran au-dessus du dress code de l'entreprise, et laissez la finition, la coupe et un détail personnel parler pour vous.",
+    "intro": "Une tenue d'entretien a une seule mission : vous faire paraître comme une évidence avant même d'avoir prononcé un mot. Bonne nouvelle cet automne : le tailoring s'assouplit, vous pouvez donc être impeccable, à l'aise et fidèle à vous-même. Partez du dress code de l'entreprise, montez d'un cran dans le soigné et construisez votre look avec des pièces qui vous vont vraiment. C'est plus important que n'importe quelle marque ou tendance.",
+    "sections": [
+     {
+      "title": "Corporate : droit, finance, conseil, secteur public",
+      "text": "Ici, le plus sûr reste un tailleur-pantalon ou un tailleur-jupe, ou une robe fourreau avec blazer. Restez sur le bleu marine, le gris anthracite ou le noir, avec un chemisier neutre ou un pull fin dessous. Ajoutez des chaussures fermées bien entretenues, à petit talon ou plates, et des bijoux discrets. Les épaules douces et le pantalon fluide sont dans l'air du temps, mais veillez à garder un ensemble net et assuré."
+     },
+     {
+      "title": "Business casual : tech, santé, éducation, scale-ups",
+      "text": "C'est là que se situent la plupart des bureaux d'aujourd'hui. Associez un pantalon de tailleur ou une jupe midi à un chemisier, une maille structurée ou un gilet de costume, et ajoutez un blazer que vous pourrez garder ou retirer. Dans les entreprises smart casual, un jean foncé, propre et non déchiré peut passer avec une chemise nette et une veste structurée. Dans le doute, le pantalon de tailleur est le choix le plus sûr. Mocassins ou babies gardent le look soigné sans raideur."
+     },
+     {
+      "title": "Créatif : médias, marketing, design, mode, retail",
+      "text": "Vous pouvez ici montrer votre goût, mais limitez-vous à une seule pièce forte : chemise imprimée, couleur d'automne profonde, boucle d'oreille sculpturale ou sac qui a du caractère. Le reste doit être net et bien ajusté. Pour le retail ou les postes liés à une marque, observez l'image de l'entreprise et faites-lui écho avec votre touche personnelle."
+     },
+     {
+      "title": "Visio, climat et confort",
+      "text": "Pour un entretien en visio, habillez-vous quand même de la tête aux pieds, choisissez des couleurs unies qui contrastent avec l'arrière-plan et testez la caméra et la lumière au préalable. Sous un climat chaud ou dans des bureaux climatisés, les fibres naturelles et respirantes et une petite couche à enfiler ou retirer vous garderont à l'aise. Quels que soient votre taille, votre morphologie ou votre style, une retouche chez la couturière ou le tailleur donne à n'importe quelle pièce l'allure du sur-mesure. Choisissez des vêtements que vous n'aurez pas à rajuster, pour rester concentrée sur la conversation."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Un blazer bien coupé",
+      "how": "Choisissez une épaule douce ou une taille marquée selon ce qui vous met en valeur, et portez-le sur un pantalon, une robe ou une maille."
+     },
+     {
+      "item": "Un pantalon de tailleur large ou droit",
+      "how": "Sa ligne nette flatte la plupart des silhouettes et se marie aussi bien avec une chemise, un pull fin ou un gilet."
+     },
+     {
+      "item": "Une chemise blanche impeccable",
+      "how": "Rentrée pour un cadre corporate, ou à moitié rentrée, manches retroussées, pour un esprit plus décontracté."
+     },
+     {
+      "item": "Une robe en maille structurée ou une robe fourreau",
+      "how": "C'est une tenue qui se décide d'un seul geste : avec un blazer pour un entretien formel, ou avec un cardigan et des mocassins pour un look plus doux."
+     },
+     {
+      "item": "Des mocassins ou des escarpins à talon bas et large",
+      "how": "Prenez une paire confortable dans laquelle vous pouvez marcher, attendre et vous asseoir, et gardez-la propre et bien entretenue."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Le tailoring décontracté",
+      "text": "Les costumes se détendent, avec des épaules plus douces, des tissus fluides et des pantalons qui effleurent sans serrer. Portez un blazer au tombé souple avec le pantalon assorti pour un look soigné qui bouge avec vous."
+     },
+     {
+      "name": "Le gilet de costume",
+      "text": "Rédactrices mode et enseignes en font l'une des pièces phares de l'année. Portez-le sur une chemise avec un pantalon de tailleur pour un tailoring avec un clin d'œil, idéal pour les entretiens créatifs ou business casual."
+     },
+     {
+      "name": "Les tons vin, bordeaux et aubergine",
+      "text": "Les rouges d'automne s'invitent au bureau et se marient très bien avec le marine, le gris et l'écru que vous avez déjà. Essayez-en un sur un chemisier, un pull ou un accessoire pour une touche mémorable mais professionnelle."
+     }
+    ],
+    "do": [
+     "Habillez-vous d'un cran au-dessus du dress code habituel de l'entreprise.",
+     "Privilégiez la coupe et le confort : une retouche vaut mieux qu'une étiquette plus chère.",
+     "Faites une répétition complète, chaussures et sac compris, quelques jours avant."
+    ],
+    "dont": [
+     "Ne portez rien que vous devez tirer, rajuster ou vérifier sans cesse.",
+     "Ne laissez pas une tendance vous éclipser : une seule pièce forte, tout au plus.",
+     "Ne confondez pas décontracté et négligé : même dans les entreprises détendues, jogging et tongs sont à éviter."
+    ],
+    "tip": "Choisissez votre tenue deux jours à l'avance et portez-la une heure chez vous : asseyez-vous, marchez, tendez le bras pour attraper quelque chose et regardez le rendu lors d'un appel vidéo. Si quelque chose tire, serre ou distrait, changez-le dès maintenant plutôt que dans l'ascenseur."
+   }
+  },
+  "image_query": "confident woman interview outfit blazer",
+  "photo_queries": [
+   "professional woman confident office interview",
+   "professional woman tailored suit office",
+   "woman blazer wide leg trousers street style",
+   "woman knit dress blazer office",
+   "woman loafers tailored trousers work outfit"
+  ],
+  "essential_queries": [
+   "tailored blazer woman",
+   "wide leg tailored trousers",
+   "white poplin button down shirt",
+   "structured knit sheath dress",
+   "leather loafers women"
+  ],
+  "shops": [
+   {
+    "name": "COS",
+    "url": "https://www.cosstores.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Clean-lined trousers, shirting and knits that feel modern but office-appropriate.",
+     "es": "Pantalones, camisas y prendas de punto de líneas limpias, modernas y perfectas para la oficina.",
+     "fr": "Pantalons, chemises et mailles aux lignes épurées, modernes et adaptés au bureau."
+    }
+   },
+   {
+    "name": "Marks & Spencer",
+    "url": "https://www.marksandspencer.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Dependable blazers, tailoring and knitwear from a UK high-street staple.",
+     "es": "Americanas, sastrería y punto fiables de un clásico de la calle comercial británica.",
+     "fr": "Blazers, tailoring et maille fiables, un classique des enseignes britanniques."
+    }
+   },
+   {
+    "name": "ASOS",
+    "url": "https://www.asos.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "A huge range of sizes and styles online: midi skirts, tailoring and autumn coats.",
+     "es": "Un surtido enorme de tallas y estilos online: faldas midi, sastrería y abrigos de otoño.",
+     "fr": "Un énorme choix de tailles et de styles en ligne : jupes midi, tailoring et manteaux d'automne."
+    }
+   },
+   {
+    "name": "Reiss",
+    "url": "https://www.reiss.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Flattering blazer-and-trouser sets with a polished British finish.",
+     "es": "Conjuntos de americana y pantalón favorecedores con un acabado británico impecable.",
+     "fr": "Ensembles blazer-pantalon flatteurs, avec une finition britannique soignée."
+    }
+   },
+   {
+    "name": "Jigsaw",
+    "url": "https://www.jigsaw-online.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Quality wools and silk blends, plus feminine dresses, coats and leather midi skirts.",
+     "es": "Lanas y mezclas de seda de calidad, además de vestidos, abrigos y faldas midi de piel con aire femenino.",
+     "fr": "Laines et mélanges de soie de qualité, robes, manteaux et jupes midi en cuir très féminins."
+    }
+   },
+   {
+    "name": "Massimo Dutti",
+    "url": "https://www.massimodutti.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "A refined, continental European take on professional dressing, sold internationally.",
+     "es": "Una visión europea y refinada de la ropa profesional, con presencia internacional.",
+     "fr": "Une vision européenne et raffinée de la tenue professionnelle, présente à l'international."
+    }
+   },
+   {
+    "name": "Max Mara",
+    "url": "https://www.maxmara.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Investment tailored coats and executive suiting.",
+     "es": "Abrigos de sastrería y trajes ejecutivos para invertir a largo plazo.",
+     "fr": "Manteaux tailleurs et costumes de direction, de vrais investissements."
+    }
+   },
+   {
+    "name": "Theory",
+    "url": "https://www.theory.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Minimalist separates built for the office, especially sharp suiting and dresses.",
+     "es": "Prendas básicas minimalistas pensadas para la oficina, sobre todo trajes y vestidos de corte limpio.",
+     "fr": "Pièces minimalistes pensées pour le bureau, notamment costumes et robes aux coupes nettes."
+    }
+   },
+   {
+    "name": "TOTEME",
+    "url": "https://toteme.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Sculptural Scandinavian tailoring and coats with a quiet, architectural edge.",
+     "es": "Sastrería escultural escandinava y abrigos de aire sobrio y arquitectónico.",
+     "fr": "Tailoring scandinave sculptural et manteaux à l'allure sobre et architecturale."
+    }
+   }
+  ],
+  "sources": [],
+  "photo": {
+   "id": "IESB4iFVuzA",
+   "src": "https://images.unsplash.com/photo-1698047682091-782b1e5c6536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjBjb25maWRlbnQlMjBvZmZpY2UlMjBpbnRlcnZpZXd8ZW58MXwwfHx8MTc5MzA5Njk2NXww&ixlib=rb-4.1.0&q=80&w=1080",
+   "alt": "a woman shaking hands with another woman sitting at a table",
+   "photographer": "Resume Genius",
+   "page": "https://unsplash.com/@resumegenius?utm_source=madam_ceo&utm_medium=referral",
+   "provider": "Unsplash",
+   "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+  },
+  "gallery": [
+   {
+    "id": "uKXfQblF2F4",
+    "src": "https://images.unsplash.com/photo-1604914509335-9001944f23d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjB0YWlsb3JlZCUyMHN1aXQlMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzA5Njk2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in black and white striped blazer",
+    "photographer": "Marcel Strauß",
+    "page": "https://unsplash.com/@martzzl?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "om-Cvae8PUo",
+    "src": "https://images.unsplash.com/photo-1584216338898-f34d78201414?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBibGF6ZXIlMjB3aWRlJTIwbGVnJTIwdHJvdXNlcnMlMjBzdHJlZXQlMjBzdHlsZXxlbnwxfDF8fHwxNzkzMDk2OTY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in gray coat standing beside black and red coca cola vending machine",
+    "photographer": "Amy Geier",
+    "page": "https://unsplash.com/@amy_geier?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "xd7q4Xr0eYQ",
+    "src": "https://images.unsplash.com/photo-1682449453924-1c0031a080ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBrbml0JTIwZHJlc3MlMjBibGF6ZXIlMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzA5Njk3MHww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "a woman with red hair is sitting on a ledge",
+    "photographer": "Ferrando Elias",
+    "page": "https://unsplash.com/@ferjeancarlo?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "A3MleA0jtoE",
+    "src": "https://images.unsplash.com/photo-1614786269829-d24616faf56d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBsb2FmZXJzJTIwdGFpbG9yZWQlMjB0cm91c2VycyUyMHdvcmslMjBvdXRmaXR8ZW58MXwxfHx8MTc5MzA5Njk3MXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in black long sleeve shirt and black pants",
+    "photographer": "Olga Zhuravleva",
+    "page": "https://unsplash.com/@zabegina?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "essential_photos": [
+   {
+    "id": "IXYxqP4zejo",
+    "src": "https://images.unsplash.com/photo-1571513722275-4b41940f54b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8dGFpbG9yZWQlMjBibGF6ZXIlMjB3b21hbnxlbnwxfDF8fHwxNzkzMDk2OTcyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman wearing white blazer",
+    "photographer": "Aiony Haust",
+    "page": "https://unsplash.com/@aiony?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "rTG-AwMj08o",
+    "src": "https://images.unsplash.com/photo-1789110854331-6d3cabfef781?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d2lkZSUyMGxlZyUyMHRhaWxvcmVkJTIwdHJvdXNlcnN8ZW58MXwxfHx8MTc5MzA5Njk3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "A person wearing red linen trousers and a beige top with tan sandals",
+    "photographer": "engin akyurt",
+    "page": "https://unsplash.com/@enginakyurt?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   null,
+   {
+    "id": "fJMhHPOqO6g",
+    "src": "https://images.unsplash.com/photo-1618333453259-049b5cbf7637?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8c3RydWN0dXJlZCUyMGtuaXQlMjBzaGVhdGglMjBkcmVzc3xlbnwxfDF8fHwxNzkzMDk2OTc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in gray tank top and brown coat standing on sidewalk during daytime",
+    "photographer": "The AW Creative Digital Marketing",
+    "page": "https://unsplash.com/@theawguide?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "avUyevopVlg",
+    "src": "https://images.unsplash.com/photo-1678784973551-f38208de2529?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8bGVhdGhlciUyMGxvYWZlcnMlMjB3b21lbnxlbnwxfDF8fHwxNzkzMDk2OTc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "a pair of shoes sitting inside of a box",
+    "photographer": "Mattia Occhi",
+    "page": "https://unsplash.com/@redzzz97?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "art": null
+ },
+ {
   "id": "sbaa6e880261027",
   "topic": "The capsule work wardrobe: 10 pieces that make 30 outfits",
   "category": "Careers",
@@ -176,10 +1000,54 @@
    }
   },
   "image_query": "neutral capsule wardrobe on rail",
-  "art": {
-   "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 40\" shape-rendering=\"crispEdges\"><rect x=\"0\" y=\"0\" width=\"60\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"1\" width=\"60\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"2\" width=\"9\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"9\" y=\"2\" width=\"2\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"11\" y=\"2\" width=\"9\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"20\" y=\"2\" width=\"20\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"40\" y=\"2\" width=\"20\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"3\" width=\"9\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"9\" y=\"3\" width=\"2\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"11\" y=\"3\" width=\"15\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"26\" y=\"3\" width=\"8\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"34\" y=\"3\" width=\"26\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"4\" width=\"23\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"23\" y=\"4\" width=\"14\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"37\" y=\"4\" width=\"23\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"5\" width=\"22\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"22\" y=\"5\" width=\"16\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"38\" y=\"5\" width=\"22\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"6\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"4\" y=\"6\" width=\"3\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"7\" y=\"6\" width=\"13\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"20\" y=\"6\" width=\"20\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"40\" y=\"6\" width=\"13\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"53\" y=\"6\" width=\"3\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"56\" y=\"6\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"7\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"4\" y=\"7\" width=\"3\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"7\" y=\"7\" width=\"12\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"19\" y=\"7\" width=\"22\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"41\" y=\"7\" width=\"12\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"53\" y=\"7\" width=\"3\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"56\" y=\"7\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"8\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"8\" width=\"6\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"11\" y=\"8\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"8\" width=\"8\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"20\" y=\"8\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"21\" y=\"8\" width=\"8\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"29\" y=\"8\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"30\" y=\"8\" width=\"8\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"38\" y=\"8\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"39\" y=\"8\" width=\"9\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"48\" y=\"8\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"49\" y=\"8\" width=\"7\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"56\" y=\"8\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"9\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"9\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"9\" width=\"6\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"18\" y=\"9\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"9\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"21\" y=\"9\" width=\"8\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"29\" y=\"9\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"30\" y=\"9\" width=\"8\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"38\" y=\"9\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"39\" y=\"9\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"42\" y=\"9\" width=\"6\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"48\" y=\"9\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"49\" y=\"9\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"9\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"9\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"10\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"10\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"10\" y=\"10\" width=\"2\" height=\"1\" fill=\"#5F626B\"/><rect x=\"12\" y=\"10\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"17\" y=\"10\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"19\" y=\"10\" width=\"2\" height=\"1\" fill=\"#5F626B\"/><rect x=\"21\" y=\"10\" width=\"5\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"10\" width=\"7\" height=\"1\" fill=\"#5F626B\"/><rect x=\"33\" y=\"10\" width=\"4\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"37\" y=\"10\" width=\"2\" height=\"1\" fill=\"#5F626B\"/><rect x=\"39\" y=\"10\" width=\"4\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"43\" y=\"10\" width=\"4\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"47\" y=\"10\" width=\"2\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"49\" y=\"10\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"10\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"10\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"11\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"11\" width=\"3\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"9\" y=\"11\" width=\"5\" height=\"1\" fill=\"#5F626B\"/><rect x=\"14\" y=\"11\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"16\" y=\"11\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"18\" y=\"11\" width=\"5\" height=\"1\" fill=\"#5F626B\"/><rect x=\"23\" y=\"11\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"11\" width=\"7\" height=\"1\" fill=\"#5F626B\"/><rect x=\"33\" y=\"11\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"36\" y=\"11\" width=\"5\" height=\"1\" fill=\"#5F626B\"/><rect x=\"41\" y=\"11\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"44\" y=\"11\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"46\" y=\"11\" width=\"5\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"51\" y=\"11\" width=\"3\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"11\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"11\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"12\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"12\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"12\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"12\" width=\"7\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"12\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"16\" y=\"12\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"12\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"12\" width=\"5\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"12\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"12\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"12\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"12\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"12\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"12\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"35\" y=\"12\" width=\"6\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"41\" y=\"12\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"44\" y=\"12\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"12\" width=\"7\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"12\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"12\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"12\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"13\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"13\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"13\" width=\"2\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"10\" y=\"13\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"12\" y=\"13\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"13\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"16\" y=\"13\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"13\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"13\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"13\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"13\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"13\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"13\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"13\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"13\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"13\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"13\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"35\" y=\"13\" width=\"2\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"37\" y=\"13\" width=\"4\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"41\" y=\"13\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"44\" y=\"13\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"13\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"13\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"13\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"13\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"13\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"13\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"14\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"14\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"14\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"14\" width=\"2\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"10\" y=\"14\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"12\" y=\"14\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"14\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"14\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"14\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"14\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"14\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"14\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"14\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"14\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"14\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"14\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"14\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"14\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"14\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"35\" y=\"14\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"14\" width=\"5\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"41\" y=\"14\" width=\"4\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"14\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"14\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"14\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"14\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"14\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"14\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"15\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"15\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"15\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"15\" width=\"1\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"9\" y=\"15\" width=\"4\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"13\" y=\"15\" width=\"2\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"15\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"15\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"15\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"15\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"15\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"15\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"15\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"15\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"15\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"15\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"15\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"15\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"15\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"34\" y=\"15\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"35\" y=\"15\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"15\" width=\"6\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"42\" y=\"15\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"15\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"15\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"15\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"15\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"15\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"15\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"16\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"16\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"16\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"16\" width=\"1\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"9\" y=\"16\" width=\"4\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"13\" y=\"16\" width=\"2\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"16\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"16\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"16\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"16\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"16\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"16\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"16\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"16\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"16\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"16\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"16\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"16\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"16\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"34\" y=\"16\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"35\" y=\"16\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"16\" width=\"6\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"42\" y=\"16\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"16\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"16\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"16\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"50\" y=\"16\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"16\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"16\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"16\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"17\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"17\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"17\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"17\" width=\"2\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"10\" y=\"17\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"12\" y=\"17\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"17\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"17\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"17\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"17\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"17\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"17\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"17\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"17\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"17\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"17\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"17\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"17\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"17\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"34\" y=\"17\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"35\" y=\"17\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"17\" width=\"6\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"42\" y=\"17\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"17\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"17\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"17\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"17\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"17\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"17\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"17\" width=\"2\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"58\" y=\"17\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"18\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"18\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"18\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"18\" width=\"7\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"18\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"18\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"18\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"18\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"18\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"18\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"18\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"18\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"18\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"18\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"18\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"18\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"18\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"34\" y=\"18\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"35\" y=\"18\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"18\" width=\"6\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"42\" y=\"18\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"18\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"18\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"18\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"18\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"18\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"18\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"18\" width=\"2\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"58\" y=\"18\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"19\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"19\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"19\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"19\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"11\" y=\"19\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"19\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"19\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"19\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"19\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"19\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"19\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"19\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"19\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"19\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"19\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"19\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"19\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"19\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"19\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"34\" y=\"19\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"35\" y=\"19\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"19\" width=\"6\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"42\" y=\"19\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"19\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"19\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"19\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"19\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"19\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"19\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"19\" width=\"2\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"58\" y=\"19\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"20\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"20\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"20\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"20\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"11\" y=\"20\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"20\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"20\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"20\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"20\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"20\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"20\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"20\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"20\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"20\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"20\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"20\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"20\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"20\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"20\" width=\"2\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"35\" y=\"20\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"36\" y=\"20\" width=\"6\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"42\" y=\"20\" width=\"3\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"20\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"20\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"20\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"50\" y=\"20\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"20\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"20\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"20\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"20\" width=\"2\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"58\" y=\"20\" width=\"1\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"20\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"21\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"21\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"21\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"21\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"11\" y=\"21\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"21\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"21\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"21\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"21\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"21\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"21\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"21\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"21\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"21\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"21\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"21\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"21\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"21\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"21\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"21\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"21\" width=\"8\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"43\" y=\"21\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"45\" y=\"21\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"21\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"21\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"21\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"21\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"21\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"57\" y=\"21\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"21\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"22\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"1\" y=\"22\" width=\"3\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"4\" y=\"22\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"22\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"22\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"22\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"11\" y=\"22\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"22\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"22\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"16\" y=\"22\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"17\" y=\"22\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"18\" y=\"22\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"20\" y=\"22\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"21\" y=\"22\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"23\" y=\"22\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"24\" y=\"22\" width=\"2\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"22\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"22\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"22\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"22\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"22\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"22\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"22\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"22\" width=\"8\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"43\" y=\"22\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"44\" y=\"22\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"22\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"22\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"22\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"22\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"22\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"22\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"57\" y=\"22\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"22\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"23\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"1\" y=\"23\" width=\"3\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"4\" y=\"23\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"23\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"23\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"23\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"11\" y=\"23\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"12\" y=\"23\" width=\"3\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"15\" y=\"23\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"16\" y=\"23\" width=\"10\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"23\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"23\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"23\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"23\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"23\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"23\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"23\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"23\" width=\"8\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"43\" y=\"23\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"44\" y=\"23\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"23\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"23\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"23\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"23\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"23\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"23\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"57\" y=\"23\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"23\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"24\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"1\" y=\"24\" width=\"3\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"4\" y=\"24\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"24\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"24\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"24\" width=\"7\" height=\"1\" fill=\"#16171B\"/><rect x=\"15\" y=\"24\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"16\" y=\"24\" width=\"10\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"24\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"24\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"24\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"24\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"24\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"24\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"24\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"24\" width=\"8\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"43\" y=\"24\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"44\" y=\"24\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"24\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"24\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"24\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"50\" y=\"24\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"24\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"24\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"24\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"57\" y=\"24\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"24\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"25\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"1\" y=\"25\" width=\"3\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"4\" y=\"25\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"25\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"25\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"8\" y=\"25\" width=\"7\" height=\"1\" fill=\"#16171B\"/><rect x=\"15\" y=\"25\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"17\" y=\"25\" width=\"9\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"25\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"25\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"25\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"25\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"25\" width=\"3\" height=\"1\" fill=\"#16171B\"/><rect x=\"33\" y=\"25\" width=\"1\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"25\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"25\" width=\"8\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"43\" y=\"25\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"25\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"25\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"25\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"25\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"25\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"25\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"57\" y=\"25\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"25\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"26\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"1\" y=\"26\" width=\"3\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"4\" y=\"26\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"26\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"26\" width=\"12\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"18\" y=\"26\" width=\"8\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"26\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"26\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"26\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"26\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"26\" width=\"2\" height=\"1\" fill=\"#16171B\"/><rect x=\"32\" y=\"26\" width=\"2\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"26\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"26\" width=\"9\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"44\" y=\"26\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"26\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"26\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"26\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"26\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"26\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"26\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"57\" y=\"26\" width=\"2\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"59\" y=\"26\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"0\" y=\"27\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"1\" y=\"27\" width=\"3\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"4\" y=\"27\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"27\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"27\" width=\"12\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"18\" y=\"27\" width=\"8\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"27\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"27\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"27\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"27\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"27\" width=\"2\" height=\"1\" fill=\"#16171B\"/><rect x=\"32\" y=\"27\" width=\"2\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"27\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"27\" width=\"9\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"44\" y=\"27\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"27\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"27\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"27\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"27\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"27\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"27\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"27\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"0\" y=\"28\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"4\" y=\"28\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"28\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"28\" width=\"13\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"19\" y=\"28\" width=\"7\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"26\" y=\"28\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"27\" y=\"28\" width=\"1\" height=\"1\" fill=\"#5F626B\"/><rect x=\"28\" y=\"28\" width=\"1\" height=\"1\" fill=\"#16171B\"/><rect x=\"29\" y=\"28\" width=\"1\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"30\" y=\"28\" width=\"2\" height=\"1\" fill=\"#16171B\"/><rect x=\"32\" y=\"28\" width=\"2\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"34\" y=\"28\" width=\"1\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"35\" y=\"28\" width=\"9\" height=\"1\" fill=\"#7A1F3D\"/><rect x=\"44\" y=\"28\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"28\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"28\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"28\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"28\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"28\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"28\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"28\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"0\" y=\"29\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"4\" y=\"29\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"5\" y=\"29\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"29\" width=\"14\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"20\" y=\"29\" width=\"20\" height=\"1\" fill=\"#FBFAF7\"/><rect x=\"40\" y=\"29\" width=\"5\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"45\" y=\"29\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"29\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"29\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"29\" width=\"2\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"54\" y=\"29\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"29\" width=\"1\" height=\"1\" fill=\"#EFEBE6\"/><rect x=\"56\" y=\"29\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"0\" y=\"30\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"4\" y=\"30\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"5\" y=\"30\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"30\" width=\"39\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"45\" y=\"30\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"48\" y=\"30\" width=\"1\" height=\"1\" fill=\"#2F6F6A\"/><rect x=\"49\" y=\"30\" width=\"3\" height=\"1\" fill=\"#7E9A6A\"/><rect x=\"52\" y=\"30\" width=\"2\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"54\" y=\"30\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"30\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"56\" y=\"30\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"0\" y=\"31\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"4\" y=\"31\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"5\" y=\"31\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"6\" y=\"31\" width=\"4\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"10\" y=\"31\" width=\"4\" height=\"1\" fill=\"#16171B\"/><rect x=\"14\" y=\"31\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"15\" y=\"31\" width=\"4\" height=\"1\" fill=\"#16171B\"/><rect x=\"19\" y=\"31\" width=\"3\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"22\" y=\"31\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"26\" y=\"31\" width=\"11\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"37\" y=\"31\" width=\"5\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"42\" y=\"31\" width=\"12\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"54\" y=\"31\" width=\"1\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"55\" y=\"31\" width=\"1\" height=\"1\" fill=\"#D9D3CC\"/><rect x=\"56\" y=\"31\" width=\"4\" height=\"1\" fill=\"#C4643F\"/><rect x=\"0\" y=\"32\" width=\"3\" height=\"1\" fill=\"#C4643F\"/><rect x=\"3\" y=\"32\" width=\"5\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"8\" y=\"32\" width=\"2\" height=\"1\" fill=\"#C4643F\"/><rect x=\"10\" y=\"32\" width=\"4\" height=\"1\" fill=\"#16171B\"/><rect x=\"14\" y=\"32\" width=\"1\" height=\"1\" fill=\"#C4643F\"/><rect x=\"15\" y=\"32\" width=\"4\" height=\"1\" fill=\"#16171B\"/><rect x=\"19\" y=\"32\" width=\"18\" height=\"1\" fill=\"#C4643F\"/><rect x=\"37\" y=\"32\" width=\"5\" height=\"1\" fill=\"#2E4A62\"/><rect x=\"42\" y=\"32\" width=\"10\" height=\"1\" fill=\"#C4643F\"/><rect x=\"52\" y=\"32\" width=\"5\" height=\"1\" fill=\"#C9A45C\"/><rect x=\"57\" y=\"32\" width=\"3\" height=\"1\" fill=\"#C4643F\"/><rect x=\"0\" y=\"33\" width=\"60\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"0\" y=\"34\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"8\" y=\"34\" width=\"45\" height=\"1\" fill=\"#C98A9B\"/><rect x=\"53\" y=\"34\" width=\"7\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"0\" y=\"35\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"8\" y=\"35\" width=\"44\" height=\"1\" fill=\"#F2E3E7\"/><rect x=\"52\" y=\"35\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"0\" y=\"36\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"8\" y=\"36\" width=\"44\" height=\"1\" fill=\"#F2E3E7\"/><rect x=\"52\" y=\"36\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"0\" y=\"37\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"8\" y=\"37\" width=\"44\" height=\"1\" fill=\"#F2E3E7\"/><rect x=\"52\" y=\"37\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"0\" y=\"38\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"8\" y=\"38\" width=\"44\" height=\"1\" fill=\"#F2E3E7\"/><rect x=\"52\" y=\"38\" width=\"8\" height=\"1\" fill=\"#E7B9A0\"/><rect x=\"0\" y=\"39\" width=\"60\" height=\"1\" fill=\"#E7B9A0\"/></svg>",
-   "alt": "neutral capsule wardrobe on rail"
+  "art": null,
+  "photo": {
+   "id": "TS--uNw-JqE",
+   "src": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8bmV1dHJhbCUyMGNhcHN1bGUlMjB3YXJkcm9iZSUyMG9uJTIwcmFpbHxlbnwxfDB8fHwxNzkzMDk3NzQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+   "alt": "hanged top on brown and white clothes horse",
+   "photographer": "Alyssa Strohmann",
+   "page": "https://unsplash.com/@anotherlovely?utm_source=madam_ceo&utm_medium=referral",
+   "provider": "Unsplash",
+   "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
   },
-  "photo": null
+  "gallery": [
+   {
+    "id": "mwa_nzFpnJw",
+    "src": "https://images.unsplash.com/photo-1603400521630-9f2de124b33b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8bmV1dHJhbCUyMGNhcHN1bGUlMjB3YXJkcm9iZSUyMG9uJTIwcmFpbHxlbnwxfDF8fHwxNzkzMDk3NzQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "clothing racks with neutral toned garments",
+    "photographer": "Thom Bradley",
+    "page": "https://unsplash.com/@thombradley?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "fouVDmGXoPI",
+    "src": "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8Mnx8bmV1dHJhbCUyMGNhcHN1bGUlMjB3YXJkcm9iZSUyMG9uJTIwcmFpbHxlbnwxfDF8fHwxNzkzMDk3NzQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "black and white floral long sleeve shirt",
+    "photographer": "Carlos Torres",
+    "page": "https://unsplash.com/@elcarito?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "dGmqNrksknE",
+    "src": "https://images.unsplash.com/photo-1593357172900-50624300577e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8M3x8bmV1dHJhbCUyMGNhcHN1bGUlMjB3YXJkcm9iZSUyMG9uJTIwcmFpbHxlbnwxfDF8fHwxNzkzMDk3NzQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "brown wooden bed frame with white bed linen",
+    "photographer": "Darren Richardson",
+    "page": "https://unsplash.com/@campfire_guy?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "6Mve42Iy8Y0",
+    "src": "https://images.unsplash.com/photo-1771605884393-056bd7a70a12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8NHx8bmV1dHJhbCUyMGNhcHN1bGUlMjB3YXJkcm9iZSUyMG9uJTIwcmFpbHxlbnwxfDF8fHwxNzkzMDk3NzQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "Coats and jackets hanging on a rack",
+    "photographer": "Ingo Zöll",
+    "page": "https://unsplash.com/@ingozoell?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "essential_photos": []
  }
 ]

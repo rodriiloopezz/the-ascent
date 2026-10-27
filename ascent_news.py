@@ -52,6 +52,10 @@ KEEP_ARTICLES = 400                 # articles kept in the archive
 DATA_FILE = os.path.join("data", "articles.json")
 STYLE_FILE = os.path.join("data", "style.json")
 STYLE_EVERY_DAYS = 7                # a new Style guide every N days
+STYLE_MIN_GUIDES = 3                # the Style section always has at least this many guides
+STYLE_IMAGE_MODE = "photos"         # "photos" = real fashion photos from Unsplash (UNSPLASH_ACCESS_KEY) or Pexels
+                                    # (PEXELS_API_KEY); "vector" = Claude illustration. With "photos", an illustration
+                                    # is drawn automatically when no key is set or no photo is found.
 
 # Evergreen office-style topics; Claude writes one guide per topic, in order, then starts over
 STYLE_TOPICS = [
@@ -158,6 +162,15 @@ UI = {
     "do": {"en": "Do", "es": "Sí", "fr": "À faire"},
     "dont": {"en": "Don't", "es": "No", "fr": "À éviter"},
     "tip": {"en": "Smart tip", "es": "Consejo", "fr": "Astuce"},
+    "lookbook": {"en": "The lookbook", "es": "Inspiración", "fr": "Le lookbook"},
+    "trends": {"en": "On the radar: what's next", "es": "En el radar: lo que viene", "fr": "Dans le viseur : ce qui arrive"},
+    "shops": {"en": "Where to shop", "es": "Dónde comprar", "fr": "Où acheter"},
+    "tier_affordable": {"en": "Affordable", "es": "Asequible", "fr": "Abordable"},
+    "tier_mid": {"en": "Mid-range", "es": "Gama media", "fr": "Milieu de gamme"},
+    "tier_premium": {"en": "Premium", "es": "Premium", "fr": "Premium"},
+    "shops_note": {"en": "Shops selected independently by our editors from current research. Availability varies by country.",
+                   "es": "Tiendas seleccionadas de forma independiente a partir de nuestra investigación. La disponibilidad varía según el país.",
+                   "fr": "Boutiques sélectionnées en toute indépendance à partir de nos recherches. La disponibilité varie selon le pays."},
     "all_style": {"en": "All style guides", "es": "Todas las guías de estilo", "fr": "Tous les guides de style"},
     "game_sub": {"en": "Guess today's business word in six tries",
                  "es": "Adivina la palabra empresarial del día en seis intentos",
@@ -267,14 +280,14 @@ def ask(client: Anthropic, model: str, prompt: str, max_tokens: int = 4000) -> s
     return "".join(b.text for b in msg.content if b.type == "text")
 
 
-def ask_with_web(client: Anthropic, prompt: str) -> tuple[str, list[dict]]:
+def ask_with_web(client: Anthropic, prompt: str, max_tokens: int = 8000) -> tuple[str, list[dict]]:
     """Ask Claude with web search enabled. Returns (text, sources)."""
     messages = [{"role": "user", "content": prompt}]
     tools = [{"type": "web_search_20250305", "name": "web_search", "max_uses": SEARCHES_PER_STORY}]
     text_parts, sources, seen = [], [], set()
     for _ in range(4):  # the API may pause long searches; continue up to 4 times
         resp = client.messages.create(
-            model=WRITER_MODEL, max_tokens=8000, messages=messages, tools=tools
+            model=WRITER_MODEL, max_tokens=max_tokens, messages=messages, tools=tools
         )
         for block in resp.content:
             if block.type == "text":
@@ -311,6 +324,176 @@ def pexels_photo(query: str) -> dict | None:
         }
     except Exception:
         return None
+
+
+def pexels_photos(query: str, n: int = 3, orientation: str = "landscape", skip: set | None = None) -> list[dict]:
+    """Several licensed Pexels photos for one search (free for commercial use)."""
+    key = os.getenv("PEXELS_API_KEY")
+    if not key or not query:
+        return []
+    url = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode(
+        {"query": query, "per_page": max(n * 3, 10), "orientation": orientation})
+    req = urllib.request.Request(url, headers={"Authorization": key, "User-Agent": "MadamCEO/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            photos = json.load(r).get("photos", [])
+    except Exception as e:
+        print(f"      Pexels search failed ({e})")
+        return []
+    out = []
+    if skip is None:
+        skip = set()
+    for p in photos:
+        if p["id"] in skip:
+            continue
+        skip.add(p["id"])
+        src = p["src"].get(orientation) or p["src"]["large"]
+        out.append({"id": p["id"], "src": src, "alt": p.get("alt") or query,
+                    "photographer": p.get("photographer", ""), "page": p.get("url", "https://www.pexels.com"),
+                    "provider": "Pexels", "provider_url": "https://www.pexels.com"})
+        if len(out) == n:
+            break
+    return out
+
+
+UNSPLASH_LEFT: int | None = None  # requests left this hour (from Unsplash headers)
+
+
+def unsplash_photos(query: str, n: int = 1, orientation: str = "landscape", skip: set | None = None) -> list[dict]:
+    """Licensed Unsplash photos. Follows the API guidelines: hotlinked URLs, photographer + Unsplash
+    credit with referral links, and a 'download' ping for each photo we use."""
+    key = os.getenv("UNSPLASH_ACCESS_KEY")
+    if not key or not query:
+        return []
+    headers = {"Authorization": f"Client-ID {key}", "Accept-Version": "v1", "User-Agent": "MadamCEO/1.0"}
+    url = "https://api.unsplash.com/search/photos?" + urllib.parse.urlencode(
+        {"query": query, "per_page": max(n * 3, 10), "orientation": "portrait" if orientation == "portrait" else "landscape",
+         "content_filter": "high"})
+    global UNSPLASH_LEFT
+    if UNSPLASH_LEFT is not None and UNSPLASH_LEFT < 3:
+        return []  # hourly limit almost reached: stop and try again next run
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=15) as r:
+            left = r.headers.get("X-Ratelimit-Remaining")
+            UNSPLASH_LEFT = int(left) if left and left.isdigit() else UNSPLASH_LEFT
+            results = json.load(r).get("results", [])
+    except Exception as e:
+        print(f"      Unsplash search failed ({e})")
+        return []
+    utm = "utm_source=madam_ceo&utm_medium=referral"
+    out = []
+    if skip is None:
+        skip = set()
+    for p in results:
+        if p["id"] in skip:
+            continue
+        skip.add(p["id"])
+        try:  # tell Unsplash the photo is being used (required by their guidelines)
+            urllib.request.urlopen(urllib.request.Request(p["links"]["download_location"], headers=headers), timeout=10).read()
+        except Exception:
+            pass
+        user = p.get("user", {})
+        out.append({
+            "id": p["id"],
+            "src": p["urls"]["regular"],
+            "alt": p.get("alt_description") or query,
+            "photographer": user.get("name", ""),
+            "page": f'{user.get("links", {}).get("html", "https://unsplash.com")}?{utm}',
+            "provider": "Unsplash",
+            "provider_url": f"https://unsplash.com/?{utm}",
+        })
+        if len(out) == n:
+            break
+    return out
+
+
+def stock_photos(query: str, n: int = 1, orientation: str = "landscape", skip: set | None = None) -> list[dict]:
+    """Unsplash first, then Pexels, depending on which key is configured."""
+    return unsplash_photos(query, n, orientation, skip) or pexels_photos(query, n, orientation, skip)
+
+
+SVG_ALLOWED = {"svg", "g", "path", "rect", "circle", "ellipse", "line", "polyline", "polygon",
+               "defs", "linearGradient", "radialGradient", "stop", "clipPath", "title", "desc"}
+
+
+def sanitise_svg(svg: str) -> str:
+    """Keep only plain drawing elements and attributes (no scripts, links, external files or text)."""
+    import xml.etree.ElementTree as ET
+    ns = "{http://www.w3.org/2000/svg}"
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    root = ET.fromstring(svg)
+
+    def walk(el):
+        for child in list(el):
+            tag = child.tag.replace(ns, "")
+            if tag not in SVG_ALLOWED:
+                el.remove(child)
+                continue
+            for attr in list(child.attrib):
+                low = attr.lower()
+                val = child.attrib[attr].lower()
+                if low.startswith("on") or "href" in low or "javascript:" in val or "url(http" in val:
+                    del child.attrib[attr]
+            walk(child)
+
+    if root.tag.replace(ns, "") != "svg":
+        raise ValueError("not an svg")
+    for attr in list(root.attrib):
+        if attr.lower().startswith("on") or "href" in attr.lower():
+            del root.attrib[attr]
+    walk(root)
+    return ET.tostring(root, encoding="unicode")
+
+
+def vector_art(client: Anthropic, headline: str, theme: str) -> dict | None:
+    """Claude draws an elegant flat fashion illustration as SVG."""
+    palette = "burgundy #7A1F3D, deep burgundy #4A0E20, blush #F2E3E7, rose #C98A9B, gold #C9A45C, " \
+              "navy #2E4A62, camel #C8A27A, cream #FBF6F1, ink #16171B, sage #7E9A6A"
+    prompt = f"""You are the fashion illustrator of "{SITE_NAME}", an elegant magazine for professional women.
+Draw an editorial fashion illustration for this style guide:
+Headline: {headline}
+Theme: {theme}
+
+Style: modern flat vector fashion illustration, like a high-end magazine. Elegant, slender stylised figures
+or flat-lay arrangements of clothes and accessories, simple faceless or minimal faces, clean shapes,
+soft shadows made with darker shades, a softly coloured background with a few decorative shapes.
+Use this palette: {palette}. No text, no letters, no logos, no brands, no real people.
+
+Technical: a single <svg> with viewBox="0 0 600 400" and xmlns="http://www.w3.org/2000/svg".
+Only use path, rect, circle, ellipse, line, polyline, polygon, g, linearGradient, radialGradient, stop.
+No text, image, script, style, filter or external references. Make it rich: 40-150 elements.
+Reply with ONLY the svg inside <svg_art></svg_art> tags."""
+    for attempt in range(1, 4):
+        try:
+            text = ask(client, WRITER_MODEL, prompt, max_tokens=16000)
+            m = re.search(r"<svg_art>\s*(<svg.*?</svg>)\s*</svg_art>", text, re.S) or re.search(r"(<svg.*?</svg>)", text, re.S)
+            if not m:
+                raise ValueError("no svg in the reply")
+            svg = sanitise_svg(m.group(1))
+            if svg.count("<") < 25:
+                raise ValueError("illustration too simple")
+            return {"svg": svg, "alt": theme or headline, "kind": "vector"}
+        except Exception as e:
+            print(f"      Fashion illustration attempt {attempt} failed: {e}")
+    return None
+
+
+def style_images(client: Anthropic, data: dict) -> dict:
+    """Cover photo, lookbook gallery and one photo per essential piece (or an illustration as fallback)."""
+    if STYLE_IMAGE_MODE == "photos" and (os.getenv("UNSPLASH_ACCESS_KEY") or os.getenv("PEXELS_API_KEY")):
+        queries = data.get("photo_queries") or [data.get("image_query", "")]
+        seen: set = set()
+        hero = stock_photos(queries[0], 1, "landscape", seen)
+        if hero:
+            gallery = stock_photos(queries[1] if len(queries) > 1 else queries[0], 4, "portrait", seen)
+            essential_photos = []
+            for q in (data.get("essential_queries") or [])[:5]:
+                found = stock_photos(q, 1, "portrait", seen)
+                essential_photos.append(found[0] if found else None)
+            return {"photo": hero[0], "gallery": gallery, "essential_photos": essential_photos, "art": None}
+        print("      No photo found; drawing an illustration instead")
+    return {"photo": None, "gallery": [], "essential_photos": [],
+            "art": vector_art(client, data["en"]["headline"], data.get("image_query", ""))}
 
 
 def pixel_art(client: Anthropic, headline: str, theme: str) -> dict | None:
@@ -623,10 +806,13 @@ def date_labels(iso: str) -> dict:
 
 def image_html(a: dict, cls: str, prefix: str) -> str:
     if a.get("art"):
-        return f'<img class="{cls} pixel" src="{prefix}img/{a["id"]}.svg" alt="{esc(a["art"]["alt"])}">'
+        px = "" if a["art"].get("kind") == "vector" else " pixel"
+        return f'<img class="{cls}{px}" src="{prefix}img/{a["id"]}.svg" alt="{esc(a["art"]["alt"])}">'
     p = a.get("photo")
     if p:
         return f'<img class="{cls}" src="{esc(p["src"])}" alt="{esc(p["alt"])}" loading="lazy">'
+    if str(a.get("id", "")).startswith("s"):
+        return f'<div class="{cls} ph" style="--cat:var(--gold)" aria-hidden="true">{tri(UI["nav_style"])}</div>'
     return (f'<div class="{cls} ph" style="--cat:{cat_color(a)}" aria-hidden="true">'
             f'{tri(CATEGORY_LABELS[a["category"]])}</div>')
 
@@ -793,7 +979,7 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .page-head h1 { font-size:clamp(42px, 7vw, 68px); }
 .page-head p { margin:8px 0 0; font-family:var(--serif); font-style:italic; font-size:20px; color:var(--muted); }
 .style-sections h2 { font-family:var(--serif); font-weight:600; font-size:30px; color:var(--granate); margin:36px 0 10px; }
-.essentials { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin:0; padding:0; list-style:none; }
+.essentials { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:14px; margin:0; padding:0; list-style:none; }
 .essentials li { background:#fff; border-radius:6px; padding:18px; border-top:3px solid var(--gold); }
 .essentials b { display:block; font-family:var(--serif); font-size:20px; color:var(--granate); margin-bottom:4px; }
 .dodont { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
@@ -803,6 +989,32 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .dodont h3 { margin:0 0 8px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--granate); }
 .dodont ul { margin:0; padding-left:18px; }
 @media (max-width: 640px) { .dodont { grid-template-columns:1fr; } }
+
+.gallery { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; margin:8px 0 28px; }
+.gallery figure { margin:0; }
+.gallery img { width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:4px; display:block; }
+.gallery figcaption { font-size:11px; margin-top:4px; }
+.gallery figcaption a { color:var(--muted); }
+@media (max-width: 640px) { .gallery { grid-template-columns:1fr 1fr; } }
+
+.style-h { font-family:var(--serif); font-weight:600; font-size:32px; color:var(--granate); margin:44px 0 16px; }
+.gallery { grid-template-columns:repeat(4, minmax(0, 1fr)) !important; }
+.essentials li img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:4px; display:block; margin-bottom:10px; }
+.essentials li small { display:block; font-size:10px; margin:-6px 0 8px; }
+.essentials li small a { color:var(--muted); }
+.trends { list-style:none; counter-reset:t; margin:0; padding:0; display:grid; gap:12px; }
+.trends li { counter-increment:t; display:grid; grid-template-columns:56px 1fr; gap:4px 16px; background:#fff; border-radius:6px; padding:18px 20px; }
+.trends li::before { content:counter(t, decimal-leading-zero); grid-row:span 2; font-family:var(--serif); font-size:40px; line-height:1; color:var(--gold); }
+.trends b { font-family:var(--serif); font-size:22px; color:var(--granate); }
+.shop-tier h3 { margin:18px 0 10px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.shops { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px; }
+.shop { position:relative; display:flex; flex-direction:column; gap:4px; background:#fff; border-radius:6px; padding:16px 36px 16px 16px;
+  text-decoration:none; color:var(--ink); font-size:14px; border:1px solid transparent; }
+.shop b { font-family:var(--serif); font-size:20px; color:var(--granate); }
+.shop:hover { border-color:var(--granate); }
+.shop-go { position:absolute; top:14px; right:14px; color:var(--granate); }
+.shop-note { font-size:12px; margin-top:12px; }
+@media (max-width: 640px) { .gallery { grid-template-columns:1fr 1fr !important; } }
 
 /* masthead */
 .masthead { text-align:center; padding:52px 24px 36px; }
@@ -1072,27 +1284,39 @@ def style_due(styles: list[dict]) -> bool:
 
 def write_style(client: Anthropic, styles: list[dict]) -> dict:
     topic = STYLE_TOPICS[len(styles) % len(STYLE_TOPICS)]
+    season = datetime.now().strftime("%B %Y")
     prompt = f"""You are the style editor of "{SITE_NAME}", a publication for this audience:
 {AUDIENCE}
 
-Write this week's office-style guide on the topic: "{topic}".
+Write this week's office-style guide on the topic: "{topic}". Today is {season}.
+
+First, research with web search (up to {SEARCHES_PER_STORY} searches):
+- current and upcoming workwear trends for this season from reliable fashion sources
+  (Vogue, Harper's Bazaar, Elle, The Cut, WWD, Business of Fashion, major newspapers);
+- real retailers that sell this kind of workwear internationally or in Europe, the US and the UK,
+  across price levels (affordable high-street, mid-range, premium).
 
 Rules:
-- Practical, confident, warm and inclusive: different budgets, body types, dress codes
-  (corporate, business casual, creative) and climates.
-- Talk about pieces, fits, fabrics and colours. Do NOT name brands, shops or prices,
-  and do not invent statistics or quotes.
+- Practical, confident, warm and inclusive: different budgets, body types, dress codes and climates.
+- Only name trends and shops you confirmed in your research. Never invent products, prices,
+  statistics or quotes. Do not mention specific prices.
+- For each shop give its official website homepage.
 - Spanish must be natural Spain Spanish and French natural France French, written natively.
 
-Output ONLY JSON inside <style_json></style_json> tags:
+After researching, output ONLY JSON inside <style_json></style_json> tags:
 {{
- "image_query": "3-6 English words for a symbolic illustration (e.g. 'blazer on a hanger by a window')",
+ "image_query": "3-6 English words describing an illustration for the guide",
+ "photo_queries": ["5 English stock-photo searches: first a wide cover photo, then 4 outfit photos, e.g. 'professional woman tailored suit office', 'woman blazer street style'"],
+ "essential_queries": ["one English stock-photo search per essential piece, same order, e.g. 'camel wool coat'"],
+ "shops": [{{"name": "Shop", "url": "https://...", "tier": "affordable | mid | premium",
+            "known_for": {{"en": "what to buy there, one line", "es": "...", "fr": "..."}}}}],
  "en": {{
    "headline": "max 10 words",
    "dek": "one-sentence standfirst",
    "intro": "a short opening paragraph",
    "sections": [{{"title": "...", "text": "one paragraph"}}, {{"title": "...", "text": "..."}}, {{"title": "...", "text": "..."}}],
    "essentials": [{{"item": "piece", "how": "how to wear it, one sentence"}}],
+   "trends": [{{"name": "trend name", "text": "what it is and how to wear it at work, 1-2 sentences"}}],
    "do": ["...", "...", "..."],
    "dont": ["...", "...", "..."],
    "tip": "one smart, specific tip"
@@ -1100,24 +1324,67 @@ Output ONLY JSON inside <style_json></style_json> tags:
  "es": {{ same fields }},
  "fr": {{ same fields }}
 }}
-Use 4-6 essentials."""
-    data = extract_json(ask(client, WRITER_MODEL, prompt, max_tokens=8000), "style_json")
+Use 4-5 essentials, 3 trends and 6-9 shops (2-3 per price level)."""
+    text, sources = ask_with_web(client, prompt, max_tokens=16000)
+    data = extract_json(text, "style_json")
     for lang in LANGS:
         if not data.get(lang, {}).get("headline"):
             raise ValueError(f"missing {lang} version")
-    art = pixel_art(client, data["en"]["headline"], data.get("image_query", "")) if IMAGE_MODE == "pixel" else None
+    shops = []
+    for sh in data.get("shops", []):
+        u = urllib.parse.urlparse(str(sh.get("url", "")))
+        if not sh.get("name") or u.scheme != "https" or not u.netloc:
+            continue
+        tier = sh.get("tier", "mid") if sh.get("tier") in ("affordable", "mid", "premium") else "mid"
+        shops.append({"name": sh["name"], "url": f"https://{u.netloc}", "tier": tier,
+                      "known_for": {l: sh.get("known_for", {}).get(l, "") for l in LANGS}})
+    images = style_images(client, data)
     words = len(" ".join([data["en"].get("intro", "")] + [x.get("text", "") for x in data["en"].get("sections", [])]).split())
     return {
         "id": "s" + hashlib.sha1(topic.encode()).hexdigest()[:8] + datetime.now(timezone.utc).strftime("%y%m%d"),
         "topic": topic,
         "category": "Careers",
         "published_at": datetime.now(timezone.utc).isoformat(timespec="minutes"),
-        "minutes": max(2, round(words / 220)),
+        "minutes": max(3, round(words / 220)),
         "content": {l: data[l] for l in LANGS},
         "image_query": data.get("image_query", ""),
-        "art": art,
-        "photo": None,
+        "photo_queries": data.get("photo_queries", []),
+        "essential_queries": data.get("essential_queries", []),
+        "shops": shops,
+        "sources": sources[:10],
+        **images,
     }
+
+
+def needs_new_images(s: dict) -> bool:
+    """A style guide needs new images if it has no photo (pixel art or illustration only)."""
+    return not s.get("photo")
+
+
+def without_pixel_art(s: dict) -> dict:
+    """Never show pixel art in the Style section."""
+    if s.get("art") and s["art"].get("kind") != "vector":
+        return {**s, "art": None}
+    return s
+
+
+def heal_style_images(client: Anthropic, styles: list[dict], limit: int = 2) -> None:
+    """Give photos to older guides that only have pixel art or an illustration (a few per run)."""
+    have_keys = os.getenv("UNSPLASH_ACCESS_KEY") or os.getenv("PEXELS_API_KEY")
+    fixed = 0
+    for st in styles:
+        if fixed >= limit:
+            break
+        pixel = st.get("art") and st["art"].get("kind") != "vector"
+        if not needs_new_images(st) or (not have_keys and not pixel):
+            continue
+        imgs = style_images(client, {**st["content"], "image_query": st.get("image_query", ""),
+                                     "photo_queries": st.get("photo_queries", []),
+                                     "essential_queries": st.get("essential_queries", [])})
+        if imgs.get("photo") or (pixel and imgs.get("art")):
+            st.update(imgs)
+            fixed += 1
+            print(f"   [Style] New images for: {st['content']['en']['headline'][:60]}")
 
 
 def style_meta(s: dict) -> str:
@@ -1125,16 +1392,75 @@ def style_meta(s: dict) -> str:
             f'{tri(UI["nav_style"])}</span><span class="muted">{s["minutes"]} {tri(UI["min"])}</span></p>')
 
 
+def photo_credit(p: dict) -> str:
+    prov = p.get("provider", "Pexels")
+    return (f'<a href="{esc(p["page"])}" target="_blank" rel="noopener">{esc(p["photographer"])}</a> / '
+            f'<a href="{esc(p.get("provider_url", "https://www.pexels.com"))}" target="_blank" rel="noopener">{esc(prov)}</a>')
+
+
+def style_credit(s: dict) -> str:
+    if s.get("art"):
+        return f'<p class="credit">{tri(UI["ai_art"])}</p>'
+    p = s.get("photo")
+    if p:
+        return f'<p class="credit">{tri(UI["photo"])}: {photo_credit(p)}</p>'
+    return '<div style="height:32px"></div>'
+
+
+def style_gallery(s: dict) -> str:
+    g = s.get("gallery") or []
+    if not g:
+        return ""
+    items = "".join(
+        f'<figure><img src="{esc(p["src"])}" alt="{esc(p["alt"])}" loading="lazy">'
+        f'<figcaption>{photo_credit(p)}</figcaption></figure>' for p in g)
+    return f'<h2 class="style-h">{tri(UI["lookbook"])}</h2><div class="gallery">{items}</div>'
+
+
 def build_style_page(s: dict) -> str:
     c = s["content"]
+
     def per_lang(fn):
         return "".join(f'<div data-l="{l}" lang="{l}">{fn(c[l])}</div>' for l in LANGS)
+
     sections = per_lang(lambda x: f'<p>{esc(x.get("intro", ""))}</p>' + "".join(
         f'<h2>{esc(sec.get("title", ""))}</h2><p>{esc(sec.get("text", ""))}</p>' for sec in x.get("sections", [])))
-    essentials = per_lang(lambda x: '<ul class="essentials">' + "".join(
-        f'<li><b>{esc(e.get("item", ""))}</b>{esc(e.get("how", ""))}</li>' for e in x.get("essentials", [])) + "</ul>")
+    ephotos = s.get("essential_photos") or []
+
+    def essential_cards(x):
+        out = []
+        for i, e in enumerate(x.get("essentials", [])):
+            ph = ephotos[i] if i < len(ephotos) and ephotos[i] else None
+            img = (f'<img src="{esc(ph["src"])}" alt="{esc(ph["alt"])}" loading="lazy">'
+                   f'<small>{photo_credit(ph)}</small>') if ph else ""
+            out.append(f'<li>{img}<b>{esc(e.get("item", ""))}</b>{esc(e.get("how", ""))}</li>')
+        return '<ul class="essentials">' + "".join(out) + "</ul>"
+
+    essentials = per_lang(essential_cards)
+    trends = per_lang(lambda x: '<ol class="trends">' + "".join(
+        f'<li><b>{esc(t.get("name", ""))}</b><span>{esc(t.get("text", ""))}</span></li>' for t in x.get("trends", [])) + "</ol>")
+    has_trends = any(c[l].get("trends") for l in LANGS)
     dos = per_lang(lambda x: "<ul>" + "".join(f"<li>{esc(d)}</li>" for d in x.get("do", [])) + "</ul>")
     donts = per_lang(lambda x: "<ul>" + "".join(f"<li>{esc(d)}</li>" for d in x.get("dont", [])) + "</ul>")
+
+    shops_html = ""
+    if s.get("shops"):
+        groups = ""
+        for tier in ("affordable", "mid", "premium"):
+            items = [sh for sh in s["shops"] if sh["tier"] == tier]
+            if not items:
+                continue
+            cards = "".join(
+                f'<a class="shop" href="{esc(sh["url"])}" target="_blank" rel="noopener sponsored">'
+                f'<b>{esc(sh["name"])}</b>{tri(sh["known_for"])}<span class="shop-go">↗</span></a>' for sh in items)
+            groups += f'<div class="shop-tier"><h3>{tri(UI["tier_" + tier])}</h3><div class="shops">{cards}</div></div>'
+        shops_html = (f'<h2 class="style-h">{tri(UI["shops"])}</h2>{groups}'
+                      f'<p class="muted shop-note">{tri(UI["shops_note"])}</p>')
+
+    srcs = "".join(f'<li><a href="{esc(x["url"])}" target="_blank" rel="noopener">{esc(x["title"])}</a></li>'
+                   for x in s.get("sources", []))
+    sources_html = f'<h2 class="src-title">{tri(UI["sources"])}</h2><ul class="sources">{srcs}</ul>' if srcs else ""
+
     body = f"""
 <div class="story-layout">
 <main class="story">
@@ -1145,16 +1471,20 @@ def build_style_page(s: dict) -> str:
     <p class="dek">{tri(field(s, "dek"))}</p>
     <p class="byline">{tri(date_labels(s["published_at"]))}</p>
     {image_html(s, "story-img", "../")}
-    {f'<p class="credit">{tri(UI["ai_art"])}</p>' if s.get("art") else '<div style="height:32px"></div>'}
+    {style_credit(s)}
     <div class="body style-sections">{sections}</div>
-    <h2 class="src-title">{tri(UI["essentials"])}</h2>
+    {style_gallery(s)}
+    <h2 class="style-h">{tri(UI["essentials"])}</h2>
     {essentials}
+    {f'<h2 class="style-h">{tri(UI["trends"])}</h2>{trends}' if has_trends else ""}
+    {ad_slot("inline")}
+    {shops_html}
     <div class="dodont">
       <div class="yes"><h3>{tri(UI["do"])}</h3>{dos}</div>
       <div class="no"><h3>{tri(UI["dont"])}</h3>{donts}</div>
     </div>
-    {ad_slot("inline")}
     <aside class="box accent"><h2>{tri(UI["tip"])}</h2><p>{tri(field(s, "tip"))}</p></aside>
+    {sources_html}
   </article>
 </main>
 {('<div class="rail">' + ad_slot("rail") + '</div>') if ADS_ENABLED else ""}
@@ -1259,6 +1589,7 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
         f.write(game.GAME_JS)
     with open(os.path.join(SITE_DIR, "game", "index.html"), "w", encoding="utf-8") as f:
         f.write(build_game_page())
+    styles = [without_pixel_art(st) for st in styles]
     for st in styles:
         if st.get("art"):
             with open(os.path.join(SITE_DIR, "img", f'{st["id"]}.svg'), "w", encoding="utf-8") as f:
@@ -1280,7 +1611,7 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
         with open(os.path.join(SITE_DIR, "article", f'{a["id"]}.html'), "w", encoding="utf-8") as f:
             f.write(build_article_page(a))
     with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_home(articles, styles))
+        f.write(build_home(articles, [without_pixel_art(x) for x in styles]))
     print(f"[6/6] Website built in '{SITE_DIR}/' with {len(articles)} articles")
 
 
@@ -1308,6 +1639,16 @@ def main() -> None:
         build_site(published)
         return
 
+    if "--style-images" in sys.argv:
+        styles = load_styles()  # redo the images of every style guide, then rebuild
+        for st in styles:
+            st.update(style_images(client, {**st["content"], "image_query": st.get("image_query", ""),
+                                            "photo_queries": st.get("photo_queries", []),
+                                            "essential_queries": st.get("essential_queries", [])}))
+            print("   images ok -", st["content"]["en"]["headline"][:60])
+        save_styles(styles)
+        build_site(published, styles)
+        return
     items = collect(published)
     new_articles = []
     if items:
@@ -1327,13 +1668,16 @@ def main() -> None:
             new_articles = [a for a in pool.map(work, enumerate(selected, 1)) if a]
 
     styles = load_styles()
-    if "--style" in sys.argv or style_due(styles):
+    wanted = max(STYLE_MIN_GUIDES - len(styles), 1 if ("--style" in sys.argv or style_due(styles)) else 0)
+    for _ in range(min(wanted, STYLE_MIN_GUIDES)):
         try:
             styles.insert(0, write_style(client, styles))
             save_styles(styles)
             print(f"[Style] New guide: {styles[0]['topic']}")
         except Exception as e:
             print(f"      Style guide skipped ({e})")
+    heal_style_images(client, styles)
+    save_styles(styles)
 
     articles = new_articles + published  # newest first
     save_articles(articles)
