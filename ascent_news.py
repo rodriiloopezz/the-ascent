@@ -585,9 +585,9 @@ def ad_slot(kind: str) -> str:
     else:
         link = (f'<a href="{esc(ADVERTISE_URL)}">{tri(UI["ad_cta"])}</a>' if ADVERTISE_URL
                 else f'<span>{tri(UI["ad_cta"])}</span>')
-        inner = f'<div class="ad-house"><span class="ad-logo">{SITE_NAME}.</span>{link}</div>'
-    return (f'<aside class="ad ad-{kind}" aria-label="Advertisement">'
-            f'<span class="ad-label">{tri(UI["ad"])}</span><div class="ad-box">{inner}</div></aside>')
+        inner = f'<div class="sp-house"><span class="sp-logo">{SITE_NAME}.</span>{link}</div>'
+    return (f'<aside class="sp sp-{kind}" aria-label="Sponsored space">'
+            f'<span class="sp-tag">{tri(UI["ad"])}</span><div class="sp-box">{inner}</div></aside>')
 
 
 def subscribe_band() -> str:
@@ -607,8 +607,8 @@ def side_rails() -> str:
     """Two tall ads in the empty side margins (only visible on wide screens)."""
     if not ADS_ENABLED:
         return ""
-    return (f'<div class="side-rail left">{ad_slot("sky")}</div>'
-            f'<div class="side-rail right">{ad_slot("sky")}</div>')
+    return (f'<div class="side-col left">{ad_slot("sky")}</div>'
+            f'<div class="side-col right">{ad_slot("sky")}</div>')
 
 
 def adsense_head() -> str:
@@ -736,31 +736,32 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .empty { text-align:center; padding:96px 0; font-family:var(--serif); font-size:28px; color:var(--muted); }
 
 /* advertising */
-.ad { display:flex; flex-direction:column; gap:6px; }
-.ad-label { font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
-.ad-box { display:flex; align-items:center; justify-content:center; background:var(--blush); border:1px dashed #C99AA5;
+.sp { display:flex; flex-direction:column; gap:6px; }
+.sp-tag { font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.sp-box { display:flex; align-items:center; justify-content:center; background:var(--blush); border:1px dashed #C99AA5;
   border-radius:4px; text-align:center; padding:16px; }
-.ad-house { display:flex; flex-direction:column; gap:6px; align-items:center; font-size:14px; color:var(--granate); }
-.ad-house a { color:var(--granate); font-weight:600; }
-.ad-logo { font-family:var(--serif); font-weight:600; font-size:22px; color:var(--granate); }
-.ad-leader { margin:40px auto 0; max-width:970px; }
-.ad-leader .ad-box { min-height:110px; }
-.ad-card .ad-box { aspect-ratio:3/2; height:auto; }
-.ad-card { border-top:4px solid #C99AA5; padding-top:16px; }
-.ad-inline { margin:12px 0 8px; }
-.ad-inline .ad-box { min-height:250px; }
-.ad-rail .ad-box { min-height:600px; }
-.side-rail { display:none; position:fixed; top:150px; width:160px; z-index:1; }
-.side-rail .ad-box { min-height:600px; padding:12px; }
-.side-rail.left { left:calc(50% - 590px - 196px); }
-.side-rail.right { right:calc(50% - 590px - 196px); }
-body:has(.story-layout) .side-rail.right { display:none !important; }
+.sp-house { display:flex; flex-direction:column; gap:6px; align-items:center; font-size:14px; color:var(--granate); }
+.sp-house a { color:var(--granate); font-weight:600; }
+.sp-logo { font-family:var(--serif); font-weight:600; font-size:22px; color:var(--granate); }
+.sp-leader { margin:40px auto 0; max-width:970px; }
+.sp-leader .sp-box { min-height:110px; }
+.sp-card .sp-box { aspect-ratio:3/2; height:auto; }
+.sp-card { border-top:4px solid #C99AA5; padding-top:16px; }
+.sp-inline { margin:12px 0 8px; }
+.sp-inline .sp-box { min-height:250px; }
+.sp-rail .sp-box { min-height:600px; }
+.side-col { display:none; position:fixed; top:150px; width:120px; z-index:1; }
+.side-col .sp-box { min-height:600px; padding:10px; font-size:13px; }
+.side-col .sp-logo { font-size:18px; }
+.side-col.left { left:calc(50% - 590px - 144px); }
+.side-col.right { right:calc(50% - 590px - 144px); }
+body:has(.story-layout) .side-col.right { display:none !important; }
 
 /* article page */
 .story-layout { max-width:1180px; margin:0 auto; display:flex; gap:56px; padding:0 24px; justify-content:center; }
 .story { flex:0 1 780px; min-width:0; padding:40px 0 72px; }
 .rail { display:none; flex:0 0 300px; padding-top:96px; }
-.rail .ad { position:sticky; top:24px; }
+.rail .sp { position:sticky; top:24px; }
 .back { display:inline-block; margin-bottom:24px; font-size:14px; font-weight:600; text-decoration:none; }
 .story h1 { color:var(--granate); font-family:var(--serif); font-weight:600; font-size:clamp(36px, 5.4vw, 60px); line-height:1.05; margin:14px 0 16px; }
 .story .dek { font-size:20px; }
@@ -797,12 +798,17 @@ footer p { margin:4px 0; }
 footer .logo-sm { font-family:var(--serif); font-weight:600; font-size:30px; color:#fff; display:block; margin-bottom:6px; }
 .ai-note { max-width:560px; margin:14px auto 0 !important; font-size:12px; color:#8E9199; }
 
-@media (min-width: 1600px) {
-  .side-rail { display:block; }
+@media (min-width: 1460px) {
+  .side-col { display:block; }
+}
+@media (min-width: 1640px) {
+  .side-col { width:160px; }
+  .side-col.left { left:calc(50% - 590px - 196px); }
+  .side-col.right { right:calc(50% - 590px - 196px); }
 }
 @media (min-width: 1200px) {
   .rail { display:block; }
-  .ad-inline { display:none; }
+  .sp-inline { display:none; }
 }
 @media (max-width: 820px) {
   .lead { grid-template-columns:1fr; gap:28px; padding-top:32px; padding-bottom:40px; }
@@ -813,7 +819,7 @@ footer .logo-sm { font-family:var(--serif); font-weight:600; font-size:30px; col
   .story { padding:28px 0 56px; }
   .body p { font-size:18px; }
   .box { padding:20px; }
-  .ad-leader { margin-top:28px; }
+  .sp-leader { margin-top:28px; }
 }
 """
 
