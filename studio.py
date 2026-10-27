@@ -33,7 +33,6 @@ except Exception:  # very old Python: fall back to UTC+1
 
 OUT_DIR = "output/studio"
 STATE_FILE = "data/studio_state.json"
-STORIES_PER_PACK = 3
 SENDER = "Madam CEO Studio <studio@themadamceo.com>"
 REPLY_TO = "hello@themadamceo.com"
 
@@ -275,7 +274,7 @@ Reply ONLY with JSON inside <copy></copy>:
  "tiktok_points": ["3 short facts, max 12 words each"],
  "tiktok_why": "max 25 words: why it matters for a woman's career",
  "tiktok_caption": "max 150 characters + 4-6 hashtags, ends with 'link in bio'",
- "linkedin": "Written by the founder sharing today's story: a strong first line, 3-4 short paragraphs, a question for the comments, the link on its own line, 3 hashtags",
+ "linkedin": "Written as the Madam CEO company page (brand voice, 'we', never a personal founder story): a strong first line, 3-4 short paragraphs, a question for the comments, the link on its own line, 3 hashtags",
  "x": "max 230 characters, one sharp line or two, no hashtags or at most one, then the link"
 }}"""
     data = None
@@ -301,90 +300,155 @@ Reply ONLY with JSON inside <copy></copy>:
     return data
 
 
+# ---------------------------------------------------------------- weekly carousel
+def week_cover(dates: str, logo_light: str, w: int, h: int) -> str:
+    css = f""".c{{background:{C['granate']};color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 90px}}
+.lg svg{{width:150px;height:150px}} .k{{font-size:30px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:{C['gold']};margin-top:50px}}
+h1{{font-size:{150 if h > 1500 else 132}px;line-height:.98;margin:26px 0 0}} .d{{font-size:38px;color:{C['pink']};margin-top:34px}}
+.sw{{position:absolute;bottom:{300 if h > 1500 else 90}px;left:0;right:0;font-size:30px;font-weight:600;color:{C['pink']}}}"""
+    return page(w, h, css, f'<div class="lg">{logo_light}</div><div class="k">Madam CEO weekly</div>'
+                           f'<h1 class="serif">The week in 5 stories</h1><div class="d">{esc(dates)}</div><div class="sw">Swipe →</div>')
+
+
+def week_slide(t: dict, i: int, w: int, h: int, domain: str) -> str:
+    color = CAT_COLORS.get(t["category"], C["accent"])
+    px = "image-rendering:pixelated;" if t["pixel"] else ""
+    story = h > 1500
+    hs = fit(t["headline"], [(50, 84 if story else 74), (80, 72 if story else 62), (999, 60 if story else 52)])
+    css = f""".c{{background:{C['paper']};display:flex;flex-direction:column}}
+.img{{height:{860 if story else 640}px;background:#EBD5D2 url('{t['src']}') center/cover no-repeat;{px}position:relative;border-bottom:14px solid {color}}}
+.n{{position:absolute;left:64px;bottom:-60px;width:120px;height:120px;border-radius:50%;background:{C['granate']};color:#fff;font:600 60px 'Cormorant Garamond',Georgia,serif;display:flex;align-items:center;justify-content:center;border:6px solid {C['paper']}}}
+.t{{padding:{90 if story else 80}px 72px 0}} .pill{{background:{color};font-size:24px;padding:10px 22px}}
+h2{{color:{C['granate']};font-size:{hs}px;line-height:1.04;margin:24px 0 0}} p{{font-size:{34 if story else 30}px;line-height:1.45;color:#4A4D55;margin:22px 0 0}}
+.u{{position:absolute;bottom:{280 if story else 44}px;right:72px;font-size:24px;color:{C['muted']}}}"""
+    return page(w, h, css, f'<div class="img"><div class="n">{i}</div></div><div class="t"><span class="pill">{esc(t["category"])}</span>'
+                           f'<h2 class="serif">{esc(t["headline"])}</h2><p>{esc(t["dek"][:170])}</p></div><div class="u">{esc(domain)}</div>')
+
+
+def week_end(logo_light: str, w: int, h: int, domain: str) -> str:
+    css = f""".c{{background:{C['granate']};color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 90px}}
+.lg svg{{width:150px;height:150px}} h2{{font-size:96px;line-height:1.02;margin:40px 0 0}}
+p{{font-size:38px;line-height:1.4;color:{C['pink']};margin:26px 0 0}}
+.cta{{margin-top:56px;background:{C['cream']};color:{C['granate']};font-size:40px;font-weight:600;padding:24px 46px;border-radius:999px}}"""
+    return page(w, h, css, f'<div class="lg">{logo_light}</div><h2 class="serif">Which one matters most to you?</h2>'
+                           f'<p>Every story in full, plus Style, Power Word and Voices.</p><div class="cta">{esc(domain)}</div>')
+
+
 # ---------------------------------------------------------------- pack
-def choose(news: list[dict], styles_new: list[dict], voices_new: list[dict]) -> list[tuple[str, dict]]:
-    picks = [("news", a) for a in sorted(news, key=lambda a: -a.get("score", 0))[:2]]
-    if voices_new:
-        picks.append(("voice", voices_new[0]))
-    elif styles_new:
-        picks.append(("style", styles_new[0]))
-    for a in sorted(news, key=lambda a: -a.get("score", 0))[2:]:
-        if len(picks) >= STORIES_PER_PACK:
-            break
-        picks.append(("news", a))
-    return picks[:STORIES_PER_PACK]
+def recent(articles: list[dict], hours: int) -> list[dict]:
+    since = datetime.now(timezone.utc) - timedelta(hours=hours)
+    out = [a for a in articles if datetime.fromisoformat(a["published_at"]) >= since]
+    return sorted(out, key=lambda a: -a.get("score", 0))
 
 
-def build_pack(ask, client, model, extract_json, site_url: str, news: list[dict], styles_new: list[dict],
+def story_t(item: dict, kind: str, cp: dict) -> dict:
+    en = item["content"]["en"]
+    src, pixel = image_src(item)
+    category = {"news": item.get("category", "Leadership"), "style": "Style", "voice": "Voices"}[kind]
+    return {"headline": en.get("headline", ""), "dek": en.get("dek", ""), "kicker": cp.get("kicker") or category,
+            "category": category, "src": src, "pixel": pixel, "story_hook": cp.get("story_hook") or en.get("headline", ""),
+            "story_sub": cp.get("story_sub", ""), "tt_hook": cp.get("tiktok_hook") or en.get("headline", ""),
+            "tt_points": cp.get("tiktok_points") or en.get("key_points", [])[:3], "tt_why": cp.get("tiktok_why", "")}
+
+
+def build_pack(ask, client, model, extract_json, site_url: str, articles: list[dict], styles_new: list[dict],
                voices_new: list[dict], words: list, game_start: datetime, logo: str, logo_light: str) -> dict | None:
+    """One pack a day. Mon-Sat: daily pack. Sunday: 'The week in 5 stories'."""
     now_md = datetime.now(MADRID)
-    state = load_state()
-    with_game = state.get("game_date") != now_md.date().isoformat()
-    picks = choose(news, styles_new, voices_new)
-    if not picks and not with_game:
+    sunday = now_md.weekday() == 6
+    day_news = recent(articles, 26) or sorted(articles[:12], key=lambda a: -a.get("score", 0))
+    if not day_news:
         return None
     os.makedirs(OUT_DIR, exist_ok=True)
     domain = site_url.replace("https://", "")
-    jobs, sections, n = [], [], 0
+    jobs = []
 
-    if with_game:
-        day = max(0, (now_md.date() - game_start.date()).days)
-        num, prev = day + 1, (words[(day - 1) % len(words)] if day > 0 else None)
-        n += 1
-        f_post, f_story = f"{n:02d}-PowerWord-instagram-post.jpg", f"{n:02d}-PowerWord-instagram-story.jpg"
-        jobs += [(game_page(num, prev, logo_light, domain, 1080, 1350), os.path.join(OUT_DIR, f_post), 1080, 1350),
-                 (game_page(num, prev, logo_light, domain, 1080, 1920), os.path.join(OUT_DIR, f_story), 1080, 1920)]
-        url = f"{site_url}/game/"
-        prev_line = f"Yesterday's word: {prev[0]}. {prev[1]}" if prev else "A new word every day."
-        sections.append({
-            "title": f"Power Word #{num}", "url": url, "kind": "game",
-            "nets": [
-                ("Instagram · Post", [f_post], f"Power Word #{num} 👑\nToday's five-letter business word is waiting. Six tries, two minutes.\n{prev_line}\nHow many tries did you need? Tell us below.\n\nPlay now: link in bio\n\n#powerword #wordgame #dailypuzzle #businessenglish #womeninbusiness #careergrowth #leadership #madamceo"),
-                ("Instagram · Story", [f_story], f"Add a link sticker → {url}\nOptional: add a poll sticker “Did you get it?” Yes / Not yet"),
-                ("TikTok", [f_story], f"Power Word #{num} 👑 can you get it in 3? #wordgame #dailypuzzle #businesstok #careertok link in bio"),
-                ("LinkedIn", [f_post], f"Power Word #{num} is live.\n\nOne five-letter business word, six tries, two minutes. A small daily habit to sharpen your business vocabulary.\n\n{prev_line}\n\nShare your score in the comments.\n\n{url}\n\n#leadership #careers #womeninbusiness"),
-                ("X", [f_post], f"Power Word #{num} is live 👑 Can you crack today's five-letter business word in six tries?\n{url}"),
-            ]})
+    def job(doc, name, w, h):
+        jobs.append((doc, os.path.join(OUT_DIR, name), w, h))
+        return name
 
-    for kind, item in picks:
-        en = item["content"]["en"]
-        path = {"news": "article", "style": "style", "voice": "voices"}[kind]
-        url = f"{site_url}/{path}/{item['id']}.html"
-        try:
-            cp = write_copy(ask, client, model, extract_json, item, kind, url)
-        except Exception as e:
-            print(f"      [Studio] Skipped one story ({e})")
-            continue
-        src, pixel = image_src(item)
-        category = {"news": item.get("category", "Leadership"), "style": "Style", "voice": "Voices"}[kind]
-        t = {"headline": en.get("headline", ""), "dek": en.get("dek", ""), "kicker": cp.get("kicker") or category,
-             "category": category, "src": src, "pixel": pixel, "story_hook": cp.get("story_hook") or en.get("headline", ""),
-             "story_sub": cp.get("story_sub", ""), "tt_hook": cp.get("tiktok_hook") or en.get("headline", ""),
-             "tt_points": cp.get("tiktok_points") or en.get("key_points", [])[:3], "tt_why": cp.get("tiktok_why", "")}
-        n += 1
-        base = f"{n:02d}-{slug(t['headline'], 28)}"
-        f_post, f_story, f_x = f"{base}-instagram-post.jpg", f"{base}-instagram-story.jpg", f"{base}-x.jpg"
-        f_tt = [f"{base}-tiktok-{i}.jpg" for i in (1, 2, 3)]
-        jobs += [(post_4x5(t, logo, domain), os.path.join(OUT_DIR, f_post), 1080, 1350),
-                 (story_9x16(t, logo_light), os.path.join(OUT_DIR, f_story), 1080, 1920),
-                 (x_16x9(t, logo, domain), os.path.join(OUT_DIR, f_x), 1600, 900)]
-        jobs += [(doc, os.path.join(OUT_DIR, f), 1080, 1920) for doc, f in zip(tiktok_slides(t, logo, logo_light, domain), f_tt)]
-        sections.append({
-            "title": t["headline"], "url": url, "kind": kind,
-            "nets": [
-                ("Instagram · Post", [f_post], cp["instagram"]),
-                ("Instagram · Story", [f_story], f"Add a link sticker → {url}\nSticker text: Read more"),
-                ("TikTok · Photo carousel", f_tt, cp.get("tiktok_caption", "")),
-                ("LinkedIn", [f_post], cp["linkedin"]),
-                ("X", [f_x], cp["x"]),
-            ]})
+    # Power Word (every day)
+    day = max(0, (now_md.date() - game_start.date()).days)
+    num, prev = day + 1, (words[(day - 1) % len(words)] if day > 0 else None)
+    game_url = f"{site_url}/game/"
+    pw_post = job(game_page(num, prev, logo_light, domain, 1080, 1350), "PowerWord-post.jpg", 1080, 1350)
+    pw_story = job(game_page(num, prev, logo_light, domain, 1080, 1920), "PowerWord-story.jpg", 1080, 1920)
+
+    # Top story (+ second story for TikTok / X)
+    top = day_news[0]
+    second = (voices_new[0] if voices_new else
+              next((a for a in day_news[1:] if a.get("category") != top.get("category")), day_news[1] if len(day_news) > 1 else None))
+    kind2 = "voice" if voices_new and second is voices_new[0] else "news"
+    url1 = f"{site_url}/article/{top['id']}.html"
+    cp1 = write_copy(ask, client, model, extract_json, top, "news", url1)
+    t1 = story_t(top, "news", cp1)
+    s1 = slug(t1["headline"], 26)
+    cp2 = t2 = url2 = None
+    if second:
+        url2 = f"{site_url}/{'voices' if kind2 == 'voice' else 'article'}/{second['id']}.html"
+        cp2 = write_copy(ask, client, model, extract_json, second, kind2, url2)
+        t2 = story_t(second, kind2, cp2)
+
+    ig, tt, xs = [], [], []
+    if not sunday:
+        ig.append(("Post · 12:30", [job(post_4x5(t1, logo, domain), f"IG-post-{s1}.jpg", 1080, 1350)], cp1["instagram"]))
+        ig.append(("Story 1 · 9:00", [pw_story], f"Power Word #{num}. Add a link sticker → {game_url}\nAdd a poll: “Did you get it?” Yes / Not yet"))
+        ig.append(("Story 2 · 13:00", [job(story_9x16(t1, logo_light), f"IG-story-{s1}.jpg", 1080, 1920)],
+                   f"Add a link sticker → {url1}\nSticker text: Read more"))
+        tt_item, tt_t, tt_cp = (second, t2, cp2) if second else (top, t1, cp1)
+        st = slug(tt_t["headline"], 26)
+        files = [job(d, f"TikTok-{st}-{i}.jpg", 1080, 1920) for i, d in enumerate(tiktok_slides(tt_t, logo, logo_light, domain), 1)]
+        tt.append(("Photo carousel · 19:00", files, tt_cp.get("tiktok_caption", "") + "\n\nAdd a trending sound (low volume) before posting."))
+    else:
+        week = sorted(recent(articles, 24 * 7), key=lambda a: -a.get("score", 0))
+        picked, cats = [], set()
+        for a in week:  # 5 stories, varied categories when possible
+            if a.get("category") not in cats or len(week) <= 5:
+                picked.append(a)
+                cats.add(a.get("category"))
+            if len(picked) == 5:
+                break
+        for a in week:
+            if len(picked) == 5:
+                break
+            if a not in picked:
+                picked.append(a)
+        start = (now_md - timedelta(days=6)).strftime("%d %b")
+        dates = f"{start} – {now_md.strftime('%d %b %Y')}"
+        ts = [story_t(a, "news", {}) for a in picked]
+        ig_files = [job(week_cover(dates, logo_light, 1080, 1350), "Week-IG-01.jpg", 1080, 1350)]
+        ig_files += [job(week_slide(t, i, 1080, 1350, domain), f"Week-IG-{i + 1:02d}.jpg", 1080, 1350) for i, t in enumerate(ts, 1)]
+        ig_files.append(job(week_end(logo_light, 1080, 1350, domain), f"Week-IG-{len(ts) + 2:02d}.jpg", 1080, 1350))
+        tt_files = [job(week_cover(dates, logo_light, 1080, 1920), "Week-TikTok-01.jpg", 1080, 1920)]
+        tt_files += [job(week_slide(t, i, 1080, 1920, domain), f"Week-TikTok-{i + 1:02d}.jpg", 1080, 1920) for i, t in enumerate(ts, 1)]
+        tt_files.append(job(week_end(logo_light, 1080, 1920, domain), f"Week-TikTok-{len(ts) + 2:02d}.jpg", 1080, 1920))
+        lines = "\n".join(f"{i}. {t['headline']}" for i, t in enumerate(ts, 1))
+        ig.append(("Carousel post · 12:00", ig_files,
+                   f"The week in 5 stories 👑\n\n{lines}\n\nWhich one matters most to you? Tell us below.\n\n"
+                   "Every story in full: link in bio\n\n#womeninleadership #womeninbusiness #careergrowth #leadership "
+                   "#weeklyroundup #businessnews #genderequality #madamceo"))
+        ig.append(("Story 1 · 9:00", [pw_story], f"Power Word #{num}. Add a link sticker → {game_url}"))
+        ig.append(("Story 2 · 12:15", [ig_files[0]], "Share the carousel post to your story (paper-plane icon → Add to story)."))
+        tt.append(("Photo carousel · 18:00", tt_files,
+                   "The week in 5 stories for women heading to the top 👑 #careertok #womeninbusiness #businessnews #leadership link in bio"
+                   "\n\nAdd a trending sound (low volume) before posting."))
+
+    xs.append(("Tweet 1 · 9:00", [pw_post], f"Power Word #{num} is live 👑 Can you crack today's five-letter business word in six tries?\n{game_url}"))
+    xs.append(("Tweet 2 · 13:00", [job(x_16x9(t1, logo, domain), f"X-{s1}.jpg", 1600, 900)], cp1["x"]))
+    if cp2:
+        s2 = slug(t2["headline"], 26)
+        xs.append(("Tweet 3 · 19:00", [job(x_16x9(t2, logo, domain), f"X-{s2}.jpg", 1600, 900)], cp2["x"]))
 
     rendered = set(os.path.basename(p) for p in render_all(jobs))
-    for s in sections:
-        s["nets"] = [(net, [f for f in files if f in rendered], text) for net, files, text in s["nets"]]
-    edition = "Morning" if now_md.hour < 11 else ("Midday" if now_md.hour < 17 else "Evening")
-    return {"date": now_md, "edition": edition, "sections": sections, "with_game": with_game,
-            "files": sorted(rendered)}
+    sections = [
+        {"title": "Instagram", "sub": "1 post + 2 stories", "nets": ig},
+        {"title": "TikTok", "sub": "1 carousel", "nets": tt},
+        {"title": "X", "sub": f"{len(xs)} tweets", "nets": xs},
+    ]
+    for sec in sections:
+        sec["nets"] = [(net, [f for f in files if f in rendered], text) for net, files, text in sec["nets"]]
+    return {"date": now_md, "edition": "Weekly" if sunday else "Daily", "sections": sections,
+            "headlines": [t1["headline"]] + ([t2["headline"]] if t2 else []), "files": sorted(rendered)}
 
 
 # ---------------------------------------------------------------- email
@@ -396,7 +460,7 @@ def copy_link(site_url: str, text: str) -> str:
 def email_html(pack: dict, site_url: str, logo_cid: str | None) -> str:
     d = pack["date"]
     head_logo = f'<img src="cid:{logo_cid}" width="56" height="56" alt="" style="display:block;border:0">' if logo_cid else ""
-    toc = "".join(f'<li style="margin:0 0 6px">{esc(s["title"])}</li>' for s in pack["sections"])
+    toc = "".join(f'<li style="margin:0 0 6px">{esc(h)}</li>' for h in pack.get("headlines", []))
     blocks = []
     for i, s in enumerate(pack["sections"], 1):
         nets = []
@@ -415,12 +479,12 @@ def email_html(pack: dict, site_url: str, logo_cid: str | None) -> str:
   <div style="font:12px/1.5 Arial,sans-serif;color:#8A7F84;margin:0 0 8px">{names}</div>
   <div style="white-space:pre-wrap;font:15px/1.55 Arial,sans-serif;color:#16171B;background:#FBF6F1;border-radius:8px;padding:14px 16px">{esc(text)}</div>
 </td></tr>""")
-        label = {"game": "Power Word", "news": "News", "style": "Style", "voice": "Voices"}[s["kind"]]
+        if not s["nets"]:
+            continue
         blocks.append(f"""
 <tr><td style="padding:28px 28px 8px;background:#fff;border-radius:14px">
-  <div style="font:600 12px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#C9A45C">{i:02d} · {label}</div>
+  <div style="font:600 12px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#C9A45C">{i:02d} · {esc(s.get("sub", ""))}</div>
   <h2 style="margin:6px 0 4px;font:600 26px/1.15 Georgia,serif;color:#6E1630">{esc(s["title"])}</h2>
-  <a href="{esc(s["url"])}" style="font:13px Arial,sans-serif;color:#7A1F3D">{esc(s["url"])}</a>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:14px">{"".join(nets)}</table>
 </td></tr><tr><td style="height:18px"></td></tr>""")
     return f"""<!doctype html><html><body style="margin:0;background:#F4E4E2">
@@ -433,15 +497,15 @@ def email_html(pack: dict, site_url: str, logo_cid: str | None) -> str:
 </td></tr>
 <tr><td style="height:18px"></td></tr>
 <tr><td style="background:#fff;border-radius:14px;padding:22px 28px;font:15px/1.6 Arial,sans-serif;color:#16171B">
-  <b style="color:#6E1630">In this pack</b>
+  <b style="color:#6E1630">{"This week's top stories" if pack["edition"] == "Weekly" else "Today's stories"}</b>
   <ol style="margin:10px 0 12px;padding-left:20px">{toc}</ol>
-  <div style="color:#5C5A60;font-size:13px">How to post from your phone: save the attached images (file names are numbered by story and network), tap <b>Copy text</b>, paste.
-  Instagram stories: add the <b>link sticker</b> with the URL shown. TikTok: post the 3 slides as a photo carousel and add a trending sound.
-  Best times: Instagram & TikTok 12:00–14:00 and 19:00–21:00 · LinkedIn 8:00–10:00 · X anytime.</div>
+  <div style="color:#5C5A60;font-size:13px">About 5 minutes in total. Each item shows the suggested time to post.
+  Save the attached images (named by network), tap <b>Copy text</b>, paste.
+  Instagram stories: add the <b>link sticker</b> with the URL shown. LinkedIn is handled separately.</div>
 </td></tr>
 <tr><td style="height:18px"></td></tr>
 {"".join(blocks)}
-<tr><td style="font:12px Arial,sans-serif;color:#8A7F84;text-align:center;padding:8px 0 24px">Generated automatically after each update of {esc(site_url.replace("https://", ""))}.</td></tr>
+<tr><td style="font:12px Arial,sans-serif;color:#8A7F84;text-align:center;padding:8px 0 24px">Sent once a day by Madam CEO Studio · {esc(site_url.replace("https://", ""))}</td></tr>
 </table></td></tr></table></body></html>"""
 
 
@@ -459,7 +523,8 @@ def send(pack: dict, site_url: str, logo_png: str | None) -> bool:
         with open(os.path.join(OUT_DIR, name), "rb") as f:
             attachments.append({"filename": name, "content": base64.b64encode(f.read()).decode(), "content_id": slug(name, 60)})
     d = pack["date"]
-    subject = f"Madam CEO · {pack['edition']} pack · {d.strftime('%a %d %b')} · {len(pack['sections'])} posts ready"
+    n_items = sum(len(sec["nets"]) for sec in pack["sections"])
+    subject = f"Madam CEO · {pack['edition']} pack · {d.strftime('%a %d %b')} · {n_items} posts ready"
     body = json.dumps({"from": SENDER, "to": [t.strip() for t in to.split(",") if t.strip()], "reply_to": REPLY_TO,
                        "subject": subject, "html": email_html(pack, site_url, logo_cid),
                        "attachments": attachments}).encode()
@@ -476,16 +541,21 @@ def send(pack: dict, site_url: str, logo_png: str | None) -> bool:
     return False
 
 
-def run(ask, client, model, extract_json, site_url, news, styles_new, voices_new, words, game_start,
-        logo: str, logo_light: str, logo_png: str | None) -> None:
-    pack = build_pack(ask, client, model, extract_json, site_url, news, styles_new, voices_new,
+def run(ask, client, model, extract_json, site_url, articles, styles_new, voices_new, words, game_start,
+        logo: str, logo_light: str, logo_png: str | None, force: bool = False) -> None:
+    """Sends one pack per day: the first update of the day (07:17 Madrid)."""
+    today = datetime.now(MADRID).date().isoformat()
+    state = load_state()
+    if state.get("pack_date") == today and not force:
+        print("[Studio] Today's pack was already sent")
+        return
+    pack = build_pack(ask, client, model, extract_json, site_url, articles, styles_new, voices_new,
                       words, game_start, logo, logo_light)
     if not pack:
-        print("[Studio] Nothing new for a pack")
+        print("[Studio] Nothing for a pack")
         return
-    if send(pack, site_url, logo_png) and pack["with_game"]:
-        state = load_state()
-        state["game_date"] = pack["date"].date().isoformat()
+    if send(pack, site_url, logo_png):
+        state["pack_date"] = today
         save_state(state)
 
 

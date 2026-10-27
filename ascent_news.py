@@ -1677,11 +1677,12 @@ def logo_svg(name: str = "logo.svg") -> str:
         return ""
 
 
-def make_content_pack(client: Anthropic, news: list[dict], styles_new: list[dict], voices_new: list[dict]) -> None:
+def make_content_pack(client: Anthropic, articles: list[dict], styles_new: list[dict], voices_new: list[dict],
+                      force: bool = False) -> None:
     here = os.path.dirname(os.path.abspath(__file__))
-    studio.run(ask, client, WRITER_MODEL, extract_json, SITE_URL, news, styles_new, voices_new,
+    studio.run(ask, client, WRITER_MODEL, extract_json, SITE_URL, articles, styles_new, voices_new,
                game.WORDS, social.GAME_START, logo_svg(), logo_svg("logo-light.svg"),
-               os.path.join(here, "assets", "apple-touch-icon.png"))
+               os.path.join(here, "assets", "apple-touch-icon.png"), force)
 
 
 def make_social_kits(client: Anthropic, news: list[dict], styles_new: list[dict]) -> None:
@@ -1818,7 +1819,7 @@ def main() -> None:
         return
 
     if "--pack" in sys.argv:  # email a content pack for the latest articles, no new news
-        make_content_pack(client, published[:3], [], [])
+        make_content_pack(client, published, [], [], force=True)
         save_articles(published)
         return
 
@@ -1893,7 +1894,7 @@ def main() -> None:
         print(f"      Voices skipped ({e})")
 
     try:
-        make_content_pack(client, new_articles, styles_new[:1], voices_new)
+        make_content_pack(client, new_articles + published, styles_new[:1], voices_new)
     except Exception as e:
         print(f"      Content pack skipped ({e})")
 
