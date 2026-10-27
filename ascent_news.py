@@ -33,6 +33,7 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 
 import game
+import legal
 
 # ---------------------------------------------------------------- settings
 SITE_NAME = "Madam CEO"
@@ -152,6 +153,7 @@ UI = {
                  "fr": "L'essentiel de la semaine corporate, chaque lundi dans votre boîte mail."},
     "sub_btn": {"en": "Subscribe", "es": "Suscríbete", "fr": "S'abonner"},
     "ad": {"en": "Advertisement", "es": "Publicidad", "fr": "Publicité"},
+    "privacy_settings": {"en": "Privacy settings", "es": "Configuración de privacidad", "fr": "Paramètres de confidentialité"},
     "ad_cta": {"en": "Your brand here — advertise with us", "es": "Tu marca aquí — anúnciate con nosotros",
                "fr": "Votre marque ici — annoncez chez nous"},
     "nav_news": {"en": "News", "es": "Noticias", "fr": "Actualités"},
@@ -238,7 +240,7 @@ CATEGORY_COLORS = {
 # ---------------------------------------------------------------- advertising
 ADS_ENABLED = True       # show advertising spaces
 ADSENSE_CLIENT = ""      # e.g. "ca-pub-1234567890" once Google AdSense approves the site
-ADVERTISE_URL = ""       # page or email link for brands that want to advertise (e.g. "mailto:ads@...")
+ADVERTISE_URL = "/advertise.html"  # page for brands that want to advertise
 AD_EVERY_N_CARDS = 6     # one ad among the homepage cards every N stories
 
 
@@ -878,9 +880,12 @@ def side_rails() -> str:
 
 
 def adsense_head() -> str:
-    if not (ADS_ENABLED and ADSENSE_CLIENT):
+    if not ADSENSE_CLIENT:
         return ""
-    return (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    verify = f'<meta name="google-adsense-account" content="{esc(ADSENSE_CLIENT)}">'
+    if not ADS_ENABLED:
+        return verify
+    return verify + (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
             f'?client={esc(ADSENSE_CLIENT)}" crossorigin="anonymous"></script>')
 
 
@@ -922,6 +927,10 @@ def page(title: str, body: str, prefix: str, desc: str = "", extra_head: str = "
   <span class="logo-sm">{SITE_NAME}.</span>
   <p>{tri(UI["tagline"])}</p>
   <p class="ai-note">{tri(UI["ai_note"])}</p>
+  <nav class="foot-links" aria-label="Information">
+    {"".join(f'<a href="{prefix}{slug}.html">{tri(legal.PAGES[slug]["title"])}</a>' for slug in legal.FOOTER_ORDER)}
+    {f'<button type="button" class="privacy-btn">{tri(UI["privacy_settings"])}</button>' if ADSENSE_CLIENT else ""}
+  </nav>
 </footer>
 <script src="{prefix}app.js"></script>
 {extra_js}
@@ -1028,6 +1037,14 @@ a { color:var(--accent); } a:hover { color:var(--ink); }
 .shop-go { position:absolute; top:14px; right:14px; color:var(--granate); }
 .shop-note { font-size:12px; margin-top:12px; }
 @media (max-width: 640px) { .gallery { grid-template-columns:1fr 1fr !important; } }
+
+.foot-links { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 18px; margin-top:18px; }
+.foot-links a, .privacy-btn { color:#B8BAC1; font-size:12px; text-decoration:none; background:none; border:0; padding:6px 0; font:inherit; font-size:12px; cursor:pointer; }
+.foot-links a:hover, .privacy-btn:hover { color:#fff; text-decoration:underline; }
+.info { max-width:760px; margin:0 auto; padding:40px 16px 72px; }
+.info h1 { font-family:var(--serif); font-weight:600; font-size:clamp(38px, 6vw, 56px); color:var(--granate); margin:0 0 20px; }
+.info h2 { font-family:var(--serif); font-weight:600; font-size:26px; color:var(--granate); margin:32px 0 8px; }
+.info p { font-size:17px; line-height:1.75; margin:0 0 16px; }
 
 /* masthead */
 .masthead { text-align:center; padding:52px 24px 36px; }
@@ -1168,6 +1185,15 @@ footer .logo-sm { font-family:var(--serif); font-weight:600; font-size:30px; col
 """
 
 JS = """
+document.querySelectorAll('.privacy-btn').forEach(function (b) {
+  b.addEventListener('click', function () {
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push(function () {
+      if (window.googlefc.showRevocationMessage) window.googlefc.showRevocationMessage();
+    });
+  });
+});
 function setLang(l) {
   document.body.dataset.lang = l;
   document.documentElement.lang = l;
@@ -1587,6 +1613,22 @@ def extras_strip(styles: list[dict]) -> str:
     return f'<section class="extras"{cols}>{style_box}{game_box}</section>'
 
 
+def build_info_page(slug: str) -> str:
+    pg = legal.PAGES[slug]
+    fill = {"email": legal.CONTACT_EMAIL, "owner": legal.OWNER_NAME, "id": legal.OWNER_ID,
+            "address": legal.OWNER_ADDRESS, "site": SITE_URL.replace("https://", ""), "updated": legal.LAST_UPDATED}
+    blocks = ""
+    for l in LANGS:
+        inner = ""
+        for kind, text in pg["body"][l]:
+            t = esc(text.format(**fill))
+            t = t.replace(esc(legal.CONTACT_EMAIL), f'<a href="mailto:{esc(legal.CONTACT_EMAIL)}">{esc(legal.CONTACT_EMAIL)}</a>')
+            inner += f"<h2>{t}</h2>" if kind == "h" else f"<p>{t}</p>"
+        blocks += f'<div data-l="{l}" lang="{l}">{inner}</div>'
+    body = f'<main class="info"><h1>{tri(pg["title"])}</h1>{blocks}</main>'
+    return page(f'{pg["title"]["en"]} — {SITE_NAME}', body, "")
+
+
 def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
     styles = load_styles() if styles is None else styles
     if os.path.isdir(SITE_DIR):
@@ -1616,6 +1658,13 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
         f.write(JS)
     with open(os.path.join(SITE_DIR, ".nojekyll"), "w") as f:
         f.write("")
+    for slug in legal.PAGES:
+        with open(os.path.join(SITE_DIR, f"{slug}.html"), "w", encoding="utf-8") as f:
+            f.write(build_info_page(slug))
+    if ADSENSE_CLIENT:  # authorises Google to sell ads on this site
+        pub = ADSENSE_CLIENT.replace("ca-", "")
+        with open(os.path.join(SITE_DIR, "ads.txt"), "w") as f:
+            f.write(f"google.com, {pub}, DIRECT, f08c47fec0942fa0\n")
     for a in articles:
         if a.get("art"):
             with open(os.path.join(SITE_DIR, "img", f'{a["id"]}.svg'), "w", encoding="utf-8") as f:
