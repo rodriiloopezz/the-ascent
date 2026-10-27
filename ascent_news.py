@@ -239,7 +239,7 @@ CATEGORY_COLORS = {
 
 # ---------------------------------------------------------------- advertising
 ADS_ENABLED = True       # show advertising spaces
-ADSENSE_CLIENT = ""      # e.g. "ca-pub-1234567890" once Google AdSense approves the site
+ADSENSE_CLIENT = "ca-pub-9142746258845789"      # e.g. "ca-pub-1234567890" once Google AdSense approves the site
 ADVERTISE_URL = "/advertise.html"  # page for brands that want to advertise
 AD_EVERY_N_CARDS = 6     # one ad among the homepage cards every N stories
 
