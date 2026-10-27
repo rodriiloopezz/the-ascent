@@ -239,7 +239,10 @@ CATEGORY_COLORS = {
 
 # ---------------------------------------------------------------- advertising
 ADS_ENABLED = True       # show advertising spaces
-ADSENSE_CLIENT = "ca-pub-9142746258845789"      # e.g. "ca-pub-1234567890" once Google AdSense approves the site
+ADSENSE_CLIENT = "ca-pub-9142746258845789"
+ADSENSE_APPROVED = False  # set to True once Google approves the site; until then the spaces show house ads
+# Optional: ad unit IDs created in AdSense (Ads → By ad unit), one per space; empty = keep the house ad there
+AD_SLOT_IDS = {"leader": "", "card": "", "inline": "", "rail": "", "sky": ""}
 ADVERTISE_URL = "/advertise.html"  # page for brands that want to advertise
 AD_EVERY_N_CARDS = 6     # one ad among the homepage cards every N stories
 
@@ -846,8 +849,10 @@ def ad_slot(kind: str) -> str:
     """kind: 'leader' (wide banner), 'card' (in the news grid), 'rail' (article sidebar), 'inline'."""
     if not ADS_ENABLED:
         return ""
-    if ADSENSE_CLIENT:
+    slot = AD_SLOT_IDS.get(kind, "") if ADSENSE_APPROVED else ""
+    if ADSENSE_CLIENT and slot:
         inner = (f'<ins class="adsbygoogle" style="display:block" data-ad-client="{esc(ADSENSE_CLIENT)}" '
+                 f'data-ad-slot="{esc(slot)}" '
                  f'data-ad-format="auto" data-full-width-responsive="true"></ins>'
                  f'<script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>')
     else:
