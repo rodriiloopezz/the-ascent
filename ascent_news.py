@@ -45,6 +45,9 @@ MAX_PER_FEED = 15                   # items read from each feed
 SEARCHES_PER_STORY = 6              # web searches Claude may run per story
 PARALLEL_WRITERS = 2                # stories written at the same time
 IMAGE_MODE = "pixel"                # "pixel", "pexels" or "none"
+# News about specific people or companies keeps pixel art (a symbolic image never suggests a real person).
+# General topics use a real stock photo, labelled as illustrative. Falls back to pixel art if no photo.
+PHOTO_CATEGORIES = {"Money", "Workplace", "Careers", "Policy"}
 SUBSCRIBE_URL = ""                  # your newsletter signup page (Beehiiv, Ghost...). Empty = hidden
 HOME_ARTICLES = 31                  # articles shown on the homepage
 KEEP_ARTICLES = 400                 # articles kept in the archive
@@ -702,6 +705,17 @@ Reply ONLY with a JSON array like:
 
 
 # ---------------------------------------------------------------- step 3 + 4
+def news_image(client: Anthropic, category: str, headline: str, image_query: str, photo_query: str):
+    """Returns (photo, pixel_art) following the rule above."""
+    if category in PHOTO_CATEGORIES and (os.getenv("UNSPLASH_ACCESS_KEY") or os.getenv("PEXELS_API_KEY")):
+        found = stock_photos(photo_query or image_query, 1, "landscape")
+        if found:
+            return found[0], None
+    if IMAGE_MODE == "pixel":
+        return None, pixel_art(client, headline, image_query)
+    return None, None
+
+
 def write_up(client: Anthropic, item: dict) -> dict:
     prompt = f"""You are a senior reporter at "Madam CEO", a news site for this audience:
 {AUDIENCE}
@@ -729,6 +743,7 @@ Editorial rules:
 After researching, output ONLY this JSON, wrapped in <article_json></article_json> tags:
 {{
  "image_query": "2-4 English words describing a generic, symbolic image for the theme (no person names, no brands)",
+ "photo_query": "3-6 English words for a generic stock photo that fits the topic without depicting any specific real person, e.g. 'women team meeting modern office'",
  "en": {{
    "headline": "max 12 words",
    "dek": "one-sentence standfirst",
@@ -746,11 +761,8 @@ The body should have 4-6 paragraphs (about 300-400 words) when the research supp
     for lang in LANGS:
         if lang not in data or not data[lang].get("headline"):
             raise ValueError(f"missing {lang} version")
-    photo, art = None, None
-    if IMAGE_MODE == "pexels":
-        photo = pexels_photo(data.get("image_query", ""))
-    elif IMAGE_MODE == "pixel":
-        art = pixel_art(client, data["en"]["headline"], data.get("image_query", ""))
+    photo, art = news_image(client, item["category"], data["en"]["headline"],
+                            data.get("image_query", ""), data.get("photo_query", ""))
     words = sum(len(p.split()) for p in data["en"].get("body", []))
     return {
         "id": make_id(item),
@@ -763,6 +775,7 @@ The body should have 4-6 paragraphs (about 300-400 words) when the research supp
         "minutes": max(2, round(words / 220)),
         "content": {l: data[l] for l in LANGS},
         "image_query": data.get("image_query", ""),
+        "photo_query": data.get("photo_query", ""),
         "sources": sources[:8],
         "photo": photo,
         "art": art,
@@ -1191,8 +1204,7 @@ def build_article_page(a: dict) -> str:
         credit = f'<p class="credit">{tri(UI["ai_art"])}</p>'
     elif a.get("photo"):
         p = a["photo"]
-        credit = (f'<p class="credit">{tri(UI["illustrative"])} · {tri(UI["photo"])}: '
-                  f'<a href="{esc(p["page"])}" target="_blank" rel="noopener">{esc(p["photographer"])} / Pexels</a></p>')
+        credit = f'<p class="credit">{tri(UI["illustrative"])} · {tri(UI["photo"])}: {photo_credit(p)}</p>'
     html_body = f"""
 <div class="story-layout" style="--cat:{cat_color(a)}">
 <main class="story">
@@ -1630,11 +1642,26 @@ def main() -> None:
 
     if "--redraw" in sys.argv or "--redraw-all" in sys.argv:  # illustrations only, no new news
         redraw_all = "--redraw-all" in sys.argv
-        missing = [a for a in published if IMAGE_MODE == "pixel" and (redraw_all or not a.get("art"))]
+        missing = [a for a in published if IMAGE_MODE == "pixel" and not a.get("photo") and (redraw_all or not a.get("art"))]
         print(f"Redrawing {len(missing)} missing illustrations...")
         for a in missing:
             a["art"] = pixel_art(client, a["content"]["en"]["headline"], a.get("image_query", ""))
             print("   ok" if a["art"] else "   still failed", "-", a["content"]["en"]["headline"][:60])
+        save_articles(published)
+        build_site(published)
+        return
+
+    if "--news-photos" in sys.argv:  # give real photos to existing general-topic articles
+        done = 0
+        for a in published:
+            if a["category"] in PHOTO_CATEGORIES and not a.get("photo"):
+                found = stock_photos(a.get("photo_query") or a.get("image_query", ""), 1, "landscape")
+                photo = found[0] if found else None
+                if photo:
+                    a["photo"], a["art"] = photo, None
+                    done += 1
+                    print("   photo ok -", a["content"]["en"]["headline"][:60])
+        print(f"{done} articles now have photos")
         save_articles(published)
         build_site(published)
         return
