@@ -1,5 +1,5 @@
 """
-The Ascent – automatic news site
+Madam CEO – automatic news site
 --------------------------------
 Each run:
 1. Collects news from RSS feeds (Google News searches + business feeds)
@@ -33,7 +33,8 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 
 # ---------------------------------------------------------------- settings
-SITE_NAME = "The Ascent"
+SITE_NAME = "Madam CEO"
+SITE_URL = "https://themadamceo.com"
 FILTER_MODEL = "claude-haiku-5-5"   # cheap and fast: scoring many headlines
 WRITER_MODEL = "claude-sonnet-5-5"  # researches and writes the full articles
 MIN_SCORE = 7                       # 0-10, preferred minimum relevance
@@ -85,9 +86,9 @@ CATEGORY_LABELS = {
 }
 
 UI = {
-    "tagline": {"en": "Corporate news for women who plan to run the room",
-                "es": "Actualidad corporativa para mujeres que van a dirigir",
-                "fr": "L'actualité corporate pour les femmes qui visent le sommet"},
+    "tagline": {"en": "News for the next woman in charge",
+                "es": "Noticias para la próxima mujer al mando",
+                "fr": "L'actualité de la prochaine femme aux commandes"},
     "latest": {"en": "Latest news", "es": "Últimas noticias", "fr": "Dernières actualités"},
     "read": {"en": "Read the full story", "es": "Leer la noticia completa", "fr": "Lire l'article complet"},
     "min": {"en": "min read", "es": "min de lectura", "fr": "min de lecture"},
@@ -100,11 +101,11 @@ UI = {
     "illustrative": {"en": "Illustrative image", "es": "Imagen ilustrativa", "fr": "Image d'illustration"},
     "ai_art": {"en": "Illustration created with AI", "es": "Ilustración creada con IA",
                "fr": "Illustration créée avec l'IA"},
-    "ai_note": {"en": "Articles on The Ascent are researched and written with the help of AI, "
+    "ai_note": {"en": "Articles on Madam CEO are researched and written with the help of AI, "
                       "based on the sources listed in each story.",
-                "es": "Los artículos de The Ascent se investigan y redactan con ayuda de IA, "
+                "es": "Los artículos de Madam CEO se investigan y redactan con ayuda de IA, "
                       "a partir de las fuentes citadas en cada noticia.",
-                "fr": "Les articles de The Ascent sont recherchés et rédigés avec l'aide de l'IA, "
+                "fr": "Les articles de Madam CEO sont recherchés et rédigés avec l'aide de l'IA, "
                       "à partir des sources citées dans chaque article."},
     "sub_title": {"en": "The Weekly Brief", "es": "The Weekly Brief", "fr": "The Weekly Brief"},
     "sub_text": {"en": "The week's essential corporate news for ambitious women, every Monday in your inbox.",
@@ -230,7 +231,7 @@ def pexels_photo(query: str) -> dict | None:
     url = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode(
         {"query": query, "per_page": 1, "orientation": "landscape"}
     )
-    req = urllib.request.Request(url, headers={"Authorization": key, "User-Agent": "TheAscent/1.0"})
+    req = urllib.request.Request(url, headers={"Authorization": key, "User-Agent": "MadamCEO/1.0"})
     try:
         with urllib.request.urlopen(req, timeout=15) as r:
             data = json.load(r)
@@ -249,7 +250,7 @@ def pixel_art(client: Anthropic, headline: str, theme: str) -> dict | None:
     """Claude composes the illustration from simple shapes; we rasterise them into pixel art.
     Working with shapes (instead of typing every pixel) means the drawing always comes out complete."""
     codes = ", ".join(f'"{c}" = {hexv}' for c, hexv in PALETTE.items())
-    prompt = f"""You are the illustrator of "The Ascent", an elegant business magazine for women.
+    prompt = f"""You are the illustrator of "Madam CEO", an elegant business magazine for women.
 Compose a pixel-art illustration for this article on a {PIXEL_W}x{PIXEL_H} pixel canvas
 (x from 0 to {PIXEL_W}, y from 0 to {PIXEL_H}, origin top-left):
 Headline: {headline}
@@ -415,7 +416,7 @@ def score(client: Anthropic, items: list[dict], published: list[dict]) -> list[d
     for start in range(0, len(items), 40):
         batch = items[start:start + 40]
         listing = "\n".join(f'{i["n"]}. {i["title"]} ({i["source"]})' for i in batch)
-        prompt = f"""You are the news editor of "The Ascent", a news site for this audience:
+        prompt = f"""You are the news editor of "Madam CEO", a news site for this audience:
 {AUDIENCE}
 
 Score each new headline from 0 to 10 for how much this audience would want it today.
@@ -452,7 +453,7 @@ Reply ONLY with a JSON array like:
 
 # ---------------------------------------------------------------- step 3 + 4
 def write_up(client: Anthropic, item: dict) -> dict:
-    prompt = f"""You are a senior reporter at "The Ascent", a news site for this audience:
+    prompt = f"""You are a senior reporter at "Madam CEO", a news site for this audience:
 {AUDIENCE}
 
 Story lead from our news feed:

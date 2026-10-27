@@ -1,4 +1,4 @@
-# The Ascent
+# Madam CEO
 
 Automatic news site for ambitious women in the corporate world, in English, Spanish and French.
 
