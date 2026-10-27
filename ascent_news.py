@@ -26,7 +26,7 @@ import sys
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 import feedparser
 from anthropic import Anthropic
@@ -36,6 +36,7 @@ import community
 import game
 import legal
 import social
+import studio
 
 # ---------------------------------------------------------------- settings
 SITE_NAME = "Madam CEO"
@@ -1676,6 +1677,13 @@ def logo_svg(name: str = "logo.svg") -> str:
         return ""
 
 
+def make_content_pack(client: Anthropic, news: list[dict], styles_new: list[dict], voices_new: list[dict]) -> None:
+    here = os.path.dirname(os.path.abspath(__file__))
+    studio.run(ask, client, WRITER_MODEL, extract_json, SITE_URL, news, styles_new, voices_new,
+               game.WORDS, social.GAME_START, logo_svg(), logo_svg("logo-light.svg"),
+               os.path.join(here, "assets", "apple-touch-icon.png"))
+
+
 def make_social_kits(client: Anthropic, news: list[dict], styles_new: list[dict]) -> None:
     queue = social.load_queue()
     done = {q["id"] for q in queue}
@@ -1707,7 +1715,7 @@ def build_seo_files(articles: list[dict], styles: list[dict]) -> None:
         f.write("".join(f"  <url><loc>{esc(u)}</loc></url>\n" for u in urls))
         f.write("</urlset>\n")
     with open(os.path.join(SITE_DIR, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write(f"User-agent: *\nAllow: /\nDisallow: /social/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+        f.write(f"User-agent: *\nAllow: /\nDisallow: /social/\nDisallow: /copy.html\n\nSitemap: {SITE_URL}/sitemap.xml\n")
 
 
 def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
@@ -1749,6 +1757,8 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
             f.write(community.build_story(v, [o for o in voices if o is not v], page, tri, esc, SITE_NAME, photo_credit, UI))
     with open(os.path.join(SITE_DIR, "app.js"), "w", encoding="utf-8") as f:
         f.write(JS)
+    with open(os.path.join(SITE_DIR, "copy.html"), "w", encoding="utf-8") as f:
+        f.write(studio.COPY_PAGE)
     with open(os.path.join(SITE_DIR, ".nojekyll"), "w") as f:
         f.write("")
     assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
@@ -1807,9 +1817,9 @@ def main() -> None:
         build_site(published)
         return
 
-    if "--social" in sys.argv:  # make a social kit for the latest article(s), no new news
-        make_social_kits(client, published[:3], [])
-        build_site(published)
+    if "--pack" in sys.argv:  # email a content pack for the latest articles, no new news
+        make_content_pack(client, published[:3], [], [])
+        save_articles(published)
         return
 
     if "--news-photos" in sys.argv:  # give real photos to existing general-topic articles
@@ -1874,15 +1884,18 @@ def main() -> None:
     heal_style_images(client, styles)
     save_styles(styles)
 
+    voices_new = []
     try:
-        community.run(ask, client, FILTER_MODEL, WRITER_MODEL, extract_json, stock_photos, USED_PHOTOS)
+        voices = community.run(ask, client, FILTER_MODEL, WRITER_MODEL, extract_json, stock_photos, USED_PHOTOS)
+        recent = datetime.now(timezone.utc) - timedelta(hours=2)
+        voices_new = [v for v in voices if datetime.fromisoformat(v["published_at"]) >= recent]
     except Exception as e:
         print(f"      Voices skipped ({e})")
 
     try:
-        make_social_kits(client, new_articles, styles_new[:1])
+        make_content_pack(client, new_articles, styles_new[:1], voices_new)
     except Exception as e:
-        print(f"      Social kits skipped ({e})")
+        print(f"      Content pack skipped ({e})")
 
     articles = new_articles + published  # newest first
     save_articles(articles)
