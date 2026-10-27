@@ -68,12 +68,34 @@ Reply ONLY with JSON inside <social></social> tags:
  "tiktok": "max 150 characters with 4-6 hashtags",
  "card_kicker": "2-4 words for the top of the image, e.g. 'Boardroom news'"
 }}"""
-    text = ask(client, model, prompt, max_tokens=2000)
-    m = re.search(r"<social>(.*?)</social>", text, re.S)
-    data = json.loads(re.search(r"\{.*\}", m.group(1) if m else text, re.S).group(0))
+    data = None
+    for attempt in range(2):  # Claude sometimes wraps the JSON oddly: try twice, then use a template
+        try:
+            text = ask(client, model, prompt, max_tokens=2000)
+            m = re.search(r"<social>(.*?)</social>", text, re.S)
+            found = re.search(r"\{.*\}", m.group(1) if m else text, re.S)
+            if found:
+                data = json.loads(found.group(0))
+                break
+        except Exception as e:
+            print(f"      Social captions attempt {attempt + 1} failed ({e})")
+    if not data:
+        data = template_captions(headline, dek, url, kind)
     for k in ("x", "instagram", "linkedin", "tiktok"):
         data[k] = str(data.get(k, "")).strip()
     return ensure_link(data, url)
+
+
+def template_captions(headline: str, dek: str, url: str, kind: str) -> dict:
+    """Safe fallback captions built only from the article's own headline and standfirst."""
+    tag = "#officestyle #workwear #womeninbusiness" if kind == "style" else "#womeninbusiness #leadership #careers"
+    return {
+        "x": f"{headline}\n{url}",
+        "instagram": f"{headline}\n\n{dek}\n\nFull story: link in bio\n\n{tag} #madamceo",
+        "linkedin": f"{headline}\n\n{dek}\n\n{url}\n\n{tag}",
+        "tiktok": f"{headline} {tag}",
+        "card_kicker": "Style guide" if kind == "style" else "Today's news",
+    }
 
 
 def ensure_link(caps: dict, url: str) -> dict:
