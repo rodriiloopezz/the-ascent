@@ -5,6 +5,8 @@ on:
     # Three times a day (times are UTC: 06:17, 12:17, 18:17 → about 7:17, 13:17, 19:17 in Madrid in winter)
     - cron: "17 6,12,18 * * *"
   workflow_dispatch: {}   # lets you run it by hand from the Actions tab
+  push:                   # when you upload changes, rebuild the site (no new news, no cost)
+    branches: [main]
 
 permissions:
   contents: write   # to save data/articles.json back to the repo
@@ -33,7 +35,12 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-        run: python ascent_news.py
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            python ascent_news.py --build-only
+          else
+            python ascent_news.py
+          fi
 
       - name: Save the article archive
         run: |
