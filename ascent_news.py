@@ -34,6 +34,7 @@ from dotenv import load_dotenv
 
 import game
 import legal
+import social
 
 # ---------------------------------------------------------------- settings
 SITE_NAME = "Madam CEO"
@@ -1649,6 +1650,46 @@ def build_info_page(slug: str) -> str:
     return page(f'{pg["title"]["en"]} — {SITE_NAME}', body, "")
 
 
+def logo_svg(name: str = "logo.svg") -> str:
+    try:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", name), encoding="utf-8") as f:
+            return f.read()
+    except OSError:
+        return ""
+
+
+def make_social_kits(client: Anthropic, news: list[dict], styles_new: list[dict]) -> None:
+    queue = social.load_queue()
+    done = {q["id"] for q in queue}
+    todo = [("news", a) for a in news if a["id"] not in done][: social.PER_RUN]
+    todo += [("style", st) for st in styles_new if st["id"] not in done]
+    for kind, item in todo:
+        kit = social.make_kit(ask, client, FILTER_MODEL, SITE_NAME, SITE_URL, item, kind, logo_svg())
+        if kit:
+            queue.insert(0, kit)
+            print(f"[Social] Kit ready: {kit['headline'][:60]}")
+    game_id = f"pw-{datetime.now(timezone.utc).strftime('%Y%m%d')}"
+    if game_id not in done:  # one Power Word post per day
+        kit = social.make_game_kit(SITE_URL, game.WORDS, logo_svg("logo-light.svg"))
+        if kit:
+            queue.insert(0, kit)
+            print(f"[Social] Kit ready: {kit['headline']}")
+    social.save_queue(queue)
+
+
+def build_seo_files(articles: list[dict], styles: list[dict]) -> None:
+    urls = [f"{SITE_URL}/", f"{SITE_URL}/style/index.html", f"{SITE_URL}/game/index.html"]
+    urls += [f"{SITE_URL}/article/{a['id']}.html" for a in articles]
+    urls += [f"{SITE_URL}/style/{st['id']}.html" for st in styles]
+    urls += [f"{SITE_URL}/{slug}.html" for slug in legal.PAGES]
+    with open(os.path.join(SITE_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        f.write("".join(f"  <url><loc>{esc(u)}</loc></url>\n" for u in urls))
+        f.write("</urlset>\n")
+    with open(os.path.join(SITE_DIR, "robots.txt"), "w", encoding="utf-8") as f:
+        f.write(f"User-agent: *\nAllow: /\nDisallow: /social/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+
+
 def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
     styles = load_styles() if styles is None else styles
     if os.path.isdir(SITE_DIR):
@@ -1697,6 +1738,15 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
             f.write(build_article_page(a))
     with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(build_home(articles, [without_pixel_art(x) for x in styles]))
+    # private social media kit + SEO files
+    os.makedirs(os.path.join(SITE_DIR, "social"), exist_ok=True)
+    queue = social.load_queue()
+    for it in queue:
+        if it.get("image") and os.path.exists(os.path.join(social.SOCIAL_DIR, it["image"])):
+            shutil.copy(os.path.join(social.SOCIAL_DIR, it["image"]), os.path.join(SITE_DIR, "social", it["image"]))
+    with open(os.path.join(SITE_DIR, "social", "index.html"), "w", encoding="utf-8") as f:
+        f.write(social.build_kit_page(queue))
+    build_seo_files(articles, styles)
     print(f"[6/6] Website built in '{SITE_DIR}/' with {len(articles)} articles")
 
 
@@ -1721,6 +1771,11 @@ def main() -> None:
             a["art"] = pixel_art(client, a["content"]["en"]["headline"], a.get("image_query", ""))
             print("   ok" if a["art"] else "   still failed", "-", a["content"]["en"]["headline"][:60])
         save_articles(published)
+        build_site(published)
+        return
+
+    if "--social" in sys.argv:  # make a social kit for the latest article(s), no new news
+        make_social_kits(client, published[:3], [])
         build_site(published)
         return
 
@@ -1769,15 +1824,22 @@ def main() -> None:
 
     styles = load_styles()
     wanted = max(STYLE_MIN_GUIDES - len(styles), 1 if ("--style" in sys.argv or style_due(styles)) else 0)
+    styles_new = []
     for _ in range(min(wanted, STYLE_MIN_GUIDES)):
         try:
             styles.insert(0, write_style(client, styles))
+            styles_new.append(styles[0])
             save_styles(styles)
             print(f"[Style] New guide: {styles[0]['topic']}")
         except Exception as e:
             print(f"      Style guide skipped ({e})")
     heal_style_images(client, styles)
     save_styles(styles)
+
+    try:
+        make_social_kits(client, new_articles, styles_new[:1])
+    except Exception as e:
+        print(f"      Social kits skipped ({e})")
 
     articles = new_articles + published  # newest first
     save_articles(articles)

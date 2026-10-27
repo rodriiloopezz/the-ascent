@@ -31,6 +31,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Install browser for social images
+        if: github.event_name != 'push'
+        run: python -m playwright install --with-deps chromium
+
       - name: Fetch news, write articles and build the site
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -64,3 +68,51 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  post:
+    # Publishes pending social kits once the images are online
+    needs: deploy
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install python-dotenv
+
+      - name: Wait for the website to update
+        run: sleep 60
+
+      - name: Post to Instagram and X
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python post_social.py
+
+      - name: Save what was posted
+        run: |
+          git config user.name "the-ascent-bot"
+          git config user.email "the-ascent-bot@users.noreply.github.com"
+          git add data/social/queue.json
+          git diff --cached --quiet || git commit -m "Social posts $(date -u +'%Y-%m-%d %H:%M')"
+          git pull --rebase && git push
+
+      - name: Keep the Instagram token fresh
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          if [ -f ig_token_refreshed.txt ] && [ -n "$GH_TOKEN" ]; then
+            gh secret set IG_ACCESS_TOKEN < ig_token_refreshed.txt
+            echo "Instagram token saved"
+          fi
+          rm -f ig_token_refreshed.txt
