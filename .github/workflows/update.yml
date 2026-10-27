@@ -40,6 +40,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          COMMUNITY_URL: ${{ secrets.COMMUNITY_URL }}
+          COMMUNITY_KEY: ${{ secrets.COMMUNITY_KEY }}
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
             python ascent_news.py --build-only

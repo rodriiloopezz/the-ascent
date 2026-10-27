@@ -32,6 +32,7 @@ import feedparser
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
+import community
 import game
 import legal
 import social
@@ -49,7 +50,9 @@ PARALLEL_WRITERS = 2                # stories written at the same time
 IMAGE_MODE = "pixel"                # "pixel", "pexels" or "none"
 # News about specific people or companies keeps pixel art (a symbolic image never suggests a real person).
 # General topics use a real stock photo, labelled as illustrative. Falls back to pixel art if no photo.
-PHOTO_CATEGORIES = {"Money", "Workplace", "Careers", "Policy"}
+# Every category now uses a photo of the story's TOPIC (never of the person named in it).
+PHOTO_CATEGORIES = {"Leadership", "Boards", "Deals", "Money", "Workplace", "Careers", "Policy", "Style"}
+USED_PHOTOS: set = set()   # avoid repeating the same photo across stories
 SUBSCRIBE_URL = ""                  # your newsletter signup page (Beehiiv, Ghost...). Empty = hidden
 HOME_ARTICLES = 31                  # articles shown on the homepage
 KEEP_ARTICLES = 400                 # articles kept in the archive
@@ -714,12 +717,25 @@ Reply ONLY with a JSON array like:
 def news_image(client: Anthropic, category: str, headline: str, image_query: str, photo_query: str):
     """Returns (photo, pixel_art) following the rule above."""
     if category in PHOTO_CATEGORIES and (os.getenv("UNSPLASH_ACCESS_KEY") or os.getenv("PEXELS_API_KEY")):
-        found = stock_photos(photo_query or image_query, 1, "landscape")
-        if found:
-            return found[0], None
+        for q in [x for x in (photo_query, image_query) if x]:
+            found = stock_photos(q, 1, "landscape", USED_PHOTOS)
+            if found:
+                return found[0], None
     if IMAGE_MODE == "pixel":
         return None, pixel_art(client, headline, image_query)
     return None, None
+
+
+def topic_query(client: Anthropic, headline: str, dek: str) -> str:
+    """For older articles: a person-free stock-photo search about the story's topic."""
+    try:
+        r = client.messages.create(model=FILTER_MODEL, max_tokens=60, messages=[{"role": "user", "content":
+            f"News headline: {headline}\nStandfirst: {dek}\n\nReply with ONLY 3-6 English words to search a stock "
+            "photo of this story's topic, sector or setting (objects, buildings, places). Never a person's name, "
+            "a brand or a face. Example: 'bank headquarters glass building'."}])
+        return r.content[0].text.strip().strip('"').strip("'")[:80]
+    except Exception:
+        return ""
 
 
 def write_up(client: Anthropic, item: dict) -> dict:
@@ -749,7 +765,7 @@ Editorial rules:
 After researching, output ONLY this JSON, wrapped in <article_json></article_json> tags:
 {{
  "image_query": "2-4 English words describing a generic, symbolic image for the theme (no person names, no brands)",
- "photo_query": "3-6 English words for a generic stock photo that fits the topic without depicting any specific real person, e.g. 'women team meeting modern office'",
+ "photo_query": "3-6 English words for a stock photo of the story's TOPIC, SECTOR or SETTING, never of a person named in it. Think of objects and places: a CEO appointment at a bank -> 'bank headquarters glass building'; an airline board -> 'airplane wing sunrise'; a pay-gap law -> 'parliament chamber'; a merger -> 'city skyline financial district'. No names, no brands, no faces as the subject.",
  "en": {{
    "headline": "max 12 words",
    "dek": "one-sentence standfirst",
@@ -926,6 +942,7 @@ def page(title: str, body: str, prefix: str, desc: str = "", extra_head: str = "
     <a href="{prefix}index.html">{tri(UI["nav_news"])}</a>
     <a href="{prefix}style/index.html">{tri(UI["nav_style"])}</a>
     <a href="{prefix}game/index.html">{tri(UI["nav_game"])}</a>
+    <a href="{prefix}voices/index.html">{tri(community.UI["nav"])}</a>
   </nav>
   <div class="langs" role="group" aria-label="Language">
     <button type="button" data-set="en" aria-pressed="true">EN</button>
@@ -1316,7 +1333,7 @@ def build_home(articles: list[dict], styles: list[dict] | None = None) -> str:
     grid = f'<h2 class="section-title">{tri(UI["latest"])}</h2><div class="grid">{"".join(parts)}</div>' if rest else ""
     leader = f'<div class="wrap">{ad_slot("leader")}</div>' if ADS_ENABLED else ""
     return page(f"{SITE_NAME} — {UI['tagline']['en']}",
-                masthead + lead_html + leader + f'<main class="wrap">{extras_strip(styles)}{grid}</main>', "")
+                masthead + lead_html + leader + f'<main class="wrap">{extras_strip(styles)}{grid}</main>' + community.home_band(tri, community.load()), "")
 
 
 # ---------------------------------------------------------------- style section
@@ -1641,7 +1658,8 @@ def build_info_page(slug: str) -> str:
     blocks = ""
     for l in LANGS:
         inner = ""
-        for kind, text in pg["body"][l]:
+        extra = community.PRIVACY_ADDON[l] if slug == "privacy" else []
+        for kind, text in list(pg["body"][l]) + extra:
             t = esc(text.format(**fill))
             t = t.replace(esc(legal.CONTACT_EMAIL), f'<a href="mailto:{esc(legal.CONTACT_EMAIL)}">{esc(legal.CONTACT_EMAIL)}</a>')
             inner += f"<h2>{t}</h2>" if kind == "h" else f"<p>{t}</p>"
@@ -1678,7 +1696,9 @@ def make_social_kits(client: Anthropic, news: list[dict], styles_new: list[dict]
 
 
 def build_seo_files(articles: list[dict], styles: list[dict]) -> None:
-    urls = [f"{SITE_URL}/", f"{SITE_URL}/style/index.html", f"{SITE_URL}/game/index.html"]
+    urls = [f"{SITE_URL}/", f"{SITE_URL}/style/index.html", f"{SITE_URL}/game/index.html",
+            f"{SITE_URL}/voices/index.html", f"{SITE_URL}/voices/share.html"]
+    urls += [f"{SITE_URL}/voices/{v['id']}.html" for v in community.load()]
     urls += [f"{SITE_URL}/article/{a['id']}.html" for a in articles]
     urls += [f"{SITE_URL}/style/{st['id']}.html" for st in styles]
     urls += [f"{SITE_URL}/{slug}.html" for slug in legal.PAGES]
@@ -1714,7 +1734,19 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
     with open(os.path.join(SITE_DIR, "style", "index.html"), "w", encoding="utf-8") as f:
         f.write(build_style_index(styles))
     with open(os.path.join(SITE_DIR, "style.css"), "w", encoding="utf-8") as f:
-        f.write(CSS)
+        f.write(CSS + community.CSS)
+    voices = community.load()
+    vdir = os.path.join(SITE_DIR, "voices")
+    os.makedirs(vdir, exist_ok=True)
+    with open(os.path.join(vdir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(community.build_index(voices, page, tri, esc, SITE_NAME, ad_slot))
+    with open(os.path.join(vdir, "share.html"), "w", encoding="utf-8") as f:
+        f.write(community.build_share(page, tri, esc, SITE_NAME, os.getenv("COMMUNITY_URL", "")))
+    with open(os.path.join(vdir, "share.js"), "w", encoding="utf-8") as f:
+        f.write(community.SHARE_JS)
+    for v in voices:
+        with open(os.path.join(vdir, f'{v["id"]}.html'), "w", encoding="utf-8") as f:
+            f.write(community.build_story(v, [o for o in voices if o is not v], page, tri, esc, SITE_NAME, photo_credit, UI))
     with open(os.path.join(SITE_DIR, "app.js"), "w", encoding="utf-8") as f:
         f.write(JS)
     with open(os.path.join(SITE_DIR, ".nojekyll"), "w") as f:
@@ -1754,6 +1786,7 @@ def build_site(articles: list[dict], styles: list[dict] | None = None) -> None:
 def main() -> None:
     load_dotenv()
     published = load_articles()
+    USED_PHOTOS.update(a["photo"].get("id") for a in published[:60] if a.get("photo"))
 
     if "--build-only" in sys.argv:  # rebuild the site without fetching news
         build_site(published)
@@ -1782,8 +1815,13 @@ def main() -> None:
     if "--news-photos" in sys.argv:  # give real photos to existing general-topic articles
         done = 0
         for a in published:
+            if a.get("photo"):
+                USED_PHOTOS.add(a["photo"].get("id"))
+        for a in published:
             if a["category"] in PHOTO_CATEGORIES and not a.get("photo"):
-                found = stock_photos(a.get("photo_query") or a.get("image_query", ""), 1, "landscape")
+                q = topic_query(client, a["content"]["en"]["headline"], a["content"]["en"].get("dek", ""))
+                a["photo_query"] = q or a.get("photo_query", "")
+                found = stock_photos(a["photo_query"], 1, "landscape", USED_PHOTOS) if a["photo_query"] else []
                 photo = found[0] if found else None
                 if photo:
                     a["photo"], a["art"] = photo, None
@@ -1835,6 +1873,11 @@ def main() -> None:
             print(f"      Style guide skipped ({e})")
     heal_style_images(client, styles)
     save_styles(styles)
+
+    try:
+        community.run(ask, client, FILTER_MODEL, WRITER_MODEL, extract_json, stock_photos, USED_PHOTOS)
+    except Exception as e:
+        print(f"      Voices skipped ({e})")
 
     try:
         make_social_kits(client, new_articles, styles_new[:1])
