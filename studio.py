@@ -248,6 +248,61 @@ def render_all(jobs: list[tuple[str, str, int, int]]) -> list[str]:
     return done
 
 
+# ---------------------------------------------------------------- X formats (refreshed weekly)
+X_FORMATS_FILE = "data/x_formats.json"
+DEFAULT_X_FORMATS = [
+    {"name": "Number hook", "structure": "Open with the single most striking number on its own line. One line of context. One line hinting there is more inside. Link.",
+     "example": "16%.\n\nThat's the share of new CEO jobs that went to women this year, a nine-year high.\n\nThe catch is in which markets. →"},
+    {"name": "Buried detail", "structure": "State the news in one line, then: 'But the most interesting part is…' and stop, sending readers to the article.",
+     "example": "Two big firms just cut paid parental leave.\n\nThe most telling part isn't the cut itself. It's who it applies to. ↓"},
+    {"name": "Myth vs data", "structure": "'Most people think X.' new line 'The data says Y.' new line one-line teaser. Link.",
+     "example": "Most people think women are closing the leadership gap.\nThree new datasets say it's going backwards.\n\nHere's what changed ↓"},
+    {"name": "Question hook", "structure": "Ask a sharp question the reader wants answered, give one fact, promise the answer in the story.",
+     "example": "Why do women stop getting promoted at the same rate after year 5?\n\nA new report has a one-word answer. →"},
+    {"name": "List teaser", "structure": "'N things [report/story] tells us about [topic]:' then 2 short numbered lines, and '3 is the one that matters' with the link.",
+     "example": "3 things the new Women in the Workplace report tells us:\n\n1. The ambition gap is real\n2. It disappears with sponsorship\n3. The one most companies ignore ↓"},
+    {"name": "Breaking-style", "structure": "Short news line with the key name and fact, one line on why it matters for the reader, link. No fluff.",
+     "example": "CME Group names its first woman CEO.\n\nShe came up through finance, the most common route to the top job. Full story →"},
+]
+
+
+def load_x_formats() -> list[dict]:
+    try:
+        with open(X_FORMATS_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+            if data.get("formats"):
+                return data["formats"]
+    except (OSError, ValueError):
+        pass
+    return DEFAULT_X_FORMATS
+
+
+def refresh_x_formats(ask_web, client, extract_json) -> None:
+    """Once a week: research which post formats are performing on X right now and keep the best ones."""
+    prompt = f"""You are a social media strategist for a premium business news brand on X (Twitter).
+Research with web search what post formats and hooks are performing best on X right now (this month), especially for
+news and business accounts that want readers to click through to their website. Look for recent analyses of viral posts,
+creator playbooks and any new format that is spreading.
+
+Current formats we use: {json.dumps([f["name"] for f in load_x_formats()])}
+
+Reply ONLY with JSON inside <formats></formats>: {{"formats": [{{"name": "...", "structure": "how to build it, step by step",
+"example": "a generic example about women in business, no real names or invented figures"}}]}} with 6-8 formats:
+keep the ones still working, replace any that stopped working, add new ones that are spreading. Brand tone: smart, credible,
+never misleading clickbait: the hook must be honest about what the article contains."""
+    try:
+        text, _ = ask_web(client, prompt)
+        data = extract_json(text, "formats")
+        if len(data.get("formats", [])) >= 4:
+            os.makedirs(os.path.dirname(X_FORMATS_FILE), exist_ok=True)
+            with open(X_FORMATS_FILE, "w", encoding="utf-8") as f:
+                json.dump({"updated": datetime.now(timezone.utc).date().isoformat(), "formats": data["formats"]},
+                          f, ensure_ascii=False, indent=1)
+            print(f"[Studio] X formats refreshed ({len(data['formats'])})")
+    except Exception as e:
+        print(f"      [Studio] X formats refresh skipped ({e})")
+
+
 # ---------------------------------------------------------------- copy
 def write_copy(ask, client, model: str, extract_json, item: dict, kind: str, url: str) -> dict:
     en = item["content"]["en"]
@@ -265,6 +320,9 @@ Promote this {what}:
 {json.dumps(facts, ensure_ascii=False)}
 Link: {url}
 
+X formats that are working right now:
+{json.dumps(load_x_formats(), ensure_ascii=False)}
+
 Reply ONLY with JSON inside <copy></copy>:
 {{
  "kicker": "2-3 words for the image label, e.g. 'Boardroom news'",
@@ -276,7 +334,8 @@ Reply ONLY with JSON inside <copy></copy>:
  "tiktok_why": "max 25 words: why it matters for a woman's career",
  "tiktok_caption": "max 150 characters + 4-6 hashtags, ends with 'link in bio'",
  "linkedin": "Written as the Madam CEO company page (brand voice, 'we', never a personal founder story): a strong first line, 3-4 short paragraphs, a question for the comments, the link on its own line, 3 hashtags",
- "x": "max 230 characters, one sharp line or two, no hashtags or at most one, then the link"
+ "x": "Built on ONE of the X formats listed below (pick the best fit). Max 250 characters including the link. Short lines with line breaks. The hook must make people want the rest of the story and hint that it continues on our site, but stay honest: never promise anything the article does not contain. No hashtags. End with the link.",
+ "x_format": "name of the format you used"
 }}"""
     data = None
     for _ in range(2):
@@ -295,7 +354,7 @@ Reply ONLY with JSON inside <copy></copy>:
                 "tiktok_why": facts["why_it_matters"][:160], "tiktok_caption": f"{hd[:90]} #careertok #womeninbusiness link in bio",
                 "linkedin": f"{hd}\n\n{dek}\n\n{url}\n\n#leadership #careers #womeninbusiness", "x": f"{hd}\n{url}"}
     if url not in data.get("x", ""):
-        data["x"] = data["x"][: 270 - len(url)].rstrip() + "\n" + url
+        data["x"] = data["x"][: 255 - len(url)].rstrip() + "\n\n" + url
     if url not in data.get("linkedin", ""):
         data["linkedin"] = data["linkedin"].rstrip() + "\n\n" + url
     return data
@@ -333,6 +392,72 @@ p{{font-size:38px;line-height:1.4;color:{C['pink']};margin:26px 0 0}}
 .cta{{margin-top:56px;background:{C['cream']};color:{C['granate']};font-size:40px;font-weight:600;padding:24px 46px;border-radius:999px}}"""
     return page(w, h, css, f'<div class="lg">{logo_light}</div><h2 class="serif">Which one matters most to you?</h2>'
                            f'<p>Every story in full, plus Style, Power Word and Voices.</p><div class="cta">{esc(domain)}</div>')
+
+
+# ---------------------------------------------------------------- career development carousels (TikTok)
+DEV_TOPICS = [
+    "phrases to use when negotiating your salary", "how to find a sponsor, not just a mentor",
+    "signs you are ready for a promotion", "how to speak up in meetings without being interrupted",
+    "how to answer 'tell me about yourself' for a senior role", "how to say no to extra work without hurting your career",
+    "how to build executive presence", "what to do in your first 90 days in a new leadership role",
+    "how to ask for feedback that actually helps you grow", "how to make your work visible without bragging",
+    "email phrases that sound confident, not apologetic", "how to prepare for a performance review",
+    "how to manage people who used to be your peers", "how to handle being the only woman in the room",
+    "how to network when you hate networking", "how to recover after a mistake at work",
+    "what to say when someone takes credit for your idea", "how to negotiate a promotion, not just a raise",
+    "how to lead your first team meeting", "habits of women who reach the C-suite",
+    "how to give tough feedback kindly", "how to set boundaries with a demanding boss",
+    "how to prepare a 30-second elevator pitch", "how to ask for a flexible schedule",
+    "how to get on a board one day: first steps", "how to turn a stretch assignment into a promotion",
+    "words that undermine you at work and what to say instead", "how to handle imposter syndrome before a big presentation",
+    "how to build a personal board of advisors", "how to switch to a more strategic role",
+]
+
+
+def dev_copy(ask, client, model, extract_json, topic: str) -> dict:
+    prompt = f"""You write career-development carousels for "Madam CEO", a brand for ambitious women in the corporate world.
+Topic: {topic}
+
+Rules: practical, specific, warm and confident. Advice that a seasoned executive coach would give. No statistics or studies
+(we can't verify them here), no names, no clichés, no emojis in the slides. English.
+Reply ONLY with JSON inside <dev></dev>:
+{{"hook": "max 9 words, slide 1, makes women stop scrolling",
+ "subhook": "max 12 words under the hook",
+ "tips": [{{"title": "max 7 words", "text": "max 22 words, concrete; if it's a phrase to say, put it in quotes"}}],
+ "caption": "TikTok caption: one line + 4-6 hashtags (#careertok #womeninbusiness ...), ends with 'More on the site: link in bio'"}}
+Give exactly 5 tips."""
+    data = extract_json(ask(client, model, prompt, 1800), "dev")
+    if len(data.get("tips", [])) < 3:
+        raise ValueError("not enough tips")
+    return data
+
+
+def dev_slides(d: dict, logo_light: str, domain: str) -> list[str]:
+    W, H = 1080, 1920
+    cover = page(W, H, f""".c{{background:{C['granate']};color:#fff;padding:0 90px;display:flex;flex-direction:column;justify-content:center}}
+.k{{font-size:28px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:{C['gold']}}}
+h1{{font-size:{fit(d['hook'], [(32, 118), (50, 100), (999, 86)])}px;line-height:1.0;margin:30px 0 0}}
+p{{font-size:40px;line-height:1.35;color:{C['pink']};margin:36px 0 0}}
+.f{{position:absolute;left:90px;right:90px;bottom:300px;display:flex;justify-content:space-between;align-items:center}}
+.brand{{font-size:40px}} .brand svg{{width:64px;height:64px}} .sw{{font-size:30px;font-weight:600;color:{C['pink']}}}""",
+                 f'<div class="k">Career playbook</div><h1 class="serif">{esc(d["hook"])}</h1><p>{esc(d.get("subhook", ""))}</p>'
+                 f'<div class="f"><div class="brand">{logo_light}<span>Madam CEO<b>.</b></span></div><div class="sw">Swipe →</div></div>')
+    slides = [cover]
+    for i, tip in enumerate(d["tips"][:5], 1):
+        slides.append(page(W, H, f""".c{{background:{C['paper']};padding:0 90px;display:flex;flex-direction:column;justify-content:center}}
+.n{{font:600 200px/1 'Cormorant Garamond',Georgia,serif;color:{C['gold']}}}
+h2{{font-size:78px;line-height:1.05;color:{C['granate']};margin:20px 0 0}}
+p{{font-size:48px;line-height:1.4;margin:40px 0 0;color:#2B2C31}}
+.u{{position:absolute;bottom:300px;left:90px;font-size:28px;color:{C['muted']}}}""",
+                           f'<div class="n">{i}</div><h2 class="serif">{esc(tip["title"])}</h2><p>{esc(tip["text"])}</p>'
+                           f'<div class="u">Madam CEO · {esc(domain)}</div>'))
+    slides.append(page(W, H, f""".c{{background:{C['granate']};color:#fff;padding:0 90px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}}
+.lg svg{{width:160px;height:160px}} h2{{font-size:92px;line-height:1.02;margin:44px 0 0}}
+p{{font-size:40px;line-height:1.4;color:{C['pink']};margin:30px 0 0}}
+.cta{{margin-top:60px;background:{C['cream']};color:{C['granate']};font-size:40px;font-weight:600;padding:24px 46px;border-radius:999px}}""",
+                       f'<div class="lg">{logo_light}</div><h2 class="serif">Save this for your next big week.</h2>'
+                       f'<p>Follow for daily career news and playbooks for women heading to the top.</p><div class="cta">{esc(domain)}</div>'))
+    return slides
 
 
 # ---------------------------------------------------------------- pack
@@ -396,10 +521,26 @@ def build_pack(ask, client, model, extract_json, site_url: str, articles: list[d
         ig.append(("Story 1 · 9:00", [pw_story], f"Power Word #{num}. Add a link sticker → {game_url}\nAdd a poll: “Did you get it?” Yes / Not yet"))
         ig.append(("Story 2 · 13:00", [job(story_9x16(t1, logo_light), f"IG-story-{s1}.jpg", 1080, 1920)],
                    f"Add a link sticker → {url1}\nSticker text: Read more"))
-        tt_item, tt_t, tt_cp = (second, t2, cp2) if second else (top, t1, cp1)
-        st = slug(tt_t["headline"], 26)
-        files = [job(d, f"TikTok-{st}-{i}.jpg", 1080, 1920) for i, d in enumerate(tiktok_slides(tt_t, logo, logo_light, domain), 1)]
-        tt.append(("Photo carousel · 19:00", files, tt_cp.get("tiktok_caption", "") + "\n\nAdd a trending sound (low volume) before posting."))
+        dev = None
+        if now_md.weekday() in (0, 2, 4):  # Mon, Wed, Fri: career playbook; other days: news
+            state = load_state()
+            used = state.get("dev_used", [])
+            topic = next((t for t in DEV_TOPICS if t not in used), DEV_TOPICS[now_md.toordinal() % len(DEV_TOPICS)])
+            try:
+                dev = dev_copy(ask, client, model, extract_json, topic)
+                state["dev_used"] = (used + [topic])[-len(DEV_TOPICS) + 1:]
+                save_state(state)
+            except Exception as e:
+                print(f"      [Studio] Career carousel skipped ({e})")
+        if dev:
+            sd = slug(dev["hook"], 26)
+            files = [job(d, f"TikTok-playbook-{sd}-{i}.jpg", 1080, 1920) for i, d in enumerate(dev_slides(dev, logo_light, domain), 1)]
+            tt.append(("Career playbook carousel · 19:00", files, dev.get("caption", "") + "\n\nAdd a calm trending sound (low volume) before posting."))
+        else:
+            tt_item, tt_t, tt_cp = (second, t2, cp2) if second else (top, t1, cp1)
+            st = slug(tt_t["headline"], 26)
+            files = [job(d, f"TikTok-{st}-{i}.jpg", 1080, 1920) for i, d in enumerate(tiktok_slides(tt_t, logo, logo_light, domain), 1)]
+            tt.append(("News carousel · 19:00", files, tt_cp.get("tiktok_caption", "") + "\n\nAdd a trending sound (low volume) before posting."))
     else:
         week = sorted(recent(articles, 24 * 7), key=lambda a: -a.get("score", 0))
         picked, cats = [], set()
@@ -543,21 +684,83 @@ def send(pack: dict, site_url: str, logo_png: str | None) -> bool:
 
 
 def run(ask, client, model, extract_json, site_url, articles, styles_new, voices_new, words, game_start,
-        logo: str, logo_light: str, logo_png: str | None, force: bool = False) -> None:
+        logo: str, logo_light: str, logo_png: str | None, force: bool = False, ask_web=None) -> None:
     """Sends one pack per day: the first update of the day (07:17 Madrid)."""
     today = datetime.now(MADRID).date().isoformat()
     state = load_state()
     if state.get("pack_date") == today and not force:
         print("[Studio] Today's pack was already sent")
         return
+    last = state.get("x_formats_date", "2000-01-01")
+    if ask_web and (datetime.fromisoformat(today) - datetime.fromisoformat(last)).days >= 7:
+        refresh_x_formats(ask_web, client, extract_json)
+        state = load_state()
+        state["x_formats_date"] = today
+        save_state(state)
     pack = build_pack(ask, client, model, extract_json, site_url, articles, styles_new, voices_new,
                       words, game_start, logo, logo_light)
     if not pack:
         print("[Studio] Nothing for a pack")
         return
     if send(pack, site_url, logo_png):
+        state = load_state()
         state["pack_date"] = today
         save_state(state)
+
+
+# ---------------------------------------------------------------- X formats (refreshed weekly)
+X_FORMATS_FILE = "data/x_formats.json"
+DEFAULT_X_FORMATS = [
+    {"name": "Number hook", "structure": "Open with the single most striking number on its own line. One line of context. One line hinting there is more inside. Link.",
+     "example": "16%.\n\nThat's the share of new CEO jobs that went to women this year, a nine-year high.\n\nThe catch is in which markets. →"},
+    {"name": "Buried detail", "structure": "State the news in one line, then: 'But the most interesting part is…' and stop, sending readers to the article.",
+     "example": "Two big firms just cut paid parental leave.\n\nThe most telling part isn't the cut itself. It's who it applies to. ↓"},
+    {"name": "Myth vs data", "structure": "'Most people think X.' new line 'The data says Y.' new line one-line teaser. Link.",
+     "example": "Most people think women are closing the leadership gap.\nThree new datasets say it's going backwards.\n\nHere's what changed ↓"},
+    {"name": "Question hook", "structure": "Ask a sharp question the reader wants answered, give one fact, promise the answer in the story.",
+     "example": "Why do women stop getting promoted at the same rate after year 5?\n\nA new report has a one-word answer. →"},
+    {"name": "List teaser", "structure": "'N things [report/story] tells us about [topic]:' then 2 short numbered lines, and '3 is the one that matters' with the link.",
+     "example": "3 things the new Women in the Workplace report tells us:\n\n1. The ambition gap is real\n2. It disappears with sponsorship\n3. The one most companies ignore ↓"},
+    {"name": "Breaking-style", "structure": "Short news line with the key name and fact, one line on why it matters for the reader, link. No fluff.",
+     "example": "CME Group names its first woman CEO.\n\nShe came up through finance, the most common route to the top job. Full story →"},
+]
+
+
+def load_x_formats() -> list[dict]:
+    try:
+        with open(X_FORMATS_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+            if data.get("formats"):
+                return data["formats"]
+    except (OSError, ValueError):
+        pass
+    return DEFAULT_X_FORMATS
+
+
+def refresh_x_formats(ask_web, client, extract_json) -> None:
+    """Once a week: research which post formats are performing on X right now and keep the best ones."""
+    prompt = f"""You are a social media strategist for a premium business news brand on X (Twitter).
+Research with web search what post formats and hooks are performing best on X right now (this month), especially for
+news and business accounts that want readers to click through to their website. Look for recent analyses of viral posts,
+creator playbooks and any new format that is spreading.
+
+Current formats we use: {json.dumps([f["name"] for f in load_x_formats()])}
+
+Reply ONLY with JSON inside <formats></formats>: {{"formats": [{{"name": "...", "structure": "how to build it, step by step",
+"example": "a generic example about women in business, no real names or invented figures"}}]}} with 6-8 formats:
+keep the ones still working, replace any that stopped working, add new ones that are spreading. Brand tone: smart, credible,
+never misleading clickbait: the hook must be honest about what the article contains."""
+    try:
+        text, _ = ask_web(client, prompt)
+        data = extract_json(text, "formats")
+        if len(data.get("formats", [])) >= 4:
+            os.makedirs(os.path.dirname(X_FORMATS_FILE), exist_ok=True)
+            with open(X_FORMATS_FILE, "w", encoding="utf-8") as f:
+                json.dump({"updated": datetime.now(timezone.utc).date().isoformat(), "formats": data["formats"]},
+                          f, ensure_ascii=False, indent=1)
+            print(f"[Studio] X formats refreshed ({len(data['formats'])})")
+    except Exception as e:
+        print(f"      [Studio] X formats refresh skipped ({e})")
 
 
 # ---------------------------------------------------------------- copy page (site/copy.html)

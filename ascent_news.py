@@ -630,10 +630,24 @@ def _draw(client: Anthropic, prompt: str, alt: str) -> dict:
 
 
 # ---------------------------------------------------------------- memory
+CITE_RE = re.compile(r"</?cite\b[^>]*>")
+
+
+def strip_cites(obj):
+    """Web search sometimes leaves <cite index=...> tags in the text: remove them everywhere."""
+    if isinstance(obj, str):
+        return CITE_RE.sub("", obj)
+    if isinstance(obj, list):
+        return [strip_cites(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: strip_cites(v) for k, v in obj.items()}
+    return obj
+
+
 def load_articles() -> list[dict]:
     try:
         with open(DATA_FILE, encoding="utf-8") as f:
-            return json.load(f)
+            return strip_cites(json.load(f))
     except FileNotFoundError:
         return []
 
@@ -780,6 +794,7 @@ After researching, output ONLY this JSON, wrapped in <article_json></article_jso
 }}
 The body should have 4-6 paragraphs (about 300-400 words) when the research supports it."""
     text, sources = ask_with_web(client, prompt)
+    text = CITE_RE.sub("", text)
     data = extract_json(text, "article_json")
     for lang in LANGS:
         if lang not in data or not data[lang].get("headline"):
@@ -1682,7 +1697,7 @@ def make_content_pack(client: Anthropic, articles: list[dict], styles_new: list[
     here = os.path.dirname(os.path.abspath(__file__))
     studio.run(ask, client, WRITER_MODEL, extract_json, SITE_URL, articles, styles_new, voices_new,
                game.WORDS, social.GAME_START, logo_svg(), logo_svg("logo-light.svg"),
-               os.path.join(here, "assets", "apple-touch-icon.png"), force)
+               os.path.join(here, "assets", "apple-touch-icon.png"), force, ask_with_web)
 
 
 def make_social_kits(client: Anthropic, news: list[dict], styles_new: list[dict]) -> None:
