@@ -1,0 +1,45 @@
+{
+ "updated": "2026-10-28",
+ "formats": [
+  {
+   "name": "Number hook (kept, made specific)",
+   "structure": "1) Pick the single most striking figure from the article and check it against the source. 2) Open with the number and what it measures, using the exact wording of the finding and no rounding for effect. 3) In one line, say what changed or why it matters. 4) Finish with a plain line saying what the full piece covers, such as the method, the sectors or the caveats. 5) Keep the whole post to about 100–200 characters. 6) Put the link in the post or the first reply, and test both. Link-penalty claims are disputed, and link posts still show the lowest median engagement in recent benchmarks.",
+   "example": "Women now hold [X]% of senior roles in mid-sized firms, up from [Y]% [timeframe]. Our analysis breaks down which sectors drove the change and which are still lagging. [link]"
+  },
+  {
+   "name": "Buried detail (kept, reframed as 'what the report says on page X')",
+   "structure": "1) Find the fact that is below the headline but changes how the story reads. 2) Open with a plain-language label such as 'Buried in the report:' or 'Easy to miss in the filing:'. 3) State the detail in full in the post, so it works without the click. 4) Add one line of context saying why it matters. 5) Say where in the article the reader can see the rest of the evidence. Do not tease a detail the article doesn't deliver.",
+   "example": "Easy to miss in the new funding report: the gap between women-led and male-led startups is widest at the earliest stage, not the later rounds. Full breakdown by stage and region in our piece. [link]"
+  },
+  {
+   "name": "Myth vs data (now a 'one-two' reversal)",
+   "structure": "1) Line one states the common assumption neutrally, in the way people actually say it. 2) Line two reverses it with the finding, naming the source type (survey, filing, official statistics). 3) Add a short qualifier if the data has limits, which keeps the post credible. 4) Close with an invitation to compare the evidence in the article. The reversal format sparks replies, and replies are the strongest ranking signal. Never set up a myth that nobody actually holds.",
+   "example": "Common assumption: women-led firms avoid growth-stage risk. What the latest data shows: [finding, with source]. Caveats and the full dataset are in our analysis. [link]"
+  },
+  {
+   "name": "Open question with an answer in the thread (replaces the generic question hook)",
+   "structure": "1) Ask one specific, debatable question that the article actually investigates, not a generic 'what do you think?'. 2) Add one line of the key fact that frames the question. 3) Say you'll share what the evidence shows. 4) Reply to early comments yourself, because author replies to replies are weighted heavily. 5) Within a few hours, post the answer as a reply with the link. Generic engagement-bait questions get replies but don't send readers to the article.",
+   "example": "Do flexible-work policies actually help women reach senior roles, or mainly keep them in place? We looked at what the research shows. Tell us what you've seen, and we'll post our findings below."
+  },
+  {
+   "name": "One chart, one takeaway (new, spreading)",
+   "structure": "1) Choose the one chart in the article that carries the story. 2) Redraw it clean for mobile, with a plain title that states the finding, readable labels and the source credited on the image. 3) Write a one-sentence caption that interprets the chart honestly, including any limit of the data. 4) Add 'Full analysis:' with the link at the end of the post or in the first reply. Screenshots, charts and data snippets earn saves and shares, which count for more than clicks and likes. They also let the post stand alone, as X's own product team has advised.",
+   "example": "Chart: share of women on executive teams by company size, [period]. The gap narrows with size, but not evenly across sectors. Methodology and sector breakdown in our piece. [link]"
+  },
+  {
+   "name": "Swipe card post (replaces the list teaser)",
+   "structure": "1) Make 3–5 images. 2) Image 1 is a plain, honest headline stating the topic. 3) Middle images each carry one fully delivered point, with a number or fact and its source. 4) The last image says what the full article adds, such as the data, quotes and context. 5) Keep the post text to one sentence plus the link. This gives readers the list in the feed instead of withholding it, which builds trust and earns bookmarks. Creator playbooks report that multi-image posts outperform single-image and text-only posts.",
+   "example": "Four things the new survey says about women moving into board roles. Swipe for the findings, and read the full report for the methodology. [link]"
+  },
+  {
+   "name": "Short proof thread (3–6 posts)",
+   "structure": "1) Post 1 states the finding and the scope of the evidence in one line. 2) Posts 2–4 each give one piece of evidence, such as a figure, a quote or a chart. 3) The final post gives the takeaway, the main caveat and the article link. 4) Keep it to 3–6 posts, since long threads that drift are losing ground. 5) Never put the key fact only behind the link. Threads still post some of the highest engagement rates, and they work as a 'warm-up' before the click.",
+   "example": "1/ What does the latest research say about women in business leadership and access to capital? Five findings from our analysis. 2/ [Finding one, with source]... 5/ The full piece covers the caveats and the data. [link]"
+  },
+  {
+   "name": "Breaking-style 'what we know' update (kept, tightened)",
+   "structure": "1) Use it only when the news is genuinely new, which keeps the format credible. 2) Start with a label such as 'Just in:' or 'Developing:', followed by the confirmed fact and its source. 3) Add a short 'What we know / what we don't yet know' line. 4) Link to the live article or explainer, and say it will be updated. 5) Follow up in the thread with a new development instead of reposting the same news. Timely, accurate reactions to real events are among the formats that still work.",
+   "example": "Developing: [Company] has announced a new programme to support women entrepreneurs. What's confirmed: [fact, source]. Not yet clear: [open point]. We're updating our report as details emerge. [link]"
+  }
+ ]
+}
