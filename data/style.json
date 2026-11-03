@@ -1,5 +1,418 @@
 [
  {
+  "id": "sd5153edf261103",
+  "topic": "Business casual decoded: what it really means",
+  "category": "Careers",
+  "published_at": "2026-11-03T14:29+00:00",
+  "minutes": 3,
+  "content": {
+   "en": {
+    "headline": "Business Casual Decoded: What It Really Means",
+    "dek": "It is not a uniform, it is a standard: polished, comfortable and unmistakably yours.",
+    "intro": "Few dress codes cause as much second-guessing as business casual. Hybrid work has loosened the rules, but it hasn't erased them, and your outfit still sends a signal in the boardroom, on a video call and at the networking dinner. This season's workwear conversation is about ease, personality and pieces that work harder, so here is how to read the code and make it work for you.",
+    "sections": [
+     {
+      "title": "The simple definition",
+      "text": "Business casual sits between a full suit and your weekend wardrobe. Stylists describe it as refined separates, clean shoes, good fit and a pulled-together silhouette. In practice that means tailored trousers or a midi skirt, a blouse, shirt or fine knit, and a layer such as a blazer or structured cardigan. If an outfit looks like you chose every piece on purpose, you are almost certainly in the zone."
+     },
+     {
+      "title": "The grey areas, sorted",
+      "text": "Dark, well-fitting jeans and clean, minimal trainers are accepted in more offices than they used to be, but they are not universal, so read your own workplace first. Finance and law usually expect the most polished version, while creative and tech teams often allow more relaxation. A good rule of thumb: when you are unsure, dress one notch above the room, and add a blazer when you are meeting clients, investors or the board. You can always take it off."
+     },
+     {
+      "title": "Make it work for your life",
+      "text": "Good business casual is built on fit, not on size or budget. Structure flatters many body types, and wide-leg and straight trousers are easy to adapt, but whatever your shape, a quick visit to a tailor makes affordable pieces look expensive. Shop your own wardrobe first, a point British Vogue's AW26 trend report makes about styling what you already own. In cold climates, layer fine knits under a blazer. In heat, choose breathable fabrics with structure, like lightweight trousers and a sleeveless shell with a linen jacket."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Wide-leg tailored trousers",
+      "how": "Pair them with a fitted knit or a tucked shirt and loafers for a polished, comfortable base that suits most body types."
+     },
+     {
+      "item": "A relaxed blazer",
+      "how": "Choose softer shoulders and a slightly easy fit, then wear it over a knit, a tee or a dress to dress it up or down."
+     },
+     {
+      "item": "A crisp shirt",
+      "how": "Try a partial tuck or rolled sleeves to keep it polished without looking stiff."
+     },
+     {
+      "item": "A midi skirt",
+      "how": "Style it with a fine knit and a blazer, or on its own with a sharp shirt; it doesn't need a matching jacket."
+     },
+     {
+      "item": "Loafers or comfortable block-heel shoes",
+      "how": "Pick closed-toe shoes in a neutral shade that you can walk in all day and that work with every outfit above."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Soft tailoring",
+      "text": "Suits are loosening up, with softer shoulders, fluid fabrics and skirt sets that feel lighter and more modern. Wear the jacket and trousers or skirt together for meetings, then split them up for easy day-to-day outfits."
+     },
+     {
+      "name": "Statement midi skirts",
+      "text": "WWD names the midi skirt as the piece that brings the most personality to office wardrobes right now. Choose a pencil or midi in a rich texture, like leather or suede, and balance it with a simple shirt or knit."
+     },
+     {
+      "name": "Glove pumps",
+      "text": "After seasons of loafers and flats, WWD reports that the pump is back, now in more colours and textures. Wear them on presentation days and keep your loafers for the commute."
+     }
+    ],
+    "do": [
+     "Prioritise fit: a quick tailor adjustment is the best upgrade at any budget.",
+     "Build outfits from mix-and-match separates so five or six pieces make many looks.",
+     "Check your company's own guidelines and watch what senior colleagues wear, then dress for the role you want.",
+     "Keep a spare blazer or polished layer at the office for surprise meetings."
+    ],
+    "dont": [
+     "Don't treat jeans, trainers or knitwear as automatically off-limits or automatically fine; check your office first.",
+     "Don't wear anything that reads weekend: gym wear, beach fabrics, flip-flops or distressed pieces.",
+     "Don't force a trend that is uncomfortable or does not suit you; a polished outfit you feel good in always wins."
+    ],
+    "tip": "Pick one hero piece per outfit, such as a textured midi skirt or a strong pump, and keep everything else simple. It gives you personality without losing polish."
+   },
+   "es": {
+    "headline": "Business casual al descubierto: qué significa de verdad",
+    "dek": "No es un uniforme, es un criterio: cuidado, cómodo y con tu sello personal.",
+    "intro": "Pocos códigos de vestimenta generan tantas dudas como el business casual. El trabajo híbrido ha relajado las normas, pero no las ha borrado: tu look sigue diciendo algo en la sala de juntas, en una videollamada y en la cena de networking. Esta temporada, la conversación sobre ropa de trabajo gira en torno a la comodidad, la personalidad y las prendas que rinden más. Te explicamos cómo interpretar el código y sacarle partido.",
+    "sections": [
+     {
+      "title": "La definición sencilla",
+      "text": "El business casual se sitúa entre el traje completo y tu ropa de fin de semana. Las estilistas lo resumen en prendas combinables con aire cuidado, calzado limpio, buen ajuste y una silueta resuelta. En la práctica: pantalón sastre o falda midi, blusa, camisa o punto fino, y una capa como una americana o una chaqueta de punto estructurada. Si tu look parece haber sido elegido pieza a pieza con intención, casi seguro que vas bien."
+     },
+     {
+      "title": "Las zonas grises, aclaradas",
+      "text": "Los vaqueros oscuros y bien cortados y las zapatillas limpias y minimalistas se aceptan en más oficinas que antes, pero no en todas, así que fíjate primero en la cultura de tu empresa. Finanzas y derecho suelen pedir la versión más formal, mientras que los equipos creativos y tecnológicos suelen ser más flexibles. Una regla útil: si dudas, vístete un punto por encima del entorno y suma una americana cuando te reúnas con clientes, inversores o el consejo. Siempre puedes quitártela."
+     },
+     {
+      "title": "Adáptalo a tu vida",
+      "text": "Un buen business casual se basa en el ajuste, no en la talla ni en el presupuesto. La estructura favorece a muchos tipos de cuerpo y los pantalones de pierna ancha o recta son fáciles de adaptar, pero sea cual sea tu figura, una visita rápida a la modista hace que las prendas asequibles parezcan de más categoría. Empieza por tu propio armario, algo que también plantea el informe de tendencias de British Vogue para otoño-invierno 2026. Si hace frío, superpón punto fino bajo la americana. Si hace calor, elige tejidos transpirables con estructura, como un pantalón ligero y un top sin mangas con chaqueta de lino."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Pantalón sastre de pierna ancha",
+      "how": "Combínalo con un jersey ajustado o una camisa por dentro y mocasines para tener una base elegante y cómoda que favorece a casi todas las siluetas."
+     },
+     {
+      "item": "Una americana relajada",
+      "how": "Busca hombros más suaves y un corte algo holgado, y llévala sobre un jersey, una camiseta o un vestido para subir o bajar el tono."
+     },
+     {
+      "item": "Una camisa impecable",
+      "how": "Méte la parte delantera nada más o remángala para que quede cuidada sin parecer rígida."
+     },
+     {
+      "item": "Una falda midi",
+      "how": "Llévala con un jersey fino y una americana, o sola con una camisa bien cortada; no necesita chaqueta a juego."
+     },
+     {
+      "item": "Mocasines o zapato cómodo de tacón ancho",
+      "how": "Elige un zapato cerrado en un tono neutro con el que puedas caminar todo el día y que combine con todo lo anterior."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Sastrería suave",
+      "text": "Los trajes se relajan, con hombros más suaves, tejidos fluidos y conjuntos de falda más ligeros y modernos. Lleva el conjunto completo para las reuniones y sepáralo después para el día a día."
+     },
+     {
+      "name": "Faldas midi protagonistas",
+      "text": "WWD señala la falda midi como la prenda que más personalidad aporta al armario de oficina ahora mismo. Elige una midi o de tubo en una textura con carácter, como piel o ante, y equilíbrala con una camisa o un jersey sencillos."
+     },
+     {
+      "name": "Salones tipo guante",
+      "text": "Tras varias temporadas de mocasines y bailarinas, WWD cuenta que el salón vuelve, ahora con más colores y texturas. Resérvalos para los días de presentación y deja los mocasines para el trayecto al trabajo."
+     }
+    ],
+    "do": [
+     "Prioriza el ajuste: un arreglo de modista es la mejor mejora con cualquier presupuesto.",
+     "Construye looks con prendas combinables para que cinco o seis piezas den muchos conjuntos.",
+     "Consulta las pautas de tu empresa, observa cómo visten tus superiores y vístete para el puesto que quieres.",
+     "Ten una americana o una capa elegante de repuesto en la oficina para reuniones inesperadas."
+    ],
+    "dont": [
+     "No des por hecho que los vaqueros, las zapatillas o el punto están siempre vetados o siempre permitidos: comprueba primero tu oficina.",
+     "No lleves nada que huela a fin de semana: ropa deportiva, tejidos de playa, chanclas o prendas rotas.",
+     "No fuerces una tendencia que te incomode o que no te favorezca: un look cuidado con el que te sientas bien siempre gana."
+    ],
+    "tip": "Elige una sola pieza protagonista por look, como una falda midi con textura o un buen salón, y mantén el resto sencillo. Así ganas personalidad sin perder elegancia."
+   },
+   "fr": {
+    "headline": "Le business casual décodé : ce qu'il signifie vraiment",
+    "dek": "Ce n'est pas un uniforme mais un standard : soigné, confortable et résolument vous.",
+    "intro": "Peu de codes vestimentaires font autant hésiter que le business casual. Le travail hybride a assoupli les règles sans les effacer : votre tenue envoie toujours un message en comité de direction, en visioconférence ou lors d'un dîner de networking. Cette saison, la mode au bureau parle d'aisance, de personnalité et de pièces qui en font plus. Voici comment lire le code et le faire fonctionner pour vous.",
+    "sections": [
+     {
+      "title": "La définition simple",
+      "text": "Le business casual se situe entre le tailleur complet et la tenue du week-end. Les stylistes le résument ainsi : des pièces séparées soignées, des chaussures propres, une coupe qui tombe bien et une silhouette cohérente. Concrètement, cela donne un pantalon tailleur ou une jupe midi, un chemisier, une chemise ou une maille fine, et une couche comme un blazer ou un gilet structuré. Si votre tenue donne l'impression que chaque pièce a été choisie avec intention, vous êtes presque sûrement dans le bon registre."
+     },
+     {
+      "title": "Les zones grises, clarifiées",
+      "text": "Le jean foncé bien coupé et les baskets minimalistes et propres sont acceptés dans plus de bureaux qu'avant, mais pas partout : observez d'abord la culture de votre entreprise. La finance et le droit attendent généralement la version la plus soignée, tandis que les équipes créatives et tech sont souvent plus souples. Une règle utile : dans le doute, habillez-vous d'un cran au-dessus et ajoutez un blazer face à des clients, des investisseurs ou le conseil d'administration. Vous pourrez toujours l'enlever."
+     },
+     {
+      "title": "Adaptez-le à votre vie",
+      "text": "Un bon business casual repose sur la coupe, pas sur la taille ni sur le budget. La structure flatte de nombreuses morphologies et les pantalons larges ou droits s'adaptent facilement, mais quelle que soit votre silhouette, un passage chez la retoucheuse donne un air haut de gamme à des pièces abordables. Commencez par fouiller votre propre garde-robe, un conseil que reprend aussi le rapport tendances automne-hiver 2026 de British Vogue. Quand il fait froid, superposez une maille fine sous le blazer. Quand il fait chaud, choisissez des matières respirantes mais structurées, comme un pantalon léger, un haut sans manches et une veste en lin."
+     }
+    ],
+    "essentials": [
+     {
+      "item": "Le pantalon tailleur large",
+      "how": "Associez-le à un pull ajusté ou à une chemise rentrée et à des mocassins pour une base élégante et confortable qui convient à la plupart des morphologies."
+     },
+     {
+      "item": "Un blazer décontracté",
+      "how": "Choisissez des épaules plus souples et une coupe légèrement ample, puis portez-le sur une maille, un t-shirt ou une robe pour jouer sur le niveau de formalité."
+     },
+     {
+      "item": "Une chemise impeccable",
+      "how": "Rentrez-la à moitié ou retroussez les manches pour un rendu soigné sans raideur."
+     },
+     {
+      "item": "Une jupe midi",
+      "how": "Portez-la avec une maille fine et un blazer, ou seule avec une chemise bien coupée ; elle n'a pas besoin de veste assortie."
+     },
+     {
+      "item": "Des mocassins ou des chaussures à talon bloc confortables",
+      "how": "Optez pour des chaussures fermées dans un ton neutre, dans lesquelles vous pouvez marcher toute la journée et qui vont avec tout ce qui précède."
+     }
+    ],
+    "trends": [
+     {
+      "name": "Le tailoring souple",
+      "text": "Les costumes se détendent, avec des épaules plus douces, des matières fluides et des ensembles jupe plus légers et plus modernes. Portez l'ensemble complet pour vos réunions, puis dissociez-le au quotidien."
+     },
+     {
+      "name": "Les jupes midi qui s'affirment",
+      "text": "WWD désigne la jupe midi comme la pièce qui apporte le plus de personnalité à la garde-robe de bureau en ce moment. Choisissez une midi ou une jupe crayon dans une matière marquée, comme le cuir ou le daim, et équilibrez avec une chemise ou une maille simples."
+     },
+     {
+      "name": "Les escarpins gant",
+      "text": "Après plusieurs saisons de mocassins et de ballerines, WWD observe le retour de l'escarpin, désormais décliné en davantage de couleurs et de matières. Gardez-les pour les jours de présentation et réservez les mocassins aux trajets."
+     }
+    ],
+    "do": [
+     "Misez sur la coupe : une retouche chez la couturière est la meilleure amélioration, quel que soit le budget.",
+     "Construisez vos tenues avec des pièces à associer, pour que cinq ou six vêtements donnent de nombreux looks.",
+     "Consultez les consignes de votre entreprise, observez la tenue de vos supérieures et habillez-vous pour le poste que vous visez.",
+     "Gardez un blazer ou une couche élégante au bureau pour les réunions imprévues."
+    ],
+    "dont": [
+     "Ne considérez pas le jean, les baskets ou la maille comme automatiquement interdits ou automatiquement permis : vérifiez d'abord votre bureau.",
+     "Ne portez rien qui fasse trop week-end : tenue de sport, matières de plage, tongs ou pièces déchirées.",
+     "Ne vous forcez pas à suivre une tendance qui vous gêne ou ne vous va pas : une tenue soignée dans laquelle vous vous sentez bien gagne toujours."
+    ],
+    "tip": "Choisissez une seule pièce phare par tenue, comme une jupe midi texturée ou un bel escarpin, et gardez le reste très simple. Vous gagnez en personnalité sans perdre en allure."
+   }
+  },
+  "image_query": "woman blazer wide-leg trousers office",
+  "photo_queries": [
+   "confident businesswomen modern office team",
+   "woman blazer wide-leg trousers loafers office",
+   "woman midi skirt knit top blazer work",
+   "woman crisp white shirt tailored trousers",
+   "woman knit dress loafers city commute"
+  ],
+  "essential_queries": [
+   "wide-leg tailored trousers women",
+   "relaxed wool blazer women",
+   "crisp white oxford shirt women",
+   "midi skirt women office",
+   "leather loafers women"
+  ],
+  "shops": [
+   {
+    "name": "Uniqlo",
+    "url": "https://www.uniqlo.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Dependable basics, fine knits and easy layering pieces to build the base of your work wardrobe.",
+     "es": "Básicos fiables, jerséis finos y prendas para superponer que sirven de base al fondo de armario laboral.",
+     "fr": "Des basiques fiables, des mailles fines et des pièces à superposer pour bâtir la base de sa garde-robe de travail."
+    }
+   },
+   {
+    "name": "Mango",
+    "url": "https://www.mango.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Minimal, grown-up tailoring and work-to-weekend outfits.",
+     "es": "Sastrería minimalista y looks para pasar de la oficina al fin de semana.",
+     "fr": "Un tailoring minimaliste et des tenues qui passent du bureau au week-end."
+    }
+   },
+   {
+    "name": "Marks & Spencer",
+    "url": "https://www.marksandspencer.com",
+    "tier": "affordable",
+    "known_for": {
+     "en": "Everyday workwear staples such as trousers, shirts, knitwear and coats from a UK high-street classic.",
+     "es": "Básicos de oficina como pantalones, camisas, punto y abrigos de un clásico de la calle comercial británica.",
+     "fr": "Des essentiels de bureau (pantalons, chemises, maille, manteaux) d'une enseigne britannique incontournable."
+    }
+   },
+   {
+    "name": "COS",
+    "url": "https://www.cos.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Contemporary, minimal shirts, tailoring and knitwear with clean lines.",
+     "es": "Camisas, sastrería y punto de líneas limpias y estética contemporánea y minimalista.",
+     "fr": "Chemises, tailoring et maille aux lignes épurées, dans un esprit contemporain et minimaliste."
+    }
+   },
+   {
+    "name": "Massimo Dutti",
+    "url": "https://www.massimodutti.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Elevated workwear: blazers, trousers and coats with a refined finish.",
+     "es": "Ropa de oficina con un toque elevado: americanas, pantalones y abrigos de acabado cuidado.",
+     "fr": "Une tenue de bureau haut de gamme : blazers, pantalons et manteaux aux finitions soignées."
+    }
+   },
+   {
+    "name": "Banana Republic",
+    "url": "https://bananarepublic.gap.com",
+    "tier": "mid",
+    "known_for": {
+     "en": "Modern tailoring and suiting with a wide size range, including petite and tall.",
+     "es": "Sastrería y trajes modernos con una amplia gama de tallas, incluidas petite y tall.",
+     "fr": "Un tailoring moderne et des tailleurs avec un large choix de tailles, dont petite et tall."
+    }
+   },
+   {
+    "name": "Reiss",
+    "url": "https://www.reiss.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Sharp blazers and wide-leg trousers, plus smart shirting.",
+     "es": "Americanas con corte impecable, pantalones de pierna ancha y camisas elegantes.",
+     "fr": "Des blazers impeccables, des pantalons larges et de belles chemises."
+    }
+   },
+   {
+    "name": "Theory",
+    "url": "https://www.theory.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Minimal tailored suiting, trousers and separates in muted palettes.",
+     "es": "Trajes sastre minimalistas, pantalones y prendas sueltas en paletas discretas.",
+     "fr": "Des tailleurs, pantalons et pièces séparées minimalistes dans des palettes sobres."
+    }
+   },
+   {
+    "name": "ME+EM",
+    "url": "https://www.me-em.com",
+    "tier": "premium",
+    "known_for": {
+     "en": "Considered knits, trousers and shirts that feel polished without being showy.",
+     "es": "Punto, pantalones y camisas muy cuidados: elegantes sin resultar ostentosos.",
+     "fr": "Des mailles, pantalons et chemises soignés, élégants sans ostentation."
+    }
+   }
+  ],
+  "sources": [],
+  "photo": {
+   "id": "kQa-Mnb8CTo",
+   "src": "https://images.unsplash.com/photo-1787647562292-cb5595159273?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8Y29uZmlkZW50JTIwYnVzaW5lc3N3b21lbiUyMG1vZGVybiUyMG9mZmljZSUyMHRlYW18ZW58MXwwfHx8MTc5MzcxNjE2Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+   "alt": "A woman with dreadlocks and glasses in a pink top in a colorful office",
+   "photographer": "Vitaly Gariev",
+   "page": "https://unsplash.com/@silverkblack?utm_source=madam_ceo&utm_medium=referral",
+   "provider": "Unsplash",
+   "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+  },
+  "gallery": [
+   {
+    "id": "gN3TN7to81Y",
+    "src": "https://images.unsplash.com/photo-1767362828069-3a8c5324be53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBibGF6ZXIlMjB3aWRlLWxlZyUyMHRyb3VzZXJzJTIwbG9hZmVycyUyMG9mZmljZXxlbnwxfDF8fHwxNzkzNzE2MTY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "Woman in a suit standing on a rooftop",
+    "photographer": "lhon karwan",
+    "page": "https://unsplash.com/@lhonkarwanhamasalih?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "McdKtISvySc",
+    "src": "https://images.unsplash.com/photo-1767362829004-a2d7da9eaabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8Mnx8d29tYW4lMjBibGF6ZXIlMjB3aWRlLWxlZyUyMHRyb3VzZXJzJTIwbG9hZmVycyUyMG9mZmljZXxlbnwxfDF8fHwxNzkzNzE2MTY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "Woman in a suit standing outdoors at sunset",
+    "photographer": "lhon karwan",
+    "page": "https://unsplash.com/@lhonkarwanhamasalih?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "TuE7v61SF-Y",
+    "src": "https://images.unsplash.com/photo-1718780817445-c6e6043973a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8M3x8d29tYW4lMjBibGF6ZXIlMjB3aWRlLWxlZyUyMHRyb3VzZXJzJTIwbG9hZmVycyUyMG9mZmljZXxlbnwxfDF8fHwxNzkzNzE2MTY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "A woman sitting on a chair talking on a cell phone",
+    "photographer": "Michael Kyule",
+    "page": "https://unsplash.com/@madness_leahcim_?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "c3gKqsGIN18",
+    "src": "https://images.unsplash.com/photo-1628938364552-44b9862579e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8NHx8d29tYW4lMjBibGF6ZXIlMjB3aWRlLWxlZyUyMHRyb3VzZXJzJTIwbG9hZmVycyUyMG9mZmljZXxlbnwxfDF8fHwxNzkzNzE2MTY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "man in gray formal suit standing on gray asphalt road during daytime",
+    "photographer": "Amir Naseri",
+    "page": "https://unsplash.com/@amirrnaseri?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "essential_photos": [
+   {
+    "id": "NJAFmCuIx1s",
+    "src": "https://images.unsplash.com/photo-1580651214613-f4692d6d138f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8d2lkZS1sZWclMjB0YWlsb3JlZCUyMHRyb3VzZXJzJTIwd29tZW58ZW58MXwxfHx8MTc5MzcxNjE2OHww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman in white long sleeve shirt and blue pants",
+    "photographer": "Vladimir Fedotov",
+    "page": "https://unsplash.com/@fedotov_vs?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "HlVjI5WmoQY",
+    "src": "https://images.unsplash.com/photo-1613915617430-8ab0fd7c6baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8cmVsYXhlZCUyMHdvb2wlMjBibGF6ZXIlMjB3b21lbnxlbnwxfDF8fHwxNzkzNzE2MTY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "A person in a blazer and trousers with a hand in a pocket",
+    "photographer": "Chyntia Juls",
+    "page": "https://unsplash.com/@chyntiajuls?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "ve2dwNxZ5Rg",
+    "src": "https://images.unsplash.com/photo-1621773881532-fe65715b5137?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8Y3Jpc3AlMjB3aGl0ZSUyMG94Zm9yZCUyMHNoaXJ0JTIwd29tZW58ZW58MXwxfHx8MTc5MzcxNjE2OXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "white polo shirt hanged on brown wooden cabinet",
+    "photographer": "Lisanto 李奕良",
+    "page": "https://unsplash.com/@lisanto_?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "ZAbdSzJnFtQ",
+    "src": "https://images.unsplash.com/photo-1573878591960-37c788c55728?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8bWlkaSUyMHNraXJ0JTIwd29tZW4lMjBvZmZpY2V8ZW58MXwxfHx8MTc5MzcxNjE2OXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "woman wearing white sweatshirt and red and brown accordion skirt",
+    "photographer": "AllGo - An App For Plus Size People",
+    "page": "https://unsplash.com/@canweallgo?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   },
+   {
+    "id": "avUyevopVlg",
+    "src": "https://images.unsplash.com/photo-1678784973551-f38208de2529?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTE1MDE1fDB8MXxzZWFyY2h8MXx8bGVhdGhlciUyMGxvYWZlcnMlMjB3b21lbnxlbnwxfDF8fHwxNzkzNzE2MTcwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "alt": "a pair of shoes sitting inside of a box",
+    "photographer": "Mattia Occhi",
+    "page": "https://unsplash.com/@redzzz97?utm_source=madam_ceo&utm_medium=referral",
+    "provider": "Unsplash",
+    "provider_url": "https://unsplash.com/?utm_source=madam_ceo&utm_medium=referral"
+   }
+  ],
+  "art": null
+ },
+ {
   "id": "sf440bea9261027",
   "topic": "Dressing for your first board or executive meeting",
   "category": "Careers",
